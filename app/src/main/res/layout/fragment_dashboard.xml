@@ -32,7 +32,7 @@
                 android:layout_marginBottom="20dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardBackgroundColor="#566777"
+                app:cardBackgroundColor="#ffffff"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
                 app:cardMaxElevation="2dp"
@@ -52,6 +52,7 @@
                         android:visibility="visible"
                         tools:context=".MainActivity"
                         android:paddingTop="10dp"
+                        android:background="@drawable/phrase_list_item_bgr"
                         >
 
                         <LinearLayout
