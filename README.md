@@ -1,6 +1,6 @@
 LangLearnApp
 ===============
-[![Build Status](https://travis-ci.com/Redbu11dev/AndroidRoomTest.svg?branch=master)](https://travis-ci.com/Redbu11dev/AndroidRoomTest)
+[![Build Status](https://travis-ci.com/Redbu11dev/LangLearnApp.svg?branch=master)](https://travis-ci.com/Redbu11dev/LangLearnApp)
 
 
 # Description
