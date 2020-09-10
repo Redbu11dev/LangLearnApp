@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="Phrases">
+        <Preference
+            android:key="clear_all"
+            android:summary="Delete all phrases forever"
+            android:title="Delete all phrases" />
+        <Preference
+            android:key="export_phrases"
+            android:summary="Export all phrases to storage"
+            android:title="Export phrases" />
+        <Preference
+            android:key="import_phrases"
+            android:summary="Import phrases from storage"
+            android:title="Import phrases" />
+        <!--        <CheckBoxPreference-->
+        <!--            android:key="clear_all"-->
+        <!--            android:summary="Delete all phrases forever"-->
+        <!--            android:title="Delete all phrases" />-->
+        <!--        <EditTextPreference-->
+        <!--            android:dialogTitle="Enter a text"-->
+        <!--            android:key="text"-->
+        <!--            android:summary="Click to show a text entry dialog"-->
+        <!--            android:title="EditText Preference" />-->
+        <!--        <SwitchPreferenceCompat-->
+        <!--            android:defaultValue="true"-->
+        <!--            android:key="switch"-->
+        <!--            android:summary="Click to switch on or off"-->
+        <!--            android:title="Switch Preference" />-->
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Social">
+        <Preference
+            app:enabled="false"
+            android:key="link_vk"
+            android:summary="Link [source] account"
+            android:title="Link [source]" />
+        <!--        <ListPreference-->
+        <!--            android:defaultValue="default_value"-->
+        <!--            android:dialogTitle="Select duration"-->
+        <!--            android:entries="@array/settings_list_preference_titles"-->
+        <!--            android:entryValues="@array/settings_list_preference_values"-->
+        <!--            android:key="list"-->
+        <!--            android:summary="Click to show a list to choose from"-->
+        <!--            android:title="List Preference" />-->
+        <!--        <DropDownPreference-->
+        <!--            android:defaultValue="default_value"-->
+        <!--            android:entries="@array/settings_list_preference_titles"-->
+        <!--            android:entryValues="@array/settings_list_preference_values"-->
+        <!--            android:key="dropdown"-->
+        <!--            android:summary="Dropdown"-->
+        <!--            android:title="Dropdown Preference" />-->
+        <!--        <SeekBarPreference-->
+        <!--            android:key="seekBar"-->
+        <!--            android:summary="SeekBar"-->
+        <!--            android:title="SeekBar Preference" />-->
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Other">
+        <Preference
+            android:key="about"
+            android:summary="Aboutthe app"
+            android:title="About" />
+        <!--        <Preference-->
+        <!--            android:summary="Click to start an activity"-->
+        <!--            android:title="Preference">-->
+        <!--            <intent-->
+        <!--                android:action="com.chikeandroid.settingsscreendemo.SETTING_START_ACTIVITY"-->
+        <!--                android:targetClass="com.chikeandroid.settingsscreendemo.MyActivity"-->
+        <!--                android:targetPackage="com.chikeandroid.settingsscreendemo" />-->
+        <!--        </Preference>-->
+        <!--        <Preference android:title="web">-->
+        <!--            <intent-->
+        <!--                android:action="android.intent.action.VIEW"-->
+        <!--                android:data="http://www.example.com" />-->
+        <!--        </Preference>-->
+    </PreferenceCategory>
+</androidx.preference.PreferenceScreen>

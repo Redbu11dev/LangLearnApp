@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Styles -->
+    <!-- List item primary text, e.g. event titles, codelab titles -->
+
+    <style name="TextAppearance.LangLearnApp.ListPrimary" parent="TextAppearance.MaterialComponents.Body1">
+<!--        <item name="android:fontFamily">@font/google_sans_medium</item>-->
+<!--        <item name="android:letterSpacing">0</item>-->
+<!--        <item name="fontFamily">@font/google_sans_medium</item>-->
+        <item name="android:textColor">#090909</item>-->
+    </style>
+
+</resources>

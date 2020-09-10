@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+<!--    access to internal files-->
+    <files-path name="phrases_csv_files" path="."/>
+<!--    access to external files-->
+    <external-files-path name="app_external_files" path="/" />
+
+<!--    Reminder-->
+<!--    <files-path/> - Context.getFilesDir()-->
+<!--    <cache-path/> - Context.getCacheDir()-->
+<!--    <external-path/> - Environment.getExternalStorageDirectory()-->
+<!--    <external-files-path/> - Context.getExternalFilesDir(String)-->
+<!--    <external-cache-path/> - Context.getExternalCacheDir()-->
+<!--    <external-media-path/> - Context.getExternalMediaDirs()-->
+</paths>
