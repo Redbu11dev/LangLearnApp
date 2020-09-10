@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.redbu11.langlearnapp.R
 
 
 open class ConfirmationDialogFragment : DialogFragment() {
@@ -46,11 +47,11 @@ open class ConfirmationDialogFragment : DialogFragment() {
 //        var negativeButtonText = requireArguments().getString("negativeButtonText","")
 
         return AlertDialog.Builder(requireContext())
-            .setMessage("Are you sure?")
-            .setPositiveButton("Yes") { _, _ ->
+            .setMessage(getString(R.string.dialog_confirmation_default_message))
+            .setPositiveButton(getString(R.string.dialog_confirmation_default_btn_positive)) { _, _ ->
                 listener.onDialogPositiveClick(this)
             }
-            .setNegativeButton("No") { _, _ ->
+            .setNegativeButton(getString(R.string.dialog_confirmation_default_btn_negative)) { _, _ ->
                 listener.onDialogNegativeClick(this)
             }
             .create()

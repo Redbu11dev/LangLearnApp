@@ -10,13 +10,16 @@ import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.utils.Event
 import kotlinx.coroutines.launch
 import com.redbu11.langlearnapp.R
+import com.redbu11.langlearnapp.utils.ConvertUtils
+import com.redbu11.langlearnapp.utils.SoftUtils
 
 
-class DashboardViewModel(application: Application, private val repository: PhraseRepository) : AndroidViewModel(application), Observable {
+class DashboardViewModel(application: Application, private val repository: PhraseRepository) :
+    AndroidViewModel(application), Observable {
 
     val phrases = repository.phrases
     private var isUpdateOrDelete = false
-    private lateinit var phraseToUpdateOrDelete : Phrase
+    private lateinit var phraseToUpdateOrDelete: Phrase
 
     val isPhraseCreatorContainerVisible = MutableLiveData<Boolean>()
 
@@ -38,8 +41,8 @@ class DashboardViewModel(application: Application, private val repository: Phras
 
     private val statusMessage = MutableLiveData<Event<String>>()
 
-    val message : LiveData<Event<String>>
-    get() = statusMessage
+    val message: LiveData<Event<String>>
+        get() = statusMessage
 
     init {
         hidePhraseCreatorContainer()
@@ -59,18 +62,26 @@ class DashboardViewModel(application: Application, private val repository: Phras
 
     fun saveOrUpdate() {
         if (inputPhraseLang.value == null) {
-            statusMessage.value = Event("Please enter phrase language")
-        }
-        else if (inputPhraseText.value == null) {
-            statusMessage.value = Event("Please enter phrase text")
-        }
-        else if (inputTranslationLang.value == null) {
-            statusMessage.value = Event("Please enter translation language")
-        }
-        else if (inputTranslationText.value == null) {
-            statusMessage.value = Event("Please enter translation text")
-        }
-        else {
+            statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
+                this@DashboardViewModel,
+                R.string.dashboard_error_enter_phrase_language
+            ))
+        } else if (inputPhraseText.value == null) {
+            statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
+                this@DashboardViewModel,
+                R.string.dashboard_error_enter_phrase_text
+            ))
+        } else if (inputTranslationLang.value == null) {
+            statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
+                this@DashboardViewModel,
+                R.string.dashboard_error_enter_translation_language
+            ))
+        } else if (inputTranslationText.value == null) {
+            statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
+                this@DashboardViewModel,
+                R.string.dashboard_error_enter_translation_text
+            ))
+        } else {
 
             if (inputNotes.value == null) {
                 //statusMessage.value = Event("Please enter notes")
@@ -84,14 +95,22 @@ class DashboardViewModel(application: Application, private val repository: Phras
                 phraseToUpdateOrDelete.translationText = inputTranslationText.value!!
                 phraseToUpdateOrDelete.notes = inputNotes.value!!
                 update(phraseToUpdateOrDelete)
-            }
-            else {
+            } else {
                 val phraseLang = inputPhraseLang.value!!
                 val phraseText = inputPhraseText.value!!
                 val translationLang = inputTranslationLang.value!!
                 val translationText = inputTranslationText.value!!
                 val notes = inputNotes.value!!
-                insert(phrase = Phrase(0, phraseLang, phraseText, translationLang, translationText, notes))
+                insert(
+                    phrase = Phrase(
+                        0,
+                        phraseLang,
+                        phraseText,
+                        translationLang,
+                        translationText,
+                        notes
+                    )
+                )
 
                 nullifyInputValues()
             }
@@ -102,8 +121,7 @@ class DashboardViewModel(application: Application, private val repository: Phras
     fun clearAllOrDelete() {
         if (isUpdateOrDelete) {
             delete(phraseToUpdateOrDelete)
-        }
-        else {
+        } else {
             clearAll()
         }
     }
@@ -111,11 +129,18 @@ class DashboardViewModel(application: Application, private val repository: Phras
     fun insert(phrase: Phrase) = viewModelScope.launch {
         val newRowID = repository.insert(phrase)
         if (newRowID > -1) {
-            statusMessage.value = Event("Phrase inserted successfully $newRowID")
+            statusMessage.value = Event("${SoftUtils.getStringFromIdAvm(
+                this@DashboardViewModel,
+                R.string.dashboard_phrase_insert_success
+            )} $newRowID")
             hidePhraseCreatorContainer()
-        }
-        else {
-            statusMessage.value = Event("Error occurred")
+        } else {
+            statusMessage.value = Event(
+                SoftUtils.getStringFromIdAvm(
+                    this@DashboardViewModel,
+                    R.string.error_occurred
+                )
+            )
         }
     }
 
@@ -126,11 +151,18 @@ class DashboardViewModel(application: Application, private val repository: Phras
             isUpdateOrDelete = false
             saveOrUpdateButtonText.value = R.string.dashboard_btn_save
             clearAllOrDeleteButtonText.value = R.string.dashboard_btn_clear_all
-            statusMessage.value = Event("$noOfRows row updated successfully")
+            statusMessage.value = Event("$noOfRows ${SoftUtils.getStringFromIdAvm(
+                this@DashboardViewModel,
+                R.string.dashboard_phrase_update_success
+            )}")
             hidePhraseCreatorContainer()
-        }
-        else {
-            statusMessage.value = Event("Error occurred")
+        } else {
+            statusMessage.value = Event(
+                SoftUtils.getStringFromIdAvm(
+                    this@DashboardViewModel,
+                    R.string.error_occurred
+                )
+            )
         }
     }
 
@@ -141,21 +173,35 @@ class DashboardViewModel(application: Application, private val repository: Phras
             isUpdateOrDelete = false
             saveOrUpdateButtonText.value = R.string.dashboard_btn_save
             clearAllOrDeleteButtonText.value = R.string.dashboard_btn_save
-            statusMessage.value = Event("$noOfRowsDeleted phrases deleted successfully")
+            statusMessage.value = Event("$noOfRowsDeleted ${SoftUtils.getStringFromIdAvm(
+                this@DashboardViewModel,
+                R.string.dashboard_phrase_delete_success
+            )}")
             hidePhraseCreatorContainer()
-        }
-        else {
-            statusMessage.value = Event(getApplication<Application>().getString(R.string.error_occurred))
+        } else {
+            statusMessage.value = Event(
+                SoftUtils.getStringFromIdAvm(
+                    this@DashboardViewModel,
+                    R.string.error_occurred
+                )
+            )
         }
     }
 
     fun clearAll() = viewModelScope.launch {
         val noOfRowsDeleted = repository.deleteAll()
         if (noOfRowsDeleted > 0) {
-            statusMessage.value = Event("$noOfRowsDeleted rows deleted successfully")
-        }
-        else {
-            statusMessage.value = Event("Error occurred")
+            statusMessage.value = Event("$noOfRowsDeleted ${SoftUtils.getStringFromIdAvm(
+                this@DashboardViewModel,
+                R.string.dashboard_phrase_delete_success
+            )}")
+        } else {
+            statusMessage.value = Event(
+                SoftUtils.getStringFromIdAvm(
+                    this@DashboardViewModel,
+                    R.string.error_occurred
+                )
+            )
         }
     }
 

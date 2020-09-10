@@ -11,12 +11,6 @@ import kotlinx.coroutines.launch
 import java.io.File
 
 class SettingsViewModel(application: Application, private val repository: PhraseRepository) : AndroidViewModel(application) {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
-    }
-    val text: LiveData<String> = _text
-
     val phrases = repository.phrases
 
     /**

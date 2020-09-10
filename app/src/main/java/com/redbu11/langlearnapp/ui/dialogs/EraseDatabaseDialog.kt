@@ -5,17 +5,18 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.redbu11.langlearnapp.R
 
 
 class EraseDatabaseDialog : ConfirmationDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext())
-            .setMessage("Are you sure you want to delete all phrases permanently?")
-            .setPositiveButton("Delete") { _, _ ->
+            .setMessage(getString(R.string.dialog_erase_db_message))
+            .setPositiveButton(getString(R.string.dialog_erase_db_btn_positive)) { _, _ ->
                 listener.onDialogPositiveClick(this)
             }
-            .setNegativeButton("Cancel") { _, _ ->
+            .setNegativeButton(getString(R.string.dialog_erase_db_btn_negative)) { _, _ ->
                 listener.onDialogNegativeClick(this)
             }
             .create()

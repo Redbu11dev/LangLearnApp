@@ -123,13 +123,14 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ) == PackageManager.PERMISSION_GRANTED
         ) {
+            val fileName = "export_phrases_${System.currentTimeMillis() / 1000}.csv"
             val file = MyFileUtils.generateExternalFile(
                 requireContext(),
-                "export_phrases_${System.currentTimeMillis() / 1000}.csv"
+                fileName
             )
             settingsViewModel.exportFromRepositoryToCsv(file, phrases)
             val intent = createOpenFileIntent(requireContext(), file)
-            startActivity(Intent.createChooser(intent, "View export_phrases.csv"))
+            startActivity(Intent.createChooser(intent, String.format(getString(R.string.settings_view_filename, fileName))))
         } else {
             requestPermissions(
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -145,7 +146,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
     private fun pickCsvToImport() {
         var chooseFile = Intent(Intent.ACTION_GET_CONTENT)
         chooseFile.type = "text/*"
-        chooseFile = Intent.createChooser(chooseFile, "Choose a file")
+        chooseFile = Intent.createChooser(chooseFile, getString(R.string.settings_pick_csv_intent))
         startActivityForResult(chooseFile, REQUEST_CODE_GET_CSV_FILE)
     }
 
@@ -156,10 +157,20 @@ class SettingsFragment : PreferenceFragmentCompat(),
      */
     fun showConfirmEraseDatabaseDialog() {
         val dialogFragment: DialogFragment = EraseDatabaseDialog()
-        //dialogFragment.setTargetFragment(this, 0)
-        //dialogFragment.show(requireActivity().supportFragmentManager, "confirmEraseDatabase")
-
         dialogFragment.show(childFragmentManager, "confirmEraseDatabase")
+
+        //Usages reminder
+//        dialogFragment.setTargetFragment(this, 0)
+//        dialogFragment.show(requireActivity().supportFragmentManager, "confirmEraseDatabase")
+
+        //Dismiss reminder
+//        public void dismissDialog(){
+//            Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
+//            if (prev != null) {
+//                DialogFragment df = (DialogFragment) prev;
+//                df.dismiss();
+//            }
+//        }
     }
 
     override fun onDialogPositiveClick(dialog: DialogFragment?) {

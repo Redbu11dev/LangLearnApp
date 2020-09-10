@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory android:title="Phrases">
+    <PreferenceCategory android:title="@string/settings_category_phrases">
         <Preference
             android:key="clear_all"
-            android:summary="Delete all phrases forever"
-            android:title="Delete all phrases" />
+            android:summary="@string/settings_pref_delete_all_desc"
+            android:title="@string/settings_pref_delete_all_name" />
         <Preference
             android:key="export_phrases"
-            android:summary="Export all phrases to storage"
-            android:title="Export phrases" />
+            android:summary="@string/settings_pref_export_desc"
+            android:title="@string/settings_pref_export_name" />
         <Preference
             android:key="import_phrases"
-            android:summary="Import phrases from storage"
-            android:title="Import phrases" />
+            android:summary="@string/settings_pref_import_desc"
+            android:title="@string/settings_pref_import_name" />
         <!--        <CheckBoxPreference-->
         <!--            android:key="clear_all"-->
         <!--            android:summary="Delete all phrases forever"-->
@@ -29,7 +29,8 @@
         <!--            android:summary="Click to switch on or off"-->
         <!--            android:title="Switch Preference" />-->
     </PreferenceCategory>
-    <PreferenceCategory android:title="Social">
+<!--    SOCIAL-->
+    <PreferenceCategory android:title="@string/settings_category_social" app:isPreferenceVisible="false">
         <Preference
             app:enabled="false"
             android:key="link_vk"
@@ -55,11 +56,11 @@
         <!--            android:summary="SeekBar"-->
         <!--            android:title="SeekBar Preference" />-->
     </PreferenceCategory>
-    <PreferenceCategory android:title="Other">
+    <PreferenceCategory android:title="@string/settings_category_other">
         <Preference
             android:key="about"
-            android:summary="Aboutthe app"
-            android:title="About" />
+            android:summary="@string/settings_pref_about_desc"
+            android:title="@string/settings_pref_about_name" />
         <!--        <Preference-->
         <!--            android:summary="Click to start an activity"-->
         <!--            android:title="Preference">-->

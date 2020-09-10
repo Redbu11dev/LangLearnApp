@@ -45,7 +45,7 @@
                         android:layout_margin="15dp"
                         android:layout_marginBottom="5dp"
                         android:ems="10"
-                        android:hint="inputPhraseLang"
+                        android:hint="@string/dashboard_input_hint_phrase_language"
                         android:inputType="textPersonName"
                         android:text="@={myViewModel.inputPhraseLang}"
                         android:textStyle="bold" />
@@ -57,7 +57,7 @@
                         android:layout_margin="15dp"
                         android:layout_marginBottom="5dp"
                         android:ems="10"
-                        android:hint="inputPhraseText"
+                        android:hint="@string/dashboard_input_hint_phrase_text"
                         android:inputType="textPersonName"
                         android:text="@={myViewModel.inputPhraseText}"
                         android:textStyle="bold" />
@@ -70,7 +70,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:ems="10"
-                        android:hint="inputTranslationLang"
+                        android:hint="@string/dashboard_input_hint_translation_language"
                         android:inputType="textPersonName"
                         android:text="@={myViewModel.inputTranslationLang}"
                         android:textStyle="bold" />
@@ -83,7 +83,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:ems="10"
-                        android:hint="inputTranslationText"
+                        android:hint="@string/dashboard_input_hint_translation_text"
                         android:inputType="textPersonName"
                         android:text="@={myViewModel.inputTranslationText}"
                         android:textStyle="bold" />
@@ -96,7 +96,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:ems="10"
-                        android:hint="inputNotes"
+                        android:hint="@string/dashboard_input_hint_notes"
                         android:inputType="textPersonName"
                         android:text="@={myViewModel.inputNotes}"
                         android:textStyle="bold" />
