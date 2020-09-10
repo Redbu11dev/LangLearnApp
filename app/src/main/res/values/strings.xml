@@ -17,15 +17,15 @@
     <string name="dialog_erase_db_btn_negative">Cancel</string>
 
 <!--    Dashboard-->
-    <string name="dashboard_input_title_phrase_language">From language</string>
-    <string name="dashboard_input_title_phrase_text">Phrase text:</string>
-    <string name="dashboard_input_title_translation_language">To language</string>
-    <string name="dashboard_input_title_translation_text">Translation text</string>
-    <string name="dashboard_input_title_notes">Notes</string>
+    <string name="dashboard_input_title_phrase_language">From:</string>
+    <string name="dashboard_input_title_phrase_text">Phrase:</string>
+    <string name="dashboard_input_title_translation_language">To:</string>
+    <string name="dashboard_input_title_translation_text">Translation:</string>
+    <string name="dashboard_input_title_notes">Notes:</string>
 
-    <string name="dashboard_input_hint_phrase_language">From language</string>
+    <string name="dashboard_input_hint_phrase_language">language</string>
     <string name="dashboard_input_hint_phrase_text">Phrase text</string>
-    <string name="dashboard_input_hint_translation_language">To language</string>
+    <string name="dashboard_input_hint_translation_language">language</string>
     <string name="dashboard_input_hint_translation_text">Translation text</string>
     <string name="dashboard_input_hint_notes">Notes</string>
 

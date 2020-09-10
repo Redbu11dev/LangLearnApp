@@ -45,6 +45,6 @@ class MyViewHolder(val binding: PhraseListItemBinding):RecyclerView.ViewHolder(b
         binding.phraseListItemLayout.setOnClickListener {
             clicklistener(phrase)
         }
-        binding.cardView.setCardBackgroundColor( Color.parseColor(ConvertUtils.stringToColor(phrase.phraseLanguage)) )
+        //binding.cardView.setCardBackgroundColor( Color.parseColor(ConvertUtils.stringToColor(phrase.phraseLanguage)) )
     }
 }

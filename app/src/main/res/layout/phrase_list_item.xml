@@ -18,25 +18,10 @@
             android:layout_gravity="center"
             android:clickable="true"
             android:focusable="true"
-            app:cardBackgroundColor="#306030"
+            app:cardBackgroundColor="#566777"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp"
             app:cardMaxElevation="2dp"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="false">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_inner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardBackgroundColor="#CC202020"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="0dp"
-            app:cardMaxElevation="2dp"
-            android:layout_margin="2dp"
             app:cardPreventCornerOverlap="false"
             app:cardUseCompatPadding="false">
 
@@ -98,7 +83,6 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 </layout>
