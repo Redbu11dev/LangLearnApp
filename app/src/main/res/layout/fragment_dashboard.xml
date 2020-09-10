@@ -13,7 +13,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.dashboard.DashboardFragment">
+        tools:context=".ui.dashboard.DashboardFragment"
+        android:background="#10000000"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,122 +26,195 @@
             android:orientation="vertical"
             tools:context=".MainActivity">
 
-            <ScrollView
-                android:id="@+id/phrase_creator_container"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#CC202020"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:cardMaxElevation="2dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="false"
+                android:layout_marginBottom="20dp"
                 >
 
-                <LinearLayout
+                <ScrollView
+                    android:id="@+id/phrase_creator_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="visible"
-                    tools:context=".MainActivity">
-
-                    <EditText
-                        android:id="@+id/phrase_lang"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginBottom="5dp"
-                        android:ems="10"
-                        android:hint="@string/dashboard_input_hint_phrase_language"
-                        android:inputType="textPersonName"
-                        android:text="@={myViewModel.inputPhraseLang}"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/phrase_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginBottom="5dp"
-                        android:ems="10"
-                        android:hint="@string/dashboard_input_hint_phrase_text"
-                        android:inputType="textPersonName"
-                        android:text="@={myViewModel.inputPhraseText}"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/translation_lang"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:ems="10"
-                        android:hint="@string/dashboard_input_hint_translation_language"
-                        android:inputType="textPersonName"
-                        android:text="@={myViewModel.inputTranslationLang}"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/translation_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:ems="10"
-                        android:hint="@string/dashboard_input_hint_translation_text"
-                        android:inputType="textPersonName"
-                        android:text="@={myViewModel.inputTranslationText}"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/notes"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:ems="10"
-                        android:hint="@string/dashboard_input_hint_notes"
-                        android:inputType="textPersonName"
-                        android:text="@={myViewModel.inputNotes}"
-                        android:textStyle="bold" />
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        tools:context=".MainActivity">
 
-                        <Button
-                            android:id="@+id/save_or_update_button"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/phrase_lang"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
+                                android:ems="10"
+                                android:gravity="center"
+                                android:hint="@string/dashboard_input_hint_phrase_language"
+                                android:inputType="textPersonName"
+                                android:text="@={myViewModel.inputPhraseLang}"
+                                style="@style/TextAppearance.LangLearnApp.PhraseCreationEditText"
+                                />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.2"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/ic_dashboard_black_24dp">
+
+                            </ImageView>
+
+                            <EditText
+                                android:id="@+id/translation_lang"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
+                                android:ems="10"
+                                android:gravity="center"
+                                android:hint="@string/dashboard_input_hint_translation_language"
+                                android:inputType="textPersonName"
+                                android:text="@={myViewModel.inputTranslationLang}"
+                                style="@style/TextAppearance.LangLearnApp.PhraseCreationEditText"
+                                />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/phrase_text_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:onClick="@{()->myViewModel.saveOrUpdate()}"
-                            android:text="@{context.getString(myViewModel.saveOrUpdateButtonText)}"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-<!--                        android:text="@={myViewModel.saveOrUpdateButtonText}"-->
+                            android:layout_marginHorizontal="15dp"
+                            android:ems="10"
+                            android:text="@string/dashboard_input_title_phrase_text"
+                            android:textSize="12sp"
+                            style="@style/TextAppearance.LangLearnApp.PhraseCreationTitleText"
+                            />
 
-                        <Button
-                            android:id="@+id/clear_all_or_delete_button"
+                        <EditText
+                            android:id="@+id/phrase_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:layout_marginBottom="5dp"
+                            android:ems="10"
+                            android:hint="@string/dashboard_input_hint_phrase_text"
+                            android:inputType="textPersonName"
+                            android:text="@={myViewModel.inputPhraseText}"
+                            style="@style/TextAppearance.LangLearnApp.PhraseCreationEditText"
+                            />
+
+                        <TextView
+                            android:id="@+id/translation_text_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:onClick="@{()->myViewModel.clearAllOrDelete()}"
-                            android:text="@{context.getString(myViewModel.clearAllOrDeleteButtonText)}"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:layout_marginHorizontal="15dp"
+                            android:ems="10"
+                            android:text="@string/dashboard_input_title_translation_text"
+                            android:textSize="12sp"
+                            style="@style/TextAppearance.LangLearnApp.PhraseCreationTitleText"
+                            />
 
+                        <EditText
+                            android:id="@+id/translation_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:layout_marginBottom="5dp"
+                            android:ems="10"
+                            android:hint="@string/dashboard_input_hint_translation_text"
+                            android:inputType="textPersonName"
+                            android:text="@={myViewModel.inputTranslationText}"
+                            style="@style/TextAppearance.LangLearnApp.PhraseCreationEditText"
+                            />
+
+                        <TextView
+                            android:id="@+id/notes_text_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:ems="10"
+                            android:text="@string/dashboard_input_title_notes"
+                            android:textSize="12sp"
+                            style="@style/TextAppearance.LangLearnApp.PhraseCreationTitleText"
+                            />
+
+                        <EditText
+                            android:id="@+id/notes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:layout_marginBottom="5dp"
+                            android:ems="10"
+                            android:hint="@string/dashboard_input_hint_notes"
+                            android:inputType="textPersonName"
+                            android:text="@={myViewModel.inputNotes}"
+                            style="@style/TextAppearance.LangLearnApp.PhraseCreationEditText"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/save_or_update_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="@{()->myViewModel.saveOrUpdate()}"
+                                android:text="@{context.getString(myViewModel.saveOrUpdateButtonText)}"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                            <!--                        android:text="@={myViewModel.saveOrUpdateButtonText}"-->
+
+                            <Button
+                                android:id="@+id/clear_all_or_delete_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="@{()->myViewModel.clearAllOrDelete()}"
+                                android:text="@{context.getString(myViewModel.clearAllOrDeleteButtonText)}"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>
-
-            </ScrollView>
+                </ScrollView>
+            </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/phrase_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginHorizontal="5dp"
+                android:layout_marginHorizontal="0dp"
                 android:layout_weight="1" />
         </LinearLayout>
 

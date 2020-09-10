@@ -7,7 +7,22 @@
 <!--        <item name="android:fontFamily">@font/google_sans_medium</item>-->
 <!--        <item name="android:letterSpacing">0</item>-->
 <!--        <item name="fontFamily">@font/google_sans_medium</item>-->
-        <item name="android:textColor">#090909</item>-->
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColorHint">#ffffff</item>
+    </style>
+
+    <style name="TextAppearance.LangLearnApp.PhraseCreationEditText" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColorHint">#ffffff</item>
+        <item name="android:background">#20ffffff</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
+
+    <style name="TextAppearance.LangLearnApp.PhraseCreationTitleText" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColorHint">#ffffff</item>
+        <item name="android:background">#80ffffff</item>
     </style>
 
 </resources>
