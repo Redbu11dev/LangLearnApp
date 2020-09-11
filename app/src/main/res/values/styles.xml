@@ -28,4 +28,14 @@
         <item name="android:paddingStart">4dp</item>
     </style>
 
+    <style name="ButtonStyle.LangLearnApp.CriticalActionButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:backgroundTint">@color/colorNeutralRed</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="ButtonStyle.LangLearnApp.RegularActionButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:backgroundTint">#7B9FCF</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
 </resources>

@@ -9,7 +9,7 @@
         <item name="colorPrimaryVariant">@color/colorAccent</item>
         <item name="colorOnPrimary">@color/colorAccent</item>
         <item name="colorOnSurface">@color/colorAccent</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorNeutralBlue</item>
 
         <!-- Text appearances -->
         <item name="textAppearanceListItem">@style/TextAppearance.LangLearnApp.ListPrimary</item>

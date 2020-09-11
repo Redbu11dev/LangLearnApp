@@ -26,14 +26,21 @@
             app:cardUseCompatPadding="false"
             >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/phrase_list_item_layout"
+            <FrameLayout
+                android:id="@+id/phrase_list_item_layout_bgr"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:background="@drawable/phrase_list_item_bgr"
-                android:paddingVertical="10dp"
                 >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/phrase_list_item_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingVertical="10dp">
 
                 <TextView
                     android:id="@+id/phrase_title_text_view"
@@ -85,7 +92,8 @@
                     />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 </layout>

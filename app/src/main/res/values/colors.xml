@@ -3,4 +3,8 @@
     <color name="colorPrimary">#202020</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#E25A53</color>
+
+    <color name="colorNeutralRed">#E25A53</color>
+    <color name="colorNeutralBlue">#ADC4DD</color>
+
 </resources>

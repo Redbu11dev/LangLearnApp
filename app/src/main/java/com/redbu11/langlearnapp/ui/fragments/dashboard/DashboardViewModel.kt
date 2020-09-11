@@ -2,6 +2,7 @@ package com.redbu11.langlearnapp.ui.fragments.dashboard
 
 
 import android.app.Application
+import android.text.TextUtils
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.lifecycle.*
@@ -37,6 +38,8 @@ class DashboardViewModel(application: Application, private val repository: Phras
     val saveOrUpdateButtonText = MutableLiveData<Int>()
     @Bindable
     val clearAllOrDeleteButtonText = MutableLiveData<Int>()
+    @Bindable
+    val deleteButtonVisible = MutableLiveData<Boolean>()
 
     private val statusMessage = MutableLiveData<Event<String>>()
 
@@ -52,6 +55,7 @@ class DashboardViewModel(application: Application, private val repository: Phras
         nullifyInputValues()
         saveOrUpdateButtonText.value = R.string.dashboard_btn_save
         clearAllOrDeleteButtonText.value = R.string.dashboard_btn_clear_all
+        deleteButtonVisible.value = false
     }
 
     fun resetAndShowInputForm() {
@@ -60,29 +64,29 @@ class DashboardViewModel(application: Application, private val repository: Phras
     }
 
     fun saveOrUpdate() {
-        if (inputPhraseLang.value == null) {
+        if (TextUtils.isEmpty(inputPhraseLang.value)) {
             statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
                 this@DashboardViewModel,
                 R.string.dashboard_error_enter_phrase_language
             ))
-        } else if (inputPhraseText.value == null) {
+        } else if (TextUtils.isEmpty(inputPhraseText.value)) {
             statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
                 this@DashboardViewModel,
                 R.string.dashboard_error_enter_phrase_text
             ))
-        } else if (inputTranslationLang.value == null) {
+        } else if (TextUtils.isEmpty(inputTranslationLang.value)) {
             statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
                 this@DashboardViewModel,
                 R.string.dashboard_error_enter_translation_language
             ))
-        } else if (inputTranslationText.value == null) {
+        } else if (TextUtils.isEmpty(inputTranslationText.value)) {
             statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
                 this@DashboardViewModel,
                 R.string.dashboard_error_enter_translation_text
             ))
         } else {
 
-            if (inputNotes.value == null) {
+            if (TextUtils.isEmpty(inputNotes.value)) {
                 //statusMessage.value = Event("Please enter notes")
                 inputNotes.value = ""
             }
@@ -146,6 +150,7 @@ class DashboardViewModel(application: Application, private val repository: Phras
             isUpdateOrDelete = false
             saveOrUpdateButtonText.value = R.string.dashboard_btn_save
             clearAllOrDeleteButtonText.value = R.string.dashboard_btn_clear_all
+            deleteButtonVisible.value = false
             statusMessage.value = Event("$noOfRows ${SoftUtils.getStringFromIdAvm(
                 this@DashboardViewModel,
                 R.string.dashboard_phrase_update_success
@@ -167,7 +172,8 @@ class DashboardViewModel(application: Application, private val repository: Phras
             nullifyInputValues()
             isUpdateOrDelete = false
             saveOrUpdateButtonText.value = R.string.dashboard_btn_save
-            clearAllOrDeleteButtonText.value = R.string.dashboard_btn_save
+            clearAllOrDeleteButtonText.value = R.string.dashboard_btn_clear_all
+            deleteButtonVisible.value = false
             statusMessage.value = Event("$noOfRowsDeleted ${SoftUtils.getStringFromIdAvm(
                 this@DashboardViewModel,
                 R.string.dashboard_phrase_delete_success
@@ -193,6 +199,7 @@ class DashboardViewModel(application: Application, private val repository: Phras
         phraseToUpdateOrDelete = phrase
         saveOrUpdateButtonText.value = R.string.dashboard_btn_update
         clearAllOrDeleteButtonText.value = R.string.dashboard_btn_delete
+        deleteButtonVisible.value = true
         showPhraseCreatorContainer()
 
     }

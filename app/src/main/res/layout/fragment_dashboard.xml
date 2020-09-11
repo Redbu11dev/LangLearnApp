@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
         <variable
             name="myViewModel"
             type="com.redbu11.langlearnapp.ui.fragments.dashboard.DashboardViewModel" />
@@ -91,7 +91,7 @@
                                     android:ems="10"
                                     android:gravity="center"
                                     android:hint="@string/dashboard_input_hint_phrase_language"
-                                    android:inputType="textPersonName"
+                                    android:inputType="text"
                                     android:text="@={myViewModel.inputPhraseLang}" />
 
                             </LinearLayout>
@@ -136,7 +136,7 @@
                                     android:ems="10"
                                     android:gravity="center"
                                     android:hint="@string/dashboard_input_hint_translation_language"
-                                    android:inputType="textPersonName"
+                                    android:inputType="text"
                                     android:text="@={myViewModel.inputTranslationLang}" />
 
                             </LinearLayout>
@@ -164,8 +164,10 @@
                             android:layout_marginHorizontal="15dp"
                             android:ems="10"
                             android:hint="@string/dashboard_input_hint_phrase_text"
-                            android:inputType="textPersonName"
-                            android:text="@={myViewModel.inputPhraseText}" />
+                            android:inputType="textImeMultiLine"
+                            android:text="@={myViewModel.inputPhraseText}"
+                            android:singleLine="false"
+                            />
 
                         <TextView
                             android:id="@+id/translation_text_title"
@@ -187,8 +189,10 @@
                             android:layout_marginHorizontal="15dp"
                             android:ems="10"
                             android:hint="@string/dashboard_input_hint_translation_text"
-                            android:inputType="textPersonName"
-                            android:text="@={myViewModel.inputTranslationText}" />
+                            android:inputType="textMultiLine"
+                            android:text="@={myViewModel.inputTranslationText}"
+                            android:singleLine="false"
+                            />
 
                         <TextView
                             android:id="@+id/notes_text_title"
@@ -212,8 +216,10 @@
                             android:layout_marginBottom="20dp"
                             android:ems="10"
                             android:hint="@string/dashboard_input_hint_notes"
-                            android:inputType="textPersonName"
-                            android:text="@={myViewModel.inputNotes}" />
+                            android:inputType="textMultiLine"
+                            android:text="@={myViewModel.inputNotes}"
+                            android:singleLine="false"
+                            />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -230,8 +236,9 @@
                                 android:onClick="@{()->myViewModel.saveOrUpdate()}"
                                 android:text="@{context.getString(myViewModel.saveOrUpdateButtonText)}"
                                 android:textSize="18sp"
-                                android:textStyle="bold" />
-                            <!--                        android:text="@={myViewModel.saveOrUpdateButtonText}"-->
+                                android:textStyle="bold"
+                                style="@style/ButtonStyle.LangLearnApp.RegularActionButton"
+                                />
 
                             <Button
                                 android:id="@+id/clear_all_or_delete_button"
@@ -241,7 +248,10 @@
                                 android:onClick="@{()->myViewModel.delete()}"
                                 android:text="@{context.getString(myViewModel.clearAllOrDeleteButtonText)}"
                                 android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:visibility="@{myViewModel.deleteButtonVisible ? View.VISIBLE : View.GONE}"
+                                style="@style/ButtonStyle.LangLearnApp.CriticalActionButton"
+                                />
 
 
                         </LinearLayout>
