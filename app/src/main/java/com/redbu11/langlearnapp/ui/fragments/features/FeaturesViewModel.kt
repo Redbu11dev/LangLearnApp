@@ -1,4 +1,4 @@
-package com.redbu11.langlearnapp.ui.features
+package com.redbu11.langlearnapp.ui.fragments.features
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

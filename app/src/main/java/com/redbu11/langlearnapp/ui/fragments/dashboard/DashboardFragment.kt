@@ -1,4 +1,4 @@
-package com.redbu11.langlearnapp.ui.dashboard
+package com.redbu11.langlearnapp.ui.fragments.dashboard
 
 import android.os.Bundle
 import android.util.Log
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,16 +41,15 @@ class DashboardFragment : Fragment() {
         dashboardViewModel =
             ViewModelProvider(this, factory).get(DashboardViewModel::class.java)
 
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        return root
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_dashboard, container, false)
+        binding.myViewModel = dashboardViewModel
+        binding.lifecycleOwner = this
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding = FragmentDashboardBinding.bind(view)
-        binding.myViewModel = dashboardViewModel
-        binding.lifecycleOwner = this
 
         initRecyclerView()
 

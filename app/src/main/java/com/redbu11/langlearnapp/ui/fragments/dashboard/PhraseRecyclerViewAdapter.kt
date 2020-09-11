@@ -1,6 +1,5 @@
-package com.redbu11.langlearnapp.ui.dashboard
+package com.redbu11.langlearnapp.ui.fragments.dashboard
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -8,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.databinding.PhraseListItemBinding
 import com.redbu11.langlearnapp.db.Phrase
-import com.redbu11.langlearnapp.utils.ConvertUtils
 
 class PhraseRecyclerViewAdapter (private val clicklistener:(Phrase)->Unit):RecyclerView.Adapter<MyViewHolder>() {
 

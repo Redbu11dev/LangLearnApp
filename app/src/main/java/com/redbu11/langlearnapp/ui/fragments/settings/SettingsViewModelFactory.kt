@@ -1,4 +1,4 @@
-package com.redbu11.langlearnapp.ui.settings
+package com.redbu11.langlearnapp.ui.fragments.settings
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

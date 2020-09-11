@@ -1,4 +1,4 @@
-package com.redbu11.langlearnapp.ui.dashboard
+package com.redbu11.langlearnapp.ui.fragments.dashboard
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

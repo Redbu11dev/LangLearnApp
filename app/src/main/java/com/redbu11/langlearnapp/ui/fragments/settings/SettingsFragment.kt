@@ -1,4 +1,4 @@
-package com.redbu11.langlearnapp.ui.settings
+package com.redbu11.langlearnapp.ui.fragments.settings
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
@@ -11,25 +11,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.collection.ArraySet
-import androidx.collection.arraySetOf
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.db.Phrase
-import com.redbu11.langlearnapp.db.PhraseDAO
 import com.redbu11.langlearnapp.db.PhraseDatabase
 import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.ui.dialogs.ConfirmationDialogFragment
 import com.redbu11.langlearnapp.ui.dialogs.EraseDatabaseDialog
 import com.redbu11.langlearnapp.utils.MyFileUtils
-import kotlinx.coroutines.launch
 import java.io.File
 
 
@@ -228,7 +223,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
                             fileUri
                         )
                     } else {
-                        //fileUri is null?!?!?!
+                        //TODO fileUri is null
                     }
                 } else {
                     //TODO NOT FOUND

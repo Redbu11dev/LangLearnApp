@@ -1,4 +1,4 @@
-package com.redbu11.langlearnapp.ui.features
+package com.redbu11.langlearnapp.ui.fragments.features
 
 import android.os.Bundle
 import android.view.LayoutInflater

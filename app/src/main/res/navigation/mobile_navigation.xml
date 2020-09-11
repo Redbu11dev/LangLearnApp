@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_features"
-        android:name="com.redbu11.langlearnapp.ui.features.FeaturesFragment"
+        android:name="com.redbu11.langlearnapp.ui.fragments.features.FeaturesFragment"
         android:label="@string/title_features"
         tools:layout="@layout/fragment_features" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.redbu11.langlearnapp.ui.dashboard.DashboardFragment"
+        android:name="com.redbu11.langlearnapp.ui.fragments.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_additem"
-        android:name="com.redbu11.langlearnapp.ui.settings.SettingsFragment"
+        android:name="com.redbu11.langlearnapp.ui.fragments.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@xml/settings_pref"
         />

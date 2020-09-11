@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 
 object SoftUtils {
+
+    /**
+     * Hide keyboard
+     */
     fun hideSoftKeyBoard(context: Context, view: View) {
         try {
             val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

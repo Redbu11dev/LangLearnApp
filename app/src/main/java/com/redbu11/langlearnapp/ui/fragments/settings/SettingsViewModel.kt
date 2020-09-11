@@ -1,9 +1,8 @@
-package com.redbu11.langlearnapp.ui.settings
+package com.redbu11.langlearnapp.ui.fragments.settings
 
 import android.app.Application
 import android.content.Context
 import android.net.Uri
-import android.widget.Toast
 import androidx.lifecycle.*
 import com.redbu11.langlearnapp.db.Phrase
 import com.redbu11.langlearnapp.db.PhraseRepository
@@ -19,14 +18,9 @@ class SettingsViewModel(application: Application, private val repository: Phrase
     fun clearAllPhrases() = viewModelScope.launch {
         val noOfRowsDeleted = repository.deleteAll()
         if (noOfRowsDeleted > 0) {
-//            Toast.makeText(
-//                context,
-//                "$noOfRowsDeleted rows deleted successfully",
-//                Toast.LENGTH_SHORT
-//            )
-//                .show()
+            //TODO show success message
         } else {
-//            Toast.makeText(context, "Error occurred", Toast.LENGTH_SHORT).show()
+            //TODO show error message
         }
     }
 

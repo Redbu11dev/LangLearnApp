@@ -1,4 +1,4 @@
-package com.redbu11.langlearnapp.ui.dashboard
+package com.redbu11.langlearnapp.ui.fragments.dashboard
 
 
 import android.app.Application
@@ -10,7 +10,6 @@ import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.utils.Event
 import kotlinx.coroutines.launch
 import com.redbu11.langlearnapp.R
-import com.redbu11.langlearnapp.utils.ConvertUtils
 import com.redbu11.langlearnapp.utils.SoftUtils
 
 
@@ -118,12 +117,8 @@ class DashboardViewModel(application: Application, private val repository: Phras
 
     }
 
-    fun clearAllOrDelete() {
-        if (isUpdateOrDelete) {
-            delete(phraseToUpdateOrDelete)
-        } else {
-            clearAll()
-        }
+    fun delete() {
+        delete(phraseToUpdateOrDelete)
     }
 
     fun insert(phrase: Phrase) = viewModelScope.launch {
@@ -178,23 +173,6 @@ class DashboardViewModel(application: Application, private val repository: Phras
                 R.string.dashboard_phrase_delete_success
             )}")
             hidePhraseCreatorContainer()
-        } else {
-            statusMessage.value = Event(
-                SoftUtils.getStringFromIdAvm(
-                    this@DashboardViewModel,
-                    R.string.error_occurred
-                )
-            )
-        }
-    }
-
-    fun clearAll() = viewModelScope.launch {
-        val noOfRowsDeleted = repository.deleteAll()
-        if (noOfRowsDeleted > 0) {
-            statusMessage.value = Event("$noOfRowsDeleted ${SoftUtils.getStringFromIdAvm(
-                this@DashboardViewModel,
-                R.string.dashboard_phrase_delete_success
-            )}")
         } else {
             statusMessage.value = Event(
                 SoftUtils.getStringFromIdAvm(

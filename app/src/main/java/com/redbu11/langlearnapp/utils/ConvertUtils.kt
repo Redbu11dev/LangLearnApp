@@ -1,7 +1,11 @@
 package com.redbu11.langlearnapp.utils
 
 object ConvertUtils {
-        fun stringToColor(str: String): String {
+
+    /**
+     * Convert a string to color using hash
+     */
+    fun stringToColor(str: String): String {
             var hash = 0
             for (i in 0 until str.length) {
                 hash = str[i].toInt() + ((hash shl 5) - hash)
