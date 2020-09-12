@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
+import com.redbu11.langlearnapp.MainActivity
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.databinding.FragmentDashboardBinding
 import com.redbu11.langlearnapp.db.Phrase
@@ -20,7 +21,7 @@ import com.redbu11.langlearnapp.db.PhraseDatabase
 import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.utils.SoftUtils
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
 
     private lateinit var dashboardViewModel: DashboardViewModel
     private lateinit var binding: FragmentDashboardBinding
@@ -71,7 +72,6 @@ class DashboardFragment : Fragment() {
             }
             TransitionManager.beginDelayedTransition(binding.root as ViewGroup, ChangeBounds().setDuration(200))
         })
-
     }
 
     override fun onDestroyView() {
@@ -96,5 +96,16 @@ class DashboardFragment : Fragment() {
     private fun listItemClicked(phrase: Phrase){
         //Toast.makeText(requireContext(),"selected phrase is ${phrase.phraseText}",Toast.LENGTH_LONG).show()
         dashboardViewModel.initUpdateAndDelete(phrase)
+    }
+
+    override fun onBackPressed(): Boolean {
+        //Toast.makeText(requireContext(),"onBackPressed",Toast.LENGTH_SHORT).show()
+        return if (binding.phraseCreatorContainer.visibility == View.VISIBLE) {
+            dashboardViewModel.isPhraseCreatorContainerVisible.value = false
+            true
+        }
+        else {
+            false
+        }
     }
 }
