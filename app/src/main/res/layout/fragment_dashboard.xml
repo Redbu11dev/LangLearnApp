@@ -72,11 +72,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
                         android:layout_marginEnd="18dp"
+                        android:layout_marginBottom="10dp"
                         android:ems="10"
                         android:gravity="center"
                         android:text="@{myViewModel.phraseManipulationTitle}"
                         android:textSize="24sp"
                         android:singleLine="true"
+                        android:visibility="@{myViewModel.phraseCreatorContainerVisible ? View.VISIBLE : View.GONE}"
                         />
 
                     <androidx.cardview.widget.CardView
@@ -104,14 +106,15 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:paddingTop="10dp"
                                 android:visibility="visible"
                                 tools:context=".MainActivity">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:paddingHorizontal="15dp"
+                                    >
 
                                     <!--                            <LinearLayout-->
                                     <!--                                android:layout_width="0dp"-->
@@ -129,14 +132,15 @@
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:paddingStart="15dp"
                                         app:counterEnabled="true"
-                                        app:counterMaxLength="10"
-                                        app:prefixText="@string/dashboard_input_title_phrase_language">
+                                        app:counterMaxLength="20"
+                                        app:prefixText="@string/dashboard_input_title_phrase_language"
+                                        style="@style/Widget.TextInputLayout.LangLearnApp.PhraseCreation1"
+                                        >
 
-                                        <EditText
+                                        <com.google.android.material.textfield.TextInputEditText
                                             android:id="@+id/phrase_lang"
-                                            style="@style/TextAppearance.LangLearnApp.PhraseCreationEditText"
+                                            style="@style/TextAppearance.LangLearnApp.PhraseCreation1"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:ems="10"
@@ -171,14 +175,15 @@
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:paddingEnd="15dp"
                                         app:counterEnabled="true"
-                                        app:counterMaxLength="10"
-                                        app:prefixText="@string/dashboard_input_title_translation_language">
+                                        app:counterMaxLength="20"
+                                        app:prefixText="@string/dashboard_input_title_translation_language"
+                                        style="@style/Widget.TextInputLayout.LangLearnApp.PhraseCreation1"
+                                        >
 
-                                        <EditText
+                                        <com.google.android.material.textfield.TextInputEditText
                                             android:id="@+id/translation_lang"
-                                            style="@style/TextAppearance.LangLearnApp.PhraseCreationEditText"
+                                            style="@style/TextAppearance.LangLearnApp.PhraseCreation1"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:ems="10"
@@ -196,11 +201,13 @@
                                     android:layout_height="wrap_content"
                                     android:paddingHorizontal="15dp"
                                     app:counterEnabled="true"
-                                    app:counterMaxLength="250">
+                                    app:counterMaxLength="250"
+                                    style="@style/Widget.TextInputLayout.LangLearnApp.PhraseCreation1"
+                                    >
 
-                                    <EditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/phrase_text"
-                                        style="@style/TextAppearance.LangLearnApp.PhraseCreationEditText"
+                                        style="@style/TextAppearance.LangLearnApp.PhraseCreation1"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:ems="10"
@@ -216,11 +223,13 @@
                                     android:layout_height="wrap_content"
                                     android:paddingHorizontal="15dp"
                                     app:counterEnabled="true"
-                                    app:counterMaxLength="250">
+                                    app:counterMaxLength="250"
+                                    style="@style/Widget.TextInputLayout.LangLearnApp.PhraseCreation1"
+                                    >
 
-                                    <EditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/translation_text"
-                                        style="@style/TextAppearance.LangLearnApp.PhraseCreationEditText"
+                                        style="@style/TextAppearance.LangLearnApp.PhraseCreation1"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:ems="10"
@@ -237,11 +246,13 @@
                                     android:layout_marginBottom="20dp"
                                     android:paddingHorizontal="15dp"
                                     app:counterEnabled="true"
-                                    app:counterMaxLength="250">
+                                    app:counterMaxLength="250"
+                                    style="@style/Widget.TextInputLayout.LangLearnApp.PhraseCreation1"
+                                    >
 
-                                    <EditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/notes"
-                                        style="@style/TextAppearance.LangLearnApp.PhraseCreationEditText"
+                                        style="@style/TextAppearance.LangLearnApp.PhraseCreation1"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:ems="10"
@@ -268,6 +279,10 @@
                                         android:text="@{myViewModel.saveOrUpdateButtonText}"
                                         android:textSize="18sp"
                                         android:textStyle="bold" />
+
+                                    <Space
+                                        android:layout_width="10dp"
+                                        android:layout_height="match_parent"/>
 
                                     <Button
                                         android:id="@+id/clear_all_or_delete_button"

@@ -42,7 +42,8 @@ class DashboardViewModel(application: Application, private val repository: Phras
     private var isUpdateOrDelete = false
     private lateinit var phraseToUpdateOrDelete: Phrase
 
-    val isPhraseCreatorContainerVisible = MutableLiveData<Boolean>()
+    @Bindable
+    val phraseCreatorContainerVisible = MutableLiveData<Boolean>()
 
     @Bindable
     val inputPhraseLang = MutableLiveData<String>()
@@ -137,14 +138,14 @@ class DashboardViewModel(application: Application, private val repository: Phras
      * Show input form
      */
     fun showPhraseCreatorContainer() {
-        isPhraseCreatorContainerVisible.value = true
+        phraseCreatorContainerVisible.value = true
     }
 
     /**
      * Hide input form
      */
     fun hidePhraseCreatorContainer() {
-        isPhraseCreatorContainerVisible.value = false
+        phraseCreatorContainerVisible.value = false
     }
 
     /**

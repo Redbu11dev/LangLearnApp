@@ -81,7 +81,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
             }
         })
 
-        dashboardViewModel.isPhraseCreatorContainerVisible.observe(viewLifecycleOwner, Observer {
+        dashboardViewModel.phraseCreatorContainerVisible.observe(viewLifecycleOwner, Observer {
             if (it) {
                 binding.phraseCreatorContainer.visibility = View.VISIBLE
                 binding.fab.visibility = View.GONE
@@ -122,7 +122,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
     override fun onBackPressed(): Boolean {
         //Toast.makeText(requireContext(),"onBackPressed",Toast.LENGTH_SHORT).show()
         return if (binding.phraseCreatorContainer.visibility == View.VISIBLE) {
-            dashboardViewModel.isPhraseCreatorContainerVisible.value = false
+            dashboardViewModel.phraseCreatorContainerVisible.value = false
             true
         }
         else {

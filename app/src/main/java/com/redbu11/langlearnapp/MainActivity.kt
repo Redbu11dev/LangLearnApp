@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 //        supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        supportActionBar?.hide()
+//        supportActionBar?.hide()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean { // handle arrow click here

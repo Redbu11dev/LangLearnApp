@@ -22,18 +22,43 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+<!--    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
+<!--        Main-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorPrimarySurface">@color/colorAccent</item>
-        <item name="colorPrimaryVariant">@color/colorAccent</item>
-        <item name="colorOnPrimary">@color/colorAccent</item>
-        <item name="colorOnSurface">@color/colorAccent</item>
-        <item name="colorAccent">@color/colorNeutralBlue</item>
+        <item name="colorSecondary">#ffde03</item>
+        <item name="colorSurface">#ffffff</item>
 
-        <!-- Text appearances -->
-        <item name="textAppearanceListItem">@style/TextAppearance.LangLearnApp.ListPrimary</item>
+        <item name="colorOnPrimary">#ffffff</item>
+        <item name="colorOnSecondary">#404040</item>
+        <item name="colorOnSurface">#000000</item>
+
+        <item name="colorPrimaryVariant">#0035c9</item>
+        <item name="colorSecondaryVariant">#ffc000</item>
+
+        <item name="colorError">@color/colorNeutralRed</item>
+
+        <item name="android:colorBackground">#F0F0F0</item>
+
+<!--        Other-->
+        <item name="colorControlNormal">#F0F0F0</item>
+        <item name="colorControlActivated">#F0F0F0</item>
+        <item name="colorControlHighlight">#F0F0F0</item>
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@color/colorNeutralRed</item>
+
+<!--&lt;!&ndash;        Dimens&ndash;&gt;-->
+<!--        <item name="listPreferredItemHeight">?attr/listPreferredItemHeight</item>-->
+<!--        <item name="actionBarSize">?attr/actionBarSize</item>-->
+
+<!--&lt;!&ndash;        Drawables&ndash;&gt;-->
+<!--        <item name="selectableItemBackground">?attr/selectableItemBackground</item>-->
+<!--        <item name="selectableItemBackgroundBorderless">?attr/selectableItemBackgroundBorderless</item>-->
+<!--        <item name="dividerVertical">?attr/dividerVertical</item>-->
+<!--        <item name="dividerHorizontal">?attr/dividerHorizontal</item>-->
+
 
     </style>
 
