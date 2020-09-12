@@ -51,6 +51,10 @@
     <string name="dialog_import_phrases_btn_negative">Cancel</string>
 
 <!--    Dashboard-->
+
+    <string name="dashboard_phrase_manipulation_title_create">Create new phrase</string>
+    <string name="dashboard_phrase_manipulation_title_update">Update the phrase</string>
+
     <string name="dashboard_input_title_phrase_language">From:</string>
     <string name="dashboard_input_title_phrase_text">Phrase:</string>
     <string name="dashboard_input_title_translation_language">To:</string>

@@ -62,6 +62,9 @@ class DashboardViewModel(application: Application, private val repository: Phras
     @Bindable
     val deleteButtonVisible = MutableLiveData<Boolean>()
 
+    @Bindable
+    val phraseManipulationTitle = MutableLiveData<Int>()
+
     private val statusMessage = MutableLiveData<Event<String>>()
 
     val message: LiveData<Event<String>>
@@ -69,176 +72,196 @@ class DashboardViewModel(application: Application, private val repository: Phras
 
     init {
         hidePhraseCreatorContainer()
-        resetInputForm()
+        setInputFormValuesAsCreate()
     }
 
-    fun resetInputForm() {
-        nullifyInputValues()
+    /**
+     * Clear input form values
+     */
+    fun clearInputValues() {
+        inputPhraseLang.value = ""
+        inputPhraseText.value = ""
+        inputTranslationLang.value = ""
+        inputTranslationText.value = ""
+        inputNotes.value = ""
+    }
+
+    /**
+     * Set input form as "create"
+     */
+    fun setInputFormValuesAsCreate() {
+        clearInputValues()
+        isUpdateOrDelete = false
         saveOrUpdateButtonText.value = R.string.dashboard_btn_save
         clearAllOrDeleteButtonText.value = R.string.dashboard_btn_clear_all
         deleteButtonVisible.value = false
+        phraseManipulationTitle.value = R.string.dashboard_phrase_manipulation_title_create
     }
 
-    fun resetAndShowInputForm() {
-        resetInputForm()
-        showPhraseCreatorContainer()
-    }
-
-    fun saveOrUpdate() {
-        if (TextUtils.isEmpty(inputPhraseLang.value)) {
-            statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
-                this@DashboardViewModel,
-                R.string.dashboard_error_enter_phrase_language
-            ))
-        } else if (TextUtils.isEmpty(inputPhraseText.value)) {
-            statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
-                this@DashboardViewModel,
-                R.string.dashboard_error_enter_phrase_text
-            ))
-        } else if (TextUtils.isEmpty(inputTranslationLang.value)) {
-            statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
-                this@DashboardViewModel,
-                R.string.dashboard_error_enter_translation_language
-            ))
-        } else if (TextUtils.isEmpty(inputTranslationText.value)) {
-            statusMessage.value = Event(SoftUtils.getStringFromIdAvm(
-                this@DashboardViewModel,
-                R.string.dashboard_error_enter_translation_text
-            ))
-        } else {
-
-            if (TextUtils.isEmpty(inputNotes.value)) {
-                //statusMessage.value = Event("Please enter notes")
-                inputNotes.value = ""
-            }
-
-            if (isUpdateOrDelete) {
-                phraseToUpdateOrDelete.phraseLanguage = inputPhraseLang.value!!
-                phraseToUpdateOrDelete.phraseText = inputPhraseText.value!!
-                phraseToUpdateOrDelete.translationLanguage = inputTranslationLang.value!!
-                phraseToUpdateOrDelete.translationText = inputTranslationText.value!!
-                phraseToUpdateOrDelete.notes = inputNotes.value!!
-                update(phraseToUpdateOrDelete)
-            } else {
-                val phraseLang = inputPhraseLang.value!!
-                val phraseText = inputPhraseText.value!!
-                val translationLang = inputTranslationLang.value!!
-                val translationText = inputTranslationText.value!!
-                val notes = inputNotes.value!!
-                insert(
-                    phrase = Phrase(
-                        0,
-                        phraseLang,
-                        phraseText,
-                        translationLang,
-                        translationText,
-                        notes
-                    )
-                )
-
-                nullifyInputValues()
-            }
-        }
-
-    }
-
-    fun delete() {
-        delete(phraseToUpdateOrDelete)
-    }
-
-    fun insert(phrase: Phrase) = viewModelScope.launch {
-        val newRowID = repository.insert(phrase)
-        if (newRowID > -1) {
-            statusMessage.value = Event("${SoftUtils.getStringFromIdAvm(
-                this@DashboardViewModel,
-                R.string.dashboard_phrase_insert_success
-            )} $newRowID")
-            hidePhraseCreatorContainer()
-        } else {
-            statusMessage.value = Event(
-                SoftUtils.getStringFromIdAvm(
-                    this@DashboardViewModel,
-                    R.string.error_occurred
-                )
-            )
-        }
-    }
-
-    fun update(phrase: Phrase) = viewModelScope.launch {
-        val noOfRows = repository.update(phrase)
-        if (noOfRows > 0) {
-            nullifyInputValues()
-            isUpdateOrDelete = false
-            saveOrUpdateButtonText.value = R.string.dashboard_btn_save
-            clearAllOrDeleteButtonText.value = R.string.dashboard_btn_clear_all
-            deleteButtonVisible.value = false
-            statusMessage.value = Event("$noOfRows ${SoftUtils.getStringFromIdAvm(
-                this@DashboardViewModel,
-                R.string.dashboard_phrase_update_success
-            )}")
-            hidePhraseCreatorContainer()
-        } else {
-            statusMessage.value = Event(
-                SoftUtils.getStringFromIdAvm(
-                    this@DashboardViewModel,
-                    R.string.error_occurred
-                )
-            )
-        }
-    }
-
-    fun delete(phrase: Phrase) = viewModelScope.launch {
-        val noOfRowsDeleted = repository.delete(phrase)
-        if (noOfRowsDeleted > 0) {
-            nullifyInputValues()
-            isUpdateOrDelete = false
-            saveOrUpdateButtonText.value = R.string.dashboard_btn_save
-            clearAllOrDeleteButtonText.value = R.string.dashboard_btn_clear_all
-            deleteButtonVisible.value = false
-            statusMessage.value = Event("$noOfRowsDeleted ${SoftUtils.getStringFromIdAvm(
-                this@DashboardViewModel,
-                R.string.dashboard_phrase_delete_success
-            )}")
-            hidePhraseCreatorContainer()
-        } else {
-            statusMessage.value = Event(
-                SoftUtils.getStringFromIdAvm(
-                    this@DashboardViewModel,
-                    R.string.error_occurred
-                )
-            )
-        }
-    }
-
-    fun initUpdateAndDelete(phrase: Phrase) {
+    /**
+     * Set input form as "update"
+     */
+    fun setInputFormValuesAsUpdate(phrase: Phrase) {
         inputPhraseLang.value = phrase.phraseLanguage
         inputPhraseText.value = phrase.phraseText
         inputTranslationLang.value = phrase.translationLanguage
         inputTranslationText.value = phrase.translationText
         inputNotes.value = phrase.notes
-        isUpdateOrDelete = true
+
         phraseToUpdateOrDelete = phrase
+        isUpdateOrDelete = true
         saveOrUpdateButtonText.value = R.string.dashboard_btn_update
         clearAllOrDeleteButtonText.value = R.string.dashboard_btn_delete
         deleteButtonVisible.value = true
+        phraseManipulationTitle.value = R.string.dashboard_phrase_manipulation_title_update
+    }
+
+    /**
+     * Set input form as "create" and show
+     */
+    fun setAndShowInputFormAsCreate() {
+        setInputFormValuesAsCreate()
         showPhraseCreatorContainer()
-
     }
 
-    fun nullifyInputValues() {
-        inputPhraseLang.value = null
-        inputPhraseText.value = null
-        inputTranslationLang.value = null
-        inputTranslationText.value = null
-        inputNotes.value = null
+    /**
+     * Set input form as "update" and show
+     * @param phrase - Phrase object
+     */
+    fun setAndShowInputFormAsUpdate(phrase: Phrase) {
+        setInputFormValuesAsUpdate(phrase)
+        showPhraseCreatorContainer()
     }
 
+    /**
+     * Show input form
+     */
     fun showPhraseCreatorContainer() {
         isPhraseCreatorContainerVisible.value = true
     }
 
+    /**
+     * Hide input form
+     */
     fun hidePhraseCreatorContainer() {
         isPhraseCreatorContainerVisible.value = false
+    }
+
+    /**
+     * Save or update current phrase
+     */
+    fun saveOrUpdate() {
+        if (TextUtils.isEmpty(inputPhraseLang.value)) {
+            postStatusMessage(R.string.dashboard_error_enter_phrase_language)
+        } else if (TextUtils.isEmpty(inputPhraseText.value)) {
+            postStatusMessage(R.string.dashboard_error_enter_phrase_text)
+        } else if (TextUtils.isEmpty(inputTranslationLang.value)) {
+            postStatusMessage(R.string.dashboard_error_enter_translation_language)
+        } else if (TextUtils.isEmpty(inputTranslationText.value)) {
+            postStatusMessage(R.string.dashboard_error_enter_translation_text)
+        } else {
+            if (isUpdateOrDelete) {
+                phraseToUpdateOrDelete.phraseLanguage = inputPhraseLang.value ?: ""
+                phraseToUpdateOrDelete.phraseText = inputPhraseText.value ?: ""
+                phraseToUpdateOrDelete.translationLanguage = inputTranslationLang.value ?: ""
+                phraseToUpdateOrDelete.translationText = inputTranslationText.value ?: ""
+                phraseToUpdateOrDelete.notes = inputNotes.value ?: ""
+                update(phraseToUpdateOrDelete)
+            } else {
+                insert(
+                    Phrase(
+                        0,
+                        inputPhraseLang.value ?: "",
+                        inputPhraseText.value ?: "",
+                        inputTranslationLang.value ?: "",
+                        inputTranslationText.value ?: "",
+                        inputNotes.value ?: ""
+                    )
+                )
+                clearInputValues()
+            }
+        }
+
+    }
+
+    /**
+     * delete current phrase
+     */
+    fun delete() {
+        delete(phraseToUpdateOrDelete)
+    }
+
+    /**
+     * Insert phrase
+     * @param phrase - Phrase object
+     */
+    fun insert(phrase: Phrase) = viewModelScope.launch {
+        val newRowID = repository.insert(phrase)
+        if (newRowID > -1) {
+            postStatusMessage(
+                "${getStringFromIdResource(R.string.dashboard_phrase_insert_success)} $newRowID"
+            )
+            hidePhraseCreatorContainer()
+        } else {
+            postStatusMessage(R.string.error_occurred)
+        }
+    }
+
+    /**
+     * Update phrase
+     * @param phrase - Phrase object
+     */
+    fun update(phrase: Phrase) = viewModelScope.launch {
+        val noOfRows = repository.update(phrase)
+        if (noOfRows > 0) {
+            setInputFormValuesAsCreate()
+            postStatusMessage(
+                "$noOfRows ${getStringFromIdResource(R.string.dashboard_phrase_update_success)}"
+            )
+            hidePhraseCreatorContainer()
+        } else {
+            postStatusMessage(R.string.error_occurred)
+        }
+    }
+
+    /**
+     * Delete phrase
+     * @param phrase - Phrase object
+     */
+    fun delete(phrase: Phrase) = viewModelScope.launch {
+        val noOfRowsDeleted = repository.delete(phrase)
+        if (noOfRowsDeleted > 0) {
+            setInputFormValuesAsCreate()
+            postStatusMessage(
+                "$noOfRowsDeleted ${getStringFromIdResource(R.string.dashboard_phrase_delete_success)}"
+            )
+            hidePhraseCreatorContainer()
+        } else {
+            postStatusMessage(R.string.error_occurred)
+        }
+    }
+
+    /**
+     * Post status message using string res id
+     */
+    fun postStatusMessage(stringResId: Int) {
+        postStatusMessage(
+            SoftUtils.getStringFromIdAvm(this, stringResId)
+        )
+    }
+
+    /**
+     * Post status message using string res id
+     */
+    fun postStatusMessage(string: String) {
+        statusMessage.value = Event(string)
+    }
+
+    /**
+     * Shorter form for getting string from id within the ViewModel
+     */
+    fun getStringFromIdResource(id: Int): String {
+        return SoftUtils.getStringFromIdAvm(this, id)
     }
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {

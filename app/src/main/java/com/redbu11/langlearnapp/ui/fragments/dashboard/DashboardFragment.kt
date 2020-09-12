@@ -116,7 +116,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
 
     private fun listItemClicked(phrase: Phrase){
         //Toast.makeText(requireContext(),"selected phrase is ${phrase.phraseText}",Toast.LENGTH_LONG).show()
-        dashboardViewModel.initUpdateAndDelete(phrase)
+        dashboardViewModel.setAndShowInputFormAsUpdate(phrase)
     }
 
     override fun onBackPressed(): Boolean {
