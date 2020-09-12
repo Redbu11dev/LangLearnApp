@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * Copyright (C) 2020 Viktor Bukovets
+  ~  *
+  ~  * This file is part of LangLearnApp.
+  ~  *
+  ~  * LangLearnApp is free software: you can redistribute it and/or modify
+  ~  * it under the terms of the GNU General Public License as published by
+  ~  * the Free Software Foundation, either version 3 of the License, or
+  ~  * (at your option) any later version.
+  ~  *
+  ~  * LangLearnApp is distributed in the hope that it will be useful,
+  ~  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~  * GNU General Public License for more details.
+  ~  *
+  ~  * You should have received a copy of the GNU General Public License
+  ~  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  ~  */
+  -->
+
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,6 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         >
 
         <androidx.cardview.widget.CardView
@@ -20,8 +43,8 @@
             android:focusable="true"
             app:cardBackgroundColor="#ffffff"
             app:cardCornerRadius="10dp"
-            app:cardElevation="0dp"
-            app:cardMaxElevation="2dp"
+            app:cardElevation="4dp"
+            app:cardMaxElevation="12dp"
             app:cardPreventCornerOverlap="false"
             app:cardUseCompatPadding="false"
             >
@@ -48,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:text="Phrase (lang):"
-                    android:textSize="14sp"
+                    android:textSize="10sp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     />
@@ -60,7 +83,7 @@
                     android:layout_marginTop="1dp"
                     android:layout_marginHorizontal="10dp"
                     android:text="phraseText"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     app:layout_constraintTop_toBottomOf="@id/phrase_title_text_view"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:textColor="#000000"
@@ -73,7 +96,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="10dp"
                     android:text="Translation (lang):"
-                    android:textSize="14sp"
+                    android:textSize="10sp"
                     app:layout_constraintTop_toBottomOf="@id/phrase_text_view"
                     app:layout_constraintLeft_toLeftOf="parent"
                     />
@@ -85,7 +108,7 @@
                     android:layout_marginTop="1dp"
                     android:layout_marginHorizontal="10dp"
                     android:text="translationText"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     app:layout_constraintTop_toBottomOf="@id/translation_title_text_view"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:textColor="#000000"
