@@ -1,4 +1,9 @@
 <resources>
+<!--    Values-->
+    <string name="default_export_path">Android/data/com.redbu11.langlearnapp/files</string>
+
+<!--    Texts-->
+
     <string name="app_name">LangLearnApp</string>
 
     <string name="error_occurred">Error occurred</string>
@@ -15,6 +20,14 @@
     <string name="dialog_erase_db_message">Are you sure you want to delete all phrases permanently?</string>
     <string name="dialog_erase_db_btn_positive">Delete</string>
     <string name="dialog_erase_db_btn_negative">Cancel</string>
+
+    <string name="dialog_export_phrases_message">Your phrases will be exported to a .csv file, located at %s</string>
+    <string name="dialog_export_phrases_btn_positive">Export</string>
+    <string name="dialog_export_phrases_btn_negative">Cancel</string>
+
+    <string name="dialog_import_phrases_message">You need to locate a .csv file with phrases on your storage, by default the location is %s</string>
+    <string name="dialog_import_phrases_btn_positive">Import</string>
+    <string name="dialog_import_phrases_btn_negative">Cancel</string>
 
 <!--    Dashboard-->
     <string name="dashboard_input_title_phrase_language">From:</string>
@@ -60,6 +73,9 @@
 
     <string name="settings_view_filename">View %s</string>
     <string name="settings_pick_csv_intent">Pick the database .csv</string>
+
+    <string name="settings_export_successful">Export successful</string>
+    <string name="settings_import_successful">Import successful</string>
 
 <!--    Phrase ListItem-->
     <string name="phrase_listItem_phraseLang_title">Phrase (%s):</string>

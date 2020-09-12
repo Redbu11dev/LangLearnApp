@@ -24,6 +24,8 @@ import com.redbu11.langlearnapp.db.PhraseDatabase
 import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.ui.dialogs.ConfirmationDialogFragment
 import com.redbu11.langlearnapp.ui.dialogs.EraseDatabaseDialog
+import com.redbu11.langlearnapp.ui.dialogs.ExportPhrasesDialog
+import com.redbu11.langlearnapp.ui.dialogs.ImportPhrasesDialog
 import com.redbu11.langlearnapp.utils.MyFileUtils
 import java.io.File
 
@@ -62,13 +64,13 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
         val key = preference?.key
-        Toast.makeText(context, "$key", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(context, "$key", Toast.LENGTH_SHORT).show()
         when {
             key.equals("clear_all") -> {
                 showConfirmEraseDatabaseDialog()
             }
-            key.equals("export_phrases") -> exportPhrasesToCSVFile()
-            key.equals("import_phrases") -> pickCsvToImport()
+            key.equals("export_phrases") -> showConfirmExportDatabaseDialog()
+            key.equals("import_phrases") -> showConfirmImportDatabaseDialog()
             else -> {
                 //nothing
             }
@@ -81,7 +83,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        Toast.makeText(context, "$key", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(context, "$key", Toast.LENGTH_SHORT).show()
     }
 
     override fun onResume() {
@@ -124,8 +126,14 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 fileName
             )
             settingsViewModel.exportFromRepositoryToCsv(file, phrases)
+            Toast.makeText(requireContext(), getString(R.string.settings_export_successful), Toast.LENGTH_SHORT).show()
             val intent = createOpenFileIntent(requireContext(), file)
-            startActivity(Intent.createChooser(intent, String.format(getString(R.string.settings_view_filename, fileName))))
+            startActivity(
+                Intent.createChooser(
+                    intent,
+                    String.format(getString(R.string.settings_view_filename, fileName))
+                )
+            )
         } else {
             requestPermissions(
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -153,26 +161,36 @@ class SettingsFragment : PreferenceFragmentCompat(),
     fun showConfirmEraseDatabaseDialog() {
         val dialogFragment: DialogFragment = EraseDatabaseDialog()
         dialogFragment.show(childFragmentManager, "confirmEraseDatabase")
+    }
 
-        //Usages reminder
-//        dialogFragment.setTargetFragment(this, 0)
-//        dialogFragment.show(requireActivity().supportFragmentManager, "confirmEraseDatabase")
+    /**
+     * Show confirmation dialog to export database
+     */
+    fun showConfirmExportDatabaseDialog() {
+        val dialogFragment: DialogFragment = ExportPhrasesDialog()
+        dialogFragment.show(childFragmentManager, "confirmExportDatabase")
+    }
 
-        //Dismiss reminder
-//        public void dismissDialog(){
-//            Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
-//            if (prev != null) {
-//                DialogFragment df = (DialogFragment) prev;
-//                df.dismiss();
-//            }
-//        }
+    /**
+     * Show confirmation dialog to import database
+     */
+    fun showConfirmImportDatabaseDialog() {
+        val dialogFragment: DialogFragment = ImportPhrasesDialog()
+        dialogFragment.show(childFragmentManager, "confirmImportDatabase")
     }
 
     override fun onDialogPositiveClick(dialog: DialogFragment?) {
         when (dialog) {
-            is ConfirmationDialogFragment -> {
-                //The dialog is ConfirmationDialogFragment
+            is EraseDatabaseDialog -> {
                 settingsViewModel.clearAllPhrases()
+                dialog.dismiss()
+            }
+            is ExportPhrasesDialog -> {
+                exportPhrasesToCSVFile()
+                dialog.dismiss()
+            }
+            is ImportPhrasesDialog -> {
+                pickCsvToImport()
                 dialog.dismiss()
             }
         }
@@ -180,8 +198,9 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     override fun onDialogNegativeClick(dialog: DialogFragment?) {
         when (dialog) {
-            is ConfirmationDialogFragment -> {
-                //The dialog is ConfirmationDialogFragment
+            is EraseDatabaseDialog,
+            is ExportPhrasesDialog,
+            is ImportPhrasesDialog -> {
                 dialog.dismiss()
             }
         }
@@ -203,7 +222,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         when (requestCode) {
             REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE -> {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    //TODO Permission has been denied by user
+                    //TODO? Permission has been denied by user
                 } else {
                     exportPhrasesToCSVFile()
                 }
@@ -222,11 +241,14 @@ class SettingsFragment : PreferenceFragmentCompat(),
                             requireContext(),
                             fileUri
                         )
+                        Toast.makeText(requireContext(), getString(R.string.settings_import_successful), Toast.LENGTH_SHORT).show()
                     } else {
-                        //TODO fileUri is null
+                        //fileUri is null
+                        Toast.makeText(requireContext(), "${getString(R.string.error_occurred)} [fileUri is null]", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    //TODO NOT FOUND
+                    //NOT FOUND
+                    Toast.makeText(requireContext(), "${getString(R.string.error_occurred)} [DATA NOT FOUND]", Toast.LENGTH_SHORT).show()
                 }
             }
         }

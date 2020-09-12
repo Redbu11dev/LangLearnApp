@@ -57,4 +57,17 @@ open class ConfirmationDialogFragment : DialogFragment() {
             .create()
     }
 
+    //Usages reminder
+//        dialogFragment.setTargetFragment(this, 0)
+//        dialogFragment.show(requireActivity().supportFragmentManager, "confirmEraseDatabase")
+
+    //Dismiss reminder
+//        public void dismissDialog(){
+//            Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
+//            if (prev != null) {
+//                DialogFragment df = (DialogFragment) prev;
+//                df.dismiss();
+//            }
+//        }
+
 }
