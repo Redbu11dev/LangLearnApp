@@ -277,6 +277,10 @@ class DashboardViewModel(application: Application, private val repository: Phras
         statusMessage.value = Event(string)
     }
 
+    fun getQueryDescStringWith(string: String): String {
+        return String.format(getStringFromIdResource(R.string.dashboard_search_query_desc), string)
+    }
+
     /**
      * Shorter form for getting string from id within the ViewModel
      */

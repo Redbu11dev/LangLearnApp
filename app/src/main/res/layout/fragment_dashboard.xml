@@ -28,6 +28,7 @@
         <import type="android.view.View" />
 
         <import type="android.text.TextUtils" />
+        <import type="com.redbu11.langlearnapp.R" />
 
         <variable
             name="myViewModel"
@@ -95,13 +96,13 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@{myViewModel.queryString}" />
+                                android:text="@{myViewModel.getQueryDescStringWith(myViewModel.queryString)}" />
 
                             <com.google.android.material.button.MaterialButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:onClick="@{()->myViewModel.clearQueryString()}"
-                                android:text="CLEAR"
+                                android:text="@string/dashboard_search_query_btn_clear"
                                 app:icon="@drawable/ic_clear_light_24dp" />
 
                         </LinearLayout>

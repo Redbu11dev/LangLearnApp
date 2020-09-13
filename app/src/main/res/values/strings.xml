@@ -60,6 +60,9 @@
 
 <!--    Dashboard-->
 
+    <string name="dashboard_search_query_desc">Filter: %s</string>
+    <string name="dashboard_search_query_btn_clear">CLEAR</string>
+
     <string name="dashboard_phrase_manipulation_title_create">Create new phrase</string>
     <string name="dashboard_phrase_manipulation_title_update">Update the phrase</string>
 
