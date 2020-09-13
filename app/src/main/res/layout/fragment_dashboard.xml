@@ -32,6 +32,10 @@
         <variable
             name="myViewModel"
             type="com.redbu11.langlearnapp.ui.fragments.dashboard.DashboardViewModel" />
+
+        <variable
+            name="myFragment"
+            type="com.redbu11.langlearnapp.ui.fragments.dashboard.DashboardFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -302,21 +306,41 @@
                                     android:layout_height="wrap_content"
                                     android:clipChildren="false"
                                     android:clipToPadding="false"
-                                    android:orientation="horizontal"
+                                    android:orientation="vertical"
                                     android:paddingHorizontal="16dp"
                                     android:paddingBottom="10dp">
+
+                                    <Button
+                                        android:id="@+id/save_button"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:onClick="@{()->myViewModel.saveCurrentPhrase()}"
+                                        android:text="@string/dashboard_btn_save"
+                                        android:visibility="@{myViewModel.deleteButtonVisible ? View.GONE : View.VISIBLE}"
+                                        />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:clipChildren="false"
+                                        android:clipToPadding="false"
+                                        android:orientation="horizontal"
+                                        android:visibility="@{myViewModel.deleteButtonVisible ? View.VISIBLE : View.GONE}"
+                                        >
 
                                     <Button
                                         android:id="@+id/save_or_update_button"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:onClick="@{()->myViewModel.saveOrUpdate()}"
-                                        android:text="@{myViewModel.saveOrUpdateButtonText}" />
+                                        android:onClick="@{()->myFragment.showConfirmUpdatePhraseDialog()}"
+                                        android:text="@string/dashboard_btn_update"
+                                        />
 
                                     <Space
                                         android:layout_width="10dp"
-                                        android:layout_height="match_parent" />
+                                        android:layout_height="match_parent"
+                                        />
 
                                     <Button
                                         android:id="@+id/clear_all_or_delete_button"
@@ -324,10 +348,10 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:onClick="@{()->myViewModel.delete()}"
-                                        android:text="@{myViewModel.clearAllOrDeleteButtonText}"
-                                        android:visibility="@{myViewModel.deleteButtonVisible ? View.VISIBLE : View.GONE}" />
+                                        android:onClick="@{()->myFragment.showConfirmDeletePhraseDialog()}"
+                                        android:text="@string/dashboard_btn_delete" />
 
+                                    </LinearLayout>
 
                                 </LinearLayout>
 

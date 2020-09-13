@@ -26,14 +26,17 @@
     <PreferenceCategory android:title="@string/settings_category_phrases">
         <Preference
             android:key="clear_all"
+            android:icon="@drawable/ic_delete_forever_black_24dp"
             android:summary="@string/settings_pref_delete_all_desc"
             android:title="@string/settings_pref_delete_all_name" />
         <Preference
             android:key="export_phrases"
+            android:icon="@drawable/ic_import_export_black_24dp"
             android:summary="@string/settings_pref_export_desc"
             android:title="@string/settings_pref_export_name" />
         <Preference
             android:key="import_phrases"
+            android:icon="@drawable/ic_import_export_black_24dp"
             android:summary="@string/settings_pref_import_desc"
             android:title="@string/settings_pref_import_name" />
     </PreferenceCategory>
@@ -48,7 +51,14 @@
     <PreferenceCategory android:title="@string/settings_category_other">
         <Preference
             android:key="about"
+            android:icon="@drawable/ic_info_outline_black_24dp"
             android:summary="@string/settings_pref_about_desc"
             android:title="@string/settings_pref_about_name" />
+        <Preference
+            android:key="github_page"
+            android:icon="@drawable/ic_star_border_black_24dp"
+            android:summary="@string/settings_pref_github_page_desc"
+            android:title="@string/settings_pref_github_page_name"
+            />
     </PreferenceCategory>
 </androidx.preference.PreferenceScreen>

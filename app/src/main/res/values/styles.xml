@@ -56,11 +56,13 @@
     </style>
 
 <!--    TEXTS-->
-    <style name="LangLearnApp.TextAppearance.PhraseCreationTitle" parent="TextAppearance.MaterialComponents.Tooltip">
+    <style name="LangLearnApp.TextAppearance.PhraseCreationTitle" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:textColor">#606060</item>
         <item name="android:textSize">24sp</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+<!--        <item name="android:textStyle">bold|italic</item>-->
     </style>
 
     <style name="LangLearnApp.TextInputLayout.Style1" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -71,6 +73,14 @@
         <item name="android:textColor">#000000</item>
         <item name="android:textColorHint">#80000000</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="LangLearnApp.TextAppearance.PhraseListItemTitle" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textColor">#606060</item>
+    </style>
+
+    <style name="LangLearnApp.TextAppearance.PhraseListItemContent" parent="TextAppearance.MaterialComponents.Body1">
+<!--        <item name="android:textColor">#606060</item>-->
     </style>
 
 <!--    BUTTONS-->

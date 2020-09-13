@@ -43,7 +43,7 @@ class DashboardViewModel(application: Application, private val repository: Phras
     val phrases =  Transformations.switchMap(queryString) {query ->
         repository.phrasesThatContain("%${query}%")
     }
-    private var isUpdateOrDelete = false
+
     private lateinit var phraseToUpdateOrDelete: Phrase
 
     @Bindable
@@ -60,10 +60,6 @@ class DashboardViewModel(application: Application, private val repository: Phras
     @Bindable
     val inputNotes = MutableLiveData<String>()
 
-    @Bindable
-    val saveOrUpdateButtonText = MutableLiveData<Int>()
-    @Bindable
-    val clearAllOrDeleteButtonText = MutableLiveData<Int>()
     @Bindable
     val deleteButtonVisible = MutableLiveData<Boolean>()
 
@@ -96,9 +92,6 @@ class DashboardViewModel(application: Application, private val repository: Phras
      */
     fun setInputFormValuesAsCreate() {
         clearInputValues()
-        isUpdateOrDelete = false
-        saveOrUpdateButtonText.value = R.string.dashboard_btn_save
-        clearAllOrDeleteButtonText.value = R.string.dashboard_btn_clear_all
         deleteButtonVisible.value = false
         phraseManipulationTitle.value = R.string.dashboard_phrase_manipulation_title_create
     }
@@ -114,9 +107,6 @@ class DashboardViewModel(application: Application, private val repository: Phras
         inputNotes.value = phrase.notes
 
         phraseToUpdateOrDelete = phrase
-        isUpdateOrDelete = true
-        saveOrUpdateButtonText.value = R.string.dashboard_btn_update
-        clearAllOrDeleteButtonText.value = R.string.dashboard_btn_delete
         deleteButtonVisible.value = true
         phraseManipulationTitle.value = R.string.dashboard_phrase_manipulation_title_update
     }
@@ -153,40 +143,61 @@ class DashboardViewModel(application: Application, private val repository: Phras
     }
 
     /**
-     * Save or update current phrase
+     * Check input fields for validity
      */
-    fun saveOrUpdate() {
+    fun inputFieldsValid(): Boolean {
         if (TextUtils.isEmpty(inputPhraseLang.value)) {
             postStatusMessage(R.string.dashboard_error_enter_phrase_language)
-        } else if (TextUtils.isEmpty(inputPhraseText.value)) {
-            postStatusMessage(R.string.dashboard_error_enter_phrase_text)
-        } else if (TextUtils.isEmpty(inputTranslationLang.value)) {
-            postStatusMessage(R.string.dashboard_error_enter_translation_language)
-        } else if (TextUtils.isEmpty(inputTranslationText.value)) {
-            postStatusMessage(R.string.dashboard_error_enter_translation_text)
-        } else {
-            if (isUpdateOrDelete) {
-                phraseToUpdateOrDelete.phraseLanguage = inputPhraseLang.value ?: ""
-                phraseToUpdateOrDelete.phraseText = inputPhraseText.value ?: ""
-                phraseToUpdateOrDelete.translationLanguage = inputTranslationLang.value ?: ""
-                phraseToUpdateOrDelete.translationText = inputTranslationText.value ?: ""
-                phraseToUpdateOrDelete.notes = inputNotes.value ?: ""
-                update(phraseToUpdateOrDelete)
-            } else {
-                insert(
-                    Phrase(
-                        0,
-                        inputPhraseLang.value ?: "",
-                        inputPhraseText.value ?: "",
-                        inputTranslationLang.value ?: "",
-                        inputTranslationText.value ?: "",
-                        inputNotes.value ?: ""
-                    )
-                )
-                clearInputValues()
-            }
+            return false
         }
+        else if (TextUtils.isEmpty(inputPhraseText.value)) {
+            postStatusMessage(R.string.dashboard_error_enter_phrase_text)
+            return false
+        }
+        else if (TextUtils.isEmpty(inputTranslationLang.value)) {
+            postStatusMessage(R.string.dashboard_error_enter_translation_language)
+            return false
+        }
+        else if (TextUtils.isEmpty(inputTranslationText.value)) {
+            postStatusMessage(R.string.dashboard_error_enter_translation_text)
+            return false
+        }
+        else {
+            return true
+        }
+    }
 
+    /**
+     * Update current phrase
+     */
+    fun updateCurrentPhrase() {
+        if (inputFieldsValid()) {
+            phraseToUpdateOrDelete.phraseLanguage = inputPhraseLang.value ?: ""
+            phraseToUpdateOrDelete.phraseText = inputPhraseText.value ?: ""
+            phraseToUpdateOrDelete.translationLanguage = inputTranslationLang.value ?: ""
+            phraseToUpdateOrDelete.translationText = inputTranslationText.value ?: ""
+            phraseToUpdateOrDelete.notes = inputNotes.value ?: ""
+            update(phraseToUpdateOrDelete)
+        }
+    }
+
+    /**
+     * save current(new) phrase
+     */
+    fun saveCurrentPhrase() {
+        if (inputFieldsValid()) {
+            insert(
+                Phrase(
+                    0,
+                    inputPhraseLang.value ?: "",
+                    inputPhraseText.value ?: "",
+                    inputTranslationLang.value ?: "",
+                    inputTranslationText.value ?: "",
+                    inputNotes.value ?: ""
+                )
+            )
+            clearInputValues()
+        }
     }
 
     /**

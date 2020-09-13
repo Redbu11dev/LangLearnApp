@@ -32,6 +32,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -45,10 +46,13 @@ import com.redbu11.langlearnapp.databinding.FragmentDashboardBinding
 import com.redbu11.langlearnapp.db.Phrase
 import com.redbu11.langlearnapp.db.PhraseDatabase
 import com.redbu11.langlearnapp.db.PhraseRepository
+import com.redbu11.langlearnapp.ui.dialogs.ConfirmationDialogFragment
+import com.redbu11.langlearnapp.ui.dialogs.DeletePhraseConfirmationDialog
+import com.redbu11.langlearnapp.ui.dialogs.UpdatePhraseConfirmationDialog
 import com.redbu11.langlearnapp.utils.SoftUtils
 
 
-class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
+class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed, ConfirmationDialogFragment.ConfirmationDialogListener {
 
     private lateinit var dashboardViewModel: DashboardViewModel
     private lateinit var binding: FragmentDashboardBinding
@@ -72,6 +76,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_dashboard, container, false)
         binding.myViewModel = dashboardViewModel
+        binding.myFragment = this
         binding.lifecycleOwner = this
         binding.queryInfoDisplayScrollview.visibility = View.GONE
 
@@ -180,6 +185,43 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
             true
         } else {
             false
+        }
+    }
+
+    /**
+     * Show confirmation dialog to update phrase info
+     */
+    fun showConfirmUpdatePhraseDialog() {
+        val dialogFragment: DialogFragment = UpdatePhraseConfirmationDialog()
+        dialogFragment.show(childFragmentManager, "UpdatePhraseConfirmationDialog")
+    }
+
+    /**
+     * Show confirmation dialog to delete phrase
+     */
+    fun showConfirmDeletePhraseDialog() {
+        val dialogFragment: DialogFragment = DeletePhraseConfirmationDialog()
+        dialogFragment.show(childFragmentManager, "DeletePhraseConfirmationDialog")
+    }
+
+    override fun onDialogPositiveClick(dialog: DialogFragment?) {
+        when (dialog) {
+            is UpdatePhraseConfirmationDialog -> {
+                dashboardViewModel.updateCurrentPhrase()
+                dialog.dismiss()
+            }
+            is DeletePhraseConfirmationDialog -> {
+                dashboardViewModel.delete()
+                dialog.dismiss()
+            }
+        }
+    }
+
+    override fun onDialogNegativeClick(dialog: DialogFragment?) {
+        when (dialog) {
+            is DialogFragment -> {
+                dialog.dismiss()
+            }
         }
     }
 }
