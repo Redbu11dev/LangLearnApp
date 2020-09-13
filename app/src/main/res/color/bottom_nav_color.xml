@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  * Copyright (C) 2020 Viktor Bukovets
   ~  *
@@ -20,14 +19,7 @@
   ~  */
   -->
 
-<resources>
-    <color name="colorPrimary">#202020</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#E25A53</color>
-
-    <color name="colorNeutralRed">#E25A53</color>
-    <color name="colorNeutralBlue">#ADC4DD</color>
-
-
-
-</resources>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#8049535e" android:state_checked="false" />
+    <item android:color="#49535e" android:state_checked="true" />
+</selector>

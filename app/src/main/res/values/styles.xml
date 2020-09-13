@@ -24,48 +24,36 @@
     <!-- Styles -->
     <!-- List item primary text, e.g. event titles, codelab titles -->
 
-<!--    <style name="TextAppearance.LangLearnApp.ListPrimary" parent="TextAppearance.MaterialComponents.Body1">-->
-<!--        <item name="android:textColor">#ffffff</item>-->
-<!--        <item name="android:textColorHint">#ffffff</item>-->
-<!--    </style>-->
-
-    <style name="TextAppearance.LangLearnApp.PhraseCreationTitle" parent="TextAppearance.MaterialComponents.Tooltip">
+<!--    TEXTS-->
+    <style name="LangLearnApp.TextAppearance.PhraseCreationTitle" parent="TextAppearance.MaterialComponents.Tooltip">
         <item name="android:textColor">#404040</item>
         <item name="android:textSize">24sp</item>
         <item name="android:singleLine">true</item>
         <item name="android:textStyle">bold|italic</item>
     </style>
 
-    <style name="Widget.TextInputLayout.LangLearnApp.PhraseCreation1" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="LangLearnApp.TextInputLayout.Style1" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">#000000</item>
     </style>
 
-    <style name="TextAppearance.LangLearnApp.PhraseCreation1" parent="TextAppearance.MaterialComponents.Headline5">
+    <style name="LangLearnApp.TextAppearance.Style1" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textColor">#000000</item>
         <item name="android:textColorHint">#80000000</item>
         <item name="android:textSize">20sp</item>
     </style>
 
-<!--    <style name="TextAppearance.LangLearnApp.PhraseCreationTitleText" parent="TextAppearance.MaterialComponents.Body1">-->
-<!--        <item name="android:textColor">#202020</item>-->
-<!--        <item name="android:textColorHint">#ffffff</item>-->
-<!--        <item name="android:paddingStart">4dp</item>-->
-<!--    </style>-->
-
-<!--    Buttons-->
-    <style name="ButtonStyle.LangLearnApp.ActionButton" parent="Widget.MaterialComponents.Button">
-        <item name="android:backgroundTint">@color/colorNeutralRed</item>
+<!--    BUTTONS-->
+    <style name="LangLearnApp.ButtonStyle.ActionButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/colorNeutralBlue</item>
         <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="ButtonStyle.LangLearnApp.CriticalActionButton" parent="ButtonStyle.LangLearnApp.ActionButton">
+    <style name="LangLearnApp.ButtonStyle.CriticalActionButton" parent="LangLearnApp.ButtonStyle.ActionButton">
         <item name="android:backgroundTint">@color/colorNeutralRed</item>
     </style>
 
-<!--    <style name="ButtonStyle.LangLearnApp.RegularActionButton" parent="Widget.AppCompat.Button.Colored">-->
-    <style name="ButtonStyle.LangLearnApp.RegularActionButton" parent="ButtonStyle.LangLearnApp.ActionButton">
+    <style name="LangLearnApp.ButtonStyle.RegularActionButton" parent="LangLearnApp.ButtonStyle.ActionButton">
         <item name="android:backgroundTint">#7B9FCF</item>
     </style>
 

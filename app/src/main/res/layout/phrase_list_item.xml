@@ -28,7 +28,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:orientation="vertical"
         android:clipChildren="false"
         android:clipToPadding="false"
@@ -53,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:background="@drawable/phrase_list_item_bgr"
                 >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,6 +62,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:paddingVertical="10dp"
+                    android:background="?attr/selectableItemBackground"
                     >
 
                 <TextView

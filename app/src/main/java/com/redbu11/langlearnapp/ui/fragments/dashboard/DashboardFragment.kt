@@ -73,7 +73,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_dashboard, container, false)
         binding.myViewModel = dashboardViewModel
         binding.lifecycleOwner = this
-        binding.queryInfoDisplay.visibility = View.GONE
+        binding.queryInfoDisplayScrollview.visibility = View.GONE
 
         setHasOptionsMenu(true)
 
@@ -142,10 +142,10 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
         dashboardViewModel.queryString.observe(viewLifecycleOwner, Observer {
             if (TextUtils.isEmpty(it)) {
                 mSearchItem.collapseActionView()
-                binding.queryInfoDisplay.visibility = View.GONE
+                binding.queryInfoDisplayScrollview.visibility = View.GONE
             }
             else {
-                binding.queryInfoDisplay.visibility = View.VISIBLE
+                binding.queryInfoDisplayScrollview.visibility = View.VISIBLE
             }
             TransitionManager.beginDelayedTransition(binding.root as ViewGroup, AutoTransition().setDuration(100))
         })

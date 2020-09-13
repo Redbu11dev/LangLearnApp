@@ -24,7 +24,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_dashboard">
+    app:startDestination="@+id/navigation_dashboard"
+    >
 
     <fragment
         android:id="@+id/navigation_features"
@@ -39,7 +40,7 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_additem"
+        android:id="@+id/navigation_settings"
         android:name="com.redbu11.langlearnapp.ui.fragments.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@xml/settings_pref"
