@@ -25,6 +25,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Phrase table
+ */
 @Entity(tableName = "phrase_data_table")
 data class Phrase (
     @PrimaryKey(autoGenerate = true)

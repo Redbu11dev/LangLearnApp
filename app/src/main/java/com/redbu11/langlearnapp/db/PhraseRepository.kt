@@ -29,12 +29,16 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import java.io.File
 
+/**
+ * Phrase repository
+ * @param dao - Phrase data access object
+ */
 class PhraseRepository(private val dao : PhraseDAO) {
 
     val phrases = dao.getAllPhrases()
 
-    fun phrasesThatContain(phrase_text: String) : LiveData<List<Phrase>>{
-        return dao.getAllPhrasesThatContain(phrase_text)
+    fun phrasesThatContain(queryString: String) : LiveData<List<Phrase>>{
+        return dao.getAllPhrasesThatContain(queryString)
     }
 
     suspend fun insert(phrase: Phrase):Long{
@@ -53,6 +57,9 @@ class PhraseRepository(private val dao : PhraseDAO) {
         return dao.deleteAll()
     }
 
+    /**
+     * Export phrases to CSV
+     */
     fun exportToCSVFile(csvFile: File, phrases: Collection<Phrase>) {
         csvWriter().open(csvFile, append = false) {
             // Header
@@ -81,6 +88,9 @@ class PhraseRepository(private val dao : PhraseDAO) {
         }
     }
 
+    /**
+     * Import phrases from CSV
+     */
     suspend fun importFromCsvFile(context: Context, fileUri: Uri) {
         val inStream = context.contentResolver.openInputStream(fileUri)
         if (null != inStream) {

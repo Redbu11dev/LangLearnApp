@@ -24,6 +24,10 @@ package com.redbu11.langlearnapp.db
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
+/**
+ * Data access object
+ */
+
 @Dao
 interface PhraseDAO {
     @Insert
@@ -41,6 +45,6 @@ interface PhraseDAO {
     @Query("SELECT * FROM phrase_data_table")
     fun getAllPhrases():LiveData<List<Phrase>>
 
-    @Query("SELECT * FROM phrase_data_table WHERE (phrase_text LIKE :phrase_text)")
-    fun getAllPhrasesThatContain(phrase_text: String):LiveData<List<Phrase>>
+    @Query("SELECT * FROM phrase_data_table WHERE (phrase_language LIKE :queryString) OR (phrase_text LIKE :queryString) OR (translation_language LIKE :queryString) OR (translation_text LIKE :queryString) OR (phrase_notes LIKE :queryString)")
+    fun getAllPhrasesThatContain(queryString: String):LiveData<List<Phrase>>
 }

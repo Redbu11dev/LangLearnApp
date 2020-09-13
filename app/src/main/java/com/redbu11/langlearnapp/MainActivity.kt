@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity() {
 //        supportActionBar?.setDisplayShowHomeEnabled(true)
 
 //        supportActionBar?.hide()
-        //supportActionBar?.collapseActionView()
 
     }
 
