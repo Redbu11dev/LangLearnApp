@@ -23,10 +23,22 @@
 
     <!-- Base application theme. -->
     <!--    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
-    <style name="BaseAppTheme" parent="Theme.MaterialComponents">
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
+<!--        <item name="colorPrimaryDark">#00a6a7</item>-->
+        <item name="colorPrimaryDark">#6d7b8a</item>
+        <item name="colorPrimary">#9aaec4</item>
+        <item name="colorPrimaryVariant">#90ffff</item>
+        <item name="colorSecondary">#A0A0A0</item>
+        <item name="colorSecondaryVariant">#989ffc</item>
+<!--        <item name="secondaryDarkColor">#6671c8</item>-->
+        <item name="colorError">#E25A53</item>
+        <item name="android:textColorPrimary">#000000</item>
+<!--        <item name="android:textColorSecondary">#000000</item>-->
+        <item name="android:colorBackground">#F0F0F0</item>
+        <item name="colorOnBackground">#0F0F0F</item>
 
-
+        <item name="textInputStyle">@style/TextAppearance.LangLearnApp.PhraseCreation1</item>
 
 
 

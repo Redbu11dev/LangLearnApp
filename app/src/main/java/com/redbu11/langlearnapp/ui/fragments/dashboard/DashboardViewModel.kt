@@ -40,8 +40,6 @@ class DashboardViewModel(application: Application, private val repository: Phras
 
     @Bindable
     val queryString = MutableLiveData<String>("")
-    //val phrases = repository.phrases
-    //val phrases = repository.phrasesThatContain("%${phrasesSearchText.value}%")
     val phrases =  Transformations.switchMap(queryString) {query ->
         repository.phrasesThatContain("%${query}%")
     }
