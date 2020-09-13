@@ -58,7 +58,10 @@
             android:key="github_page"
             android:icon="@drawable/ic_star_border_black_24dp"
             android:summary="@string/settings_pref_github_page_desc"
-            android:title="@string/settings_pref_github_page_name"
-            />
+            android:title="@string/settings_pref_github_page_name">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/Redbu11dev/LangLearnApp" />
+        </Preference>
     </PreferenceCategory>
 </androidx.preference.PreferenceScreen>
