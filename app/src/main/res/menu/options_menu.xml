@@ -27,5 +27,6 @@
         android:icon="@drawable/ic_search_light_24dp"
         android:title="temp_search_title"
         app:actionLayout="@layout/search_view_layout"
-        app:showAsAction="ifRoom|collapseActionView" />
+        app:showAsAction="ifRoom|collapseActionView"
+        />
 </menu>

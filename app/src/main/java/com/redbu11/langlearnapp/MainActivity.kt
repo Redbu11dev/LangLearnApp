@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-
+        // Makes (toolbar text = fragment name)
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_features, R.id.navigation_dashboard, R.id.navigation_settings))
         setupActionBarWithNavController(navController, appBarConfiguration)

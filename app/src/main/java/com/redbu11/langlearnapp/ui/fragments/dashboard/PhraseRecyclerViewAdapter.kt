@@ -69,6 +69,10 @@ class MyViewHolder(val binding: PhraseListItemBinding):RecyclerView.ViewHolder(b
             binding.notesTitleTextView.visibility = View.GONE
             binding.notesTextView.visibility = View.GONE
         }
+        else {
+            binding.notesTitleTextView.visibility = View.VISIBLE
+            binding.notesTextView.visibility = View.VISIBLE
+        }
         binding.phraseListItemClickLayout.setOnClickListener {
             clicklistener(phrase)
         }

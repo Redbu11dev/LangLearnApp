@@ -24,9 +24,38 @@
     <!-- Styles -->
     <!-- List item primary text, e.g. event titles, codelab titles -->
 
+<!--    TOOLBAR/APPBAR-->
+
+    <style name="LangLearnApp.ToolbarStyle" parent="@style/Widget.MaterialComponents.Toolbar">
+        <item name="titleTextColor">#ffffff</item>
+        <item name="collapseIcon">@drawable/ic_arrow_back_light_24dp</item>
+    </style>
+
+<!--    SEARCHVIEW-->
+
+    <style name="LangLearnApp.MySearchViewStyle" parent="Widget.AppCompat.SearchView">
+<!--        &lt;!&ndash; Background for the search query section (e.g. EditText) &ndash;&gt;-->
+<!--        <item name="queryBackground">...</item>-->
+<!--        &lt;!&ndash; Background for the actions section (e.g. voice, submit) &ndash;&gt;-->
+<!--        <item name="submitBackground">...</item>-->
+<!--        &lt;!&ndash; Close button icon &ndash;&gt;-->
+        <item name="closeIcon">@drawable/ic_clear_light_24dp</item>
+<!--        &lt;!&ndash; Search button icon &ndash;&gt;-->
+<!--        <item name="searchIcon">@drawable/ic_arrow_forward_dark_24dp</item>-->
+        <item name="searchHintIcon">@null</item>
+<!--        &lt;!&ndash; Go/commit button icon &ndash;&gt;-->
+<!--        <item name="goIcon">...</item>-->
+<!--        &lt;!&ndash; Voice search button icon &ndash;&gt;-->
+<!--        <item name="voiceIcon">...</item>-->
+<!--        &lt;!&ndash; Commit icon shown in the query suggestion row &ndash;&gt;-->
+<!--        <item name="commitIcon">...</item>-->
+<!--        &lt;!&ndash; Layout for query suggestion rows &ndash;&gt;-->
+<!--        <item name="suggestionRowLayout">...</item>-->
+    </style>
+
 <!--    TEXTS-->
     <style name="LangLearnApp.TextAppearance.PhraseCreationTitle" parent="TextAppearance.MaterialComponents.Tooltip">
-        <item name="android:textColor">#404040</item>
+        <item name="android:textColor">#606060</item>
         <item name="android:textSize">24sp</item>
         <item name="android:singleLine">true</item>
         <item name="android:textStyle">bold|italic</item>

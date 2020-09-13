@@ -22,55 +22,59 @@
 <resources>
 
     <!-- Base application theme. -->
+
     <!--    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
     <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
-<!--        <item name="colorPrimaryDark">#00a6a7</item>-->
+        <!--        <item name="colorPrimaryDark">#00a6a7</item>-->
         <item name="colorPrimaryDark">#6d7b8a</item>
         <item name="colorPrimary">#9aaec4</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
         <item name="colorPrimaryVariant">#90ffff</item>
         <item name="colorSecondary">#A0A0A0</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
         <item name="colorSecondaryVariant">#989ffc</item>
-<!--        <item name="secondaryDarkColor">#6671c8</item>-->
+        <!--        <item name="secondaryDarkColor">#6671c8</item>-->
         <item name="colorError">#E25A53</item>
-        <item name="android:textColorPrimary">#000000</item>
-<!--        <item name="android:textColorSecondary">#000000</item>-->
+        <!--        <item name="android:textColorSecondary">#000000</item>-->
         <item name="android:colorBackground">#F0F0F0</item>
         <item name="colorOnBackground">#0F0F0F</item>
+
+<!--        <item name="actionBarSize">100dp</item>-->
+        <item name="toolbarStyle">@style/LangLearnApp.ToolbarStyle</item>
+
 
         <item name="textInputStyle">@style/LangLearnApp.TextAppearance.Style1</item>
 
         <item name="android:buttonStyle">@style/LangLearnApp.ButtonStyle.ActionButton</item>
 
 
-
-
         <!--        Main-->
-<!--        <item name="colorPrimaryDark">#000000</item>-->
-<!--        <item name="colorPrimary">#101010</item>-->
-<!--        &lt;!&ndash;        <item name="colorPrimaryVariant">#ff0000</item>&ndash;&gt;-->
-<!--        <item name="colorOnPrimary">#ffffff</item>-->
+        <!--        <item name="colorPrimaryDark">#000000</item>-->
+        <!--        <item name="colorPrimary">#101010</item>-->
+        <!--        &lt;!&ndash;        <item name="colorPrimaryVariant">#ff0000</item>&ndash;&gt;-->
+        <!--        <item name="colorOnPrimary">#ffffff</item>-->
 
-<!--        <item name="colorSecondary">#606060</item>-->
-<!--        &lt;!&ndash;        <item name="colorSecondaryVariant">#0000FF</item>&ndash;&gt;-->
-<!--        <item name="colorOnSecondary">#ffffff</item>-->
+        <!--        <item name="colorSecondary">#606060</item>-->
+        <!--        &lt;!&ndash;        <item name="colorSecondaryVariant">#0000FF</item>&ndash;&gt;-->
+        <!--        <item name="colorOnSecondary">#ffffff</item>-->
 
-<!--        <item name="android:colorBackground">#F0F0F0</item>-->
-<!--        <item name="colorOnBackground">#0F0F0F</item>-->
+        <!--        <item name="android:colorBackground">#F0F0F0</item>-->
+        <!--        <item name="colorOnBackground">#0F0F0F</item>-->
 
-<!--        <item name="colorSurface">#ffffff</item>-->
-<!--        <item name="colorOnSurface">#000000</item>-->
+        <!--        <item name="colorSurface">#ffffff</item>-->
+        <!--        <item name="colorOnSurface">#000000</item>-->
 
-<!--        <item name="colorError">@color/colorNeutralRed</item>-->
-<!--        <item name="colorOnError">#ffffff</item>-->
+        <!--        <item name="colorError">@color/colorNeutralRed</item>-->
+        <!--        <item name="colorOnError">#ffffff</item>-->
 
-<!--        <item name="android:textColorPrimary">#000000</item>-->
+        <!--        <item name="android:textColorPrimary">#000000</item>-->
         <!--        <item name="android:textColorSecondary">#303030</item>-->
 
-<!--        Button Styles-->
-<!--        <item name="materialButtonStyle">@style/ButtonStyle.LangLearnApp.RegularActionButton</item>-->
-<!--        <item name="borderlessButtonStyle">#F0F0F0</item>-->
-<!--        <item name="materialButtonOutlinedStyle">#F0F0F0</item>-->
+        <!--        Button Styles-->
+        <!--        <item name="materialButtonStyle">@style/ButtonStyle.LangLearnApp.RegularActionButton</item>-->
+        <!--        <item name="borderlessButtonStyle">#F0F0F0</item>-->
+        <!--        <item name="materialButtonOutlinedStyle">#F0F0F0</item>-->
 
 
         <!--        Other-->
@@ -117,5 +121,6 @@
 
     <!-- declare the theme name that's actually applied in the manifest file -->
     <style name="AppTheme" parent="BaseAppTheme" />
+
 
 </resources>
