@@ -21,7 +21,9 @@
 
 package com.redbu11.langlearnapp.ui.fragments.dashboard
 
+import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -61,7 +63,13 @@ class MyViewHolder(val binding: PhraseListItemBinding):RecyclerView.ViewHolder(b
         binding.phraseTextView.text = phrase.phraseText
         binding.translationTitleTextView.text = String.format(binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_translationLang_title), phrase.translationLanguage)
         binding.translationTextView.text = phrase.translationText
-        binding.phraseListItemLayout.setOnClickListener {
+        binding.notesTitleTextView.text = binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_notes_title)
+        binding.notesTextView.text = phrase.notes
+        if (TextUtils.isEmpty(binding.notesTextView.text)) {
+            binding.notesTitleTextView.visibility = View.GONE
+            binding.notesTextView.visibility = View.GONE
+        }
+        binding.phraseListItemClickLayout.setOnClickListener {
             clicklistener(phrase)
         }
         //binding.cardView.setCardBackgroundColor( Color.parseColor(ConvertUtils.stringToColor(phrase.phraseLanguage)) )

@@ -22,43 +22,82 @@
 <resources>
 
     <!-- Base application theme. -->
-<!--    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
-    <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <!--    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents.DayNight">
         <!-- Customize your theme here. -->
-<!--        Main-->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorSecondary">#ffde03</item>
-        <item name="colorSurface">#ffffff</item>
 
-        <item name="colorOnPrimary">#ffffff</item>
-        <item name="colorOnSecondary">#404040</item>
-        <item name="colorOnSurface">#000000</item>
 
-        <item name="colorPrimaryVariant">#0035c9</item>
-        <item name="colorSecondaryVariant">#ffc000</item>
 
-        <item name="colorError">@color/colorNeutralRed</item>
 
-        <item name="android:colorBackground">#F0F0F0</item>
 
-<!--        Other-->
-        <item name="colorControlNormal">#F0F0F0</item>
-        <item name="colorControlActivated">#F0F0F0</item>
-        <item name="colorControlHighlight">#F0F0F0</item>
-        <item name="android:textColorPrimary">@color/colorPrimary</item>
-        <item name="android:textColorSecondary">@color/colorNeutralRed</item>
 
-<!--&lt;!&ndash;        Dimens&ndash;&gt;-->
-<!--        <item name="listPreferredItemHeight">?attr/listPreferredItemHeight</item>-->
-<!--        <item name="actionBarSize">?attr/actionBarSize</item>-->
+        <!--        Main-->
+<!--        <item name="colorPrimaryDark">#000000</item>-->
+<!--        <item name="colorPrimary">#101010</item>-->
+<!--        &lt;!&ndash;        <item name="colorPrimaryVariant">#ff0000</item>&ndash;&gt;-->
+<!--        <item name="colorOnPrimary">#ffffff</item>-->
 
-<!--&lt;!&ndash;        Drawables&ndash;&gt;-->
-<!--        <item name="selectableItemBackground">?attr/selectableItemBackground</item>-->
-<!--        <item name="selectableItemBackgroundBorderless">?attr/selectableItemBackgroundBorderless</item>-->
-<!--        <item name="dividerVertical">?attr/dividerVertical</item>-->
-<!--        <item name="dividerHorizontal">?attr/dividerHorizontal</item>-->
+<!--        <item name="colorSecondary">#606060</item>-->
+<!--        &lt;!&ndash;        <item name="colorSecondaryVariant">#0000FF</item>&ndash;&gt;-->
+<!--        <item name="colorOnSecondary">#ffffff</item>-->
 
+<!--        <item name="android:colorBackground">#F0F0F0</item>-->
+<!--        <item name="colorOnBackground">#0F0F0F</item>-->
+
+<!--        <item name="colorSurface">#ffffff</item>-->
+<!--        <item name="colorOnSurface">#000000</item>-->
+
+<!--        <item name="colorError">@color/colorNeutralRed</item>-->
+<!--        <item name="colorOnError">#ffffff</item>-->
+
+<!--        <item name="android:textColorPrimary">#000000</item>-->
+        <!--        <item name="android:textColorSecondary">#303030</item>-->
+
+<!--        Button Styles-->
+<!--        <item name="materialButtonStyle">@style/ButtonStyle.LangLearnApp.RegularActionButton</item>-->
+<!--        <item name="borderlessButtonStyle">#F0F0F0</item>-->
+<!--        <item name="materialButtonOutlinedStyle">#F0F0F0</item>-->
+
+
+        <!--        Other-->
+        <!--        <item name="colorControlNormal">#F0F0F0</item>-->
+        <!--        <item name="colorControlActivated">#F0F0F0</item>-->
+        <!--        <item name="colorControlHighlight">#F0F0F0</item>-->
+
+        <!--        Dimens-->
+        <!--        <item name="listPreferredItemHeight">?attr/listPreferredItemHeight</item>-->
+        <!--        <item name="actionBarSize">?attr/actionBarSize</item>-->
+
+        <!--        Drawables-->
+        <!--        <item name="selectableItemBackground">?attr/selectableItemBackground</item>-->
+        <!--        <item name="selectableItemBackgroundBorderless">?attr/selectableItemBackgroundBorderless</item>-->
+        <!--        <item name="dividerVertical">?attr/dividerVertical</item>-->
+        <!--        <item name="dividerHorizontal">?attr/dividerHorizontal</item>-->
+
+        <!--        TextAppearances-->
+        <!--        <item name="textAppearanceHeadline1">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceHeadline2">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceHeadline3">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceHeadline4">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceHeadline5">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceHeadline6">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceSubtitle1">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceSubtitle2">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceBody1">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceBody2">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceCaption">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceButton">#F0F0F0</item>-->
+        <!--        <item name="textAppearanceOverline">#F0F0F0</item>-->
+
+        <!--        Shape-->
+        <!--        <item name="shapeAppearanceSmallComponent">#F0F0F0</item>-->
+        <!--        <item name="shapeAppearanceMediumComponent">#F0F0F0</item>-->
+        <!--        <item name="shapeAppearanceLargeComponent">#F0F0F0</item>-->
+
+        <!--        Floats-->
+        <!--        <item name="android:disabledAlpha">#F0F0F0</item>-->
+        <!--        <item name="android:primaryContentAlpha">#F0F0F0</item>-->
+        <!--        <item name="android:secondaryContentAlpha">#F0F0F0</item>-->
 
     </style>
 

@@ -30,7 +30,7 @@
     <string name="error_occurred">Error occurred</string>
 
     <string name="title_features">#TODO</string>
-    <string name="title_dashboard">Your phrases</string>
+    <string name="title_dashboard">Phrases</string>
     <string name="title_settings">Settings</string>
 
 <!--    Dialogs-->
@@ -105,4 +105,5 @@
 <!--    Phrase ListItem-->
     <string name="phrase_listItem_phraseLang_title">Phrase (%s):</string>
     <string name="phrase_listItem_translationLang_title">Translation (%s):</string>
+    <string name="phrase_listItem_notes_title">Notes:</string>
 </resources>
