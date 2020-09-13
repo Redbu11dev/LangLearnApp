@@ -21,10 +21,10 @@
 
 <resources>
 <!--    Values-->
-    <string name="default_export_path">Android/data/com.redbu11.langlearnapp/files</string>
+    <string name="default_export_path" translatable="false">Android/data/com.redbu11.langlearnapp/files</string>
 
 <!--    Texts-->
-    <string name="app_name">LangLearn</string>
+    <string name="app_name" translatable="false">LangLearn</string>
 
     <string name="error_occurred">Error occurred</string>
 
@@ -127,6 +127,9 @@
 
     <string name="settings_pref_github_page_name">GitHub page</string>
     <string name="settings_pref_github_page_desc">Visit the app\'s github page</string>
+
+    <string name="settings_pref_credits_name">Credits</string>
+    <string name="settings_pref_credits_desc">Credits and attribution</string>
 
     <string name="settings_view_filename">View %s</string>
     <string name="settings_pick_csv_intent">Pick the database .csv</string>

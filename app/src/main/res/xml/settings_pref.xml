@@ -63,5 +63,10 @@
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/Redbu11dev/LangLearnApp" />
         </Preference>
+<!--        <Preference-->
+<!--            android:key="credits"-->
+<!--            android:icon="@drawable/ic_info_outline_black_24dp"-->
+<!--            android:summary="@string/settings_pref_about_desc"-->
+<!--            android:title="@string/settings_pref_about_name" />-->
     </PreferenceCategory>
 </androidx.preference.PreferenceScreen>
