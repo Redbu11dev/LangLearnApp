@@ -38,7 +38,13 @@ import com.redbu11.langlearnapp.utils.SoftUtils
 class DashboardViewModel(application: Application, private val repository: PhraseRepository) :
     AndroidViewModel(application), Observable {
 
-    val phrases = repository.phrases
+    @Bindable
+    val queryString = MutableLiveData<String>("")
+    //val phrases = repository.phrases
+    //val phrases = repository.phrasesThatContain("%${phrasesSearchText.value}%")
+    val phrases =  Transformations.switchMap(queryString) {query ->
+        repository.phrasesThatContain("%${query}%")
+    }
     private var isUpdateOrDelete = false
     private lateinit var phraseToUpdateOrDelete: Phrase
 
@@ -240,6 +246,10 @@ class DashboardViewModel(application: Application, private val repository: Phras
         } else {
             postStatusMessage(R.string.error_occurred)
         }
+    }
+
+    fun clearQueryString() {
+        queryString.value = ""
     }
 
     /**

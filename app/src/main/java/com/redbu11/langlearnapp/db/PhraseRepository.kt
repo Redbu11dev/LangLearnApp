@@ -24,6 +24,7 @@ package com.redbu11.langlearnapp.db
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import java.io.File
@@ -31,6 +32,10 @@ import java.io.File
 class PhraseRepository(private val dao : PhraseDAO) {
 
     val phrases = dao.getAllPhrases()
+
+    fun phrasesThatContain(phrase_text: String) : LiveData<List<Phrase>>{
+        return dao.getAllPhrasesThatContain(phrase_text)
+    }
 
     suspend fun insert(phrase: Phrase):Long{
         return dao.insertPhrase(phrase)

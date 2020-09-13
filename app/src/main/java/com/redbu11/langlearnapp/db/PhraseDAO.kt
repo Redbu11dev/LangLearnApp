@@ -40,4 +40,7 @@ interface PhraseDAO {
 
     @Query("SELECT * FROM phrase_data_table")
     fun getAllPhrases():LiveData<List<Phrase>>
+
+    @Query("SELECT * FROM phrase_data_table WHERE (phrase_text LIKE :phrase_text)")
+    fun getAllPhrasesThatContain(phrase_text: String):LiveData<List<Phrase>>
 }

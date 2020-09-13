@@ -24,9 +24,11 @@ package com.redbu11.langlearnapp.ui.fragments.dashboard
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
 import androidx.databinding.DataBindingUtil
@@ -34,6 +36,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.AutoTransition
 import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
 import com.redbu11.langlearnapp.MainActivity
@@ -52,9 +55,9 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
     private lateinit var adapter: PhraseRecyclerViewAdapter
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 //        dashboardViewModel =
 //                ViewModelProvider(this).get(DashboardViewModel::class.java)
@@ -66,9 +69,11 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
         dashboardViewModel =
             ViewModelProvider(this, factory).get(DashboardViewModel::class.java)
 
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_dashboard, container, false)
+        binding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_dashboard, container, false)
         binding.myViewModel = dashboardViewModel
         binding.lifecycleOwner = this
+        binding.queryInfoDisplay.visibility = View.GONE
 
         setHasOptionsMenu(true)
 
@@ -90,13 +95,15 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
             if (it) {
                 binding.phraseCreatorContainer.visibility = View.VISIBLE
                 binding.fab.visibility = View.GONE
-            }
-            else {
+            } else {
                 binding.phraseCreatorContainer.visibility = View.GONE
                 binding.fab.visibility = View.VISIBLE
                 SoftUtils.hideSoftKeyBoard(requireContext(), binding.phraseCreatorContainer)
             }
-            TransitionManager.beginDelayedTransition(binding.root as ViewGroup, ChangeBounds().setDuration(200))
+            TransitionManager.beginDelayedTransition(
+                binding.root as ViewGroup,
+                ChangeBounds().setDuration(200)
+            )
         })
     }
 
@@ -115,48 +122,54 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
         val searchManager =
             requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         mSearchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-        mSearchView.setOnQueryTextListener(object :
-            SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                mSearchView.clearFocus()
-                return true
-            }
+        mSearchView.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    mSearchView.clearFocus()
+                    mSearchItem.collapseActionView()
+                    return true
+                }
 
-            override fun onQueryTextChange(query: String): Boolean {
-                //adapter.getFilter().filter(query)
-                return true
+                override fun onQueryTextChange(query: String): Boolean {
+                    if (mSearchView.hasFocus()) {
+                        dashboardViewModel.queryString.value = query
+                    }
+                    return true
+                }
             }
+        )
+
+        dashboardViewModel.queryString.observe(viewLifecycleOwner, Observer {
+            if (TextUtils.isEmpty(it)) {
+                mSearchItem.collapseActionView()
+                binding.queryInfoDisplay.visibility = View.GONE
+            }
+            else {
+                binding.queryInfoDisplay.visibility = View.VISIBLE
+            }
+            TransitionManager.beginDelayedTransition(binding.root as ViewGroup, AutoTransition().setDuration(100))
         })
+
         super.onCreateOptionsMenu(menu, inflater)
-
-//        // Get the SearchView and set the searchable configuration
-//        val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
-//        (menu.findItem(R.id.m_search).actionView as SearchView).apply {
-//            // Assumes current activity is the searchable activity
-//            setSearchableInfo(searchManager.getSearchableInfo(componentName))
-//            setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
-//        }
-
-//        return true
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         binding.phraseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = PhraseRecyclerViewAdapter { selectedItem:Phrase->listItemClicked(selectedItem)}
+        adapter =
+            PhraseRecyclerViewAdapter { selectedItem: Phrase -> listItemClicked(selectedItem) }
         binding.phraseRecyclerView.adapter = adapter
         displayPhrasesList()
     }
 
-    private fun displayPhrasesList(){
+    private fun displayPhrasesList() {
         dashboardViewModel.phrases.observe(viewLifecycleOwner, Observer {
-            Log.i("MYTAG",it.toString())
+            Log.i("MYTAG", it.toString())
             adapter.setList(it)
             adapter.notifyDataSetChanged()
         })
     }
 
-    private fun listItemClicked(phrase: Phrase){
-        //Toast.makeText(requireContext(),"selected phrase is ${phrase.phraseText}",Toast.LENGTH_LONG).show()
+    private fun listItemClicked(phrase: Phrase) {
         dashboardViewModel.setAndShowInputFormAsUpdate(phrase)
     }
 
@@ -165,8 +178,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
         return if (binding.phraseCreatorContainer.visibility == View.VISIBLE) {
             dashboardViewModel.phraseCreatorContainerVisible.value = false
             true
-        }
-        else {
+        } else {
             false
         }
     }
