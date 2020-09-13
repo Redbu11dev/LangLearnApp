@@ -377,7 +377,10 @@
                 android:layoutAnimation="@anim/layout_animation"
                 android:overScrollMode="never"
                 android:paddingHorizontal="15dp"
-                tools:listitem="@layout/phrase_list_item" />
+                tools:listitem="@layout/phrase_list_item"
+                app:stackFromEnd="true"
+                app:reverseLayout="true"
+                />
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

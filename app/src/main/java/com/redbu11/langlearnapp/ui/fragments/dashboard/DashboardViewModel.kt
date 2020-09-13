@@ -215,7 +215,7 @@ class DashboardViewModel(application: Application, private val repository: Phras
         val newRowID = repository.insert(phrase)
         if (newRowID > -1) {
             postStatusMessage(
-                "${getStringFromIdResource(R.string.dashboard_phrase_insert_success)} $newRowID"
+                "${getStringFromIdResource(R.string.dashboard_phrase_insert_success)}"
             )
             hidePhraseCreatorContainer()
         } else {

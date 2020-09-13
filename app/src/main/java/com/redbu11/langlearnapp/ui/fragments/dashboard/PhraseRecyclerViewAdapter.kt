@@ -30,6 +30,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.databinding.PhraseListItemBinding
 import com.redbu11.langlearnapp.db.Phrase
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PhraseRecyclerViewAdapter (private val clicklistener:(Phrase)->Unit):RecyclerView.Adapter<MyViewHolder>() {
 
@@ -53,6 +55,7 @@ class PhraseRecyclerViewAdapter (private val clicklistener:(Phrase)->Unit):Recyc
     fun setList(phrases: List<Phrase>) {
         phrasesList.clear()
         phrasesList.addAll(phrases)
+        phrasesList.reverse()
     }
 
 }
