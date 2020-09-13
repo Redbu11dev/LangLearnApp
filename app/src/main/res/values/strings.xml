@@ -24,7 +24,6 @@
     <string name="default_export_path">Android/data/com.redbu11.langlearnapp/files</string>
 
 <!--    Texts-->
-
     <string name="app_name">LangLearnApp</string>
 
     <string name="error_occurred">Error occurred</string>
@@ -34,6 +33,25 @@
     <string name="title_settings">Settings</string>
 
 <!--    Dialogs-->
+    <string name="dialog_about_the_app_title">About the app</string>
+    <string name="dialog_about_the_app_message">
+        Copyright © 2020 Viktor Bukovets
+        \n
+        \n
+        The app is created for the purpose of helping people learn other languages by providing a dedicated way of storing foreign phrases.
+        \n
+        Can be useful if someone tells you a phrase/word, but you don\'t have a quick or convenient way of writing it down.
+        \n
+        I made the app mostly for myself, because I needed a convenient way of storing phrases, when playing VRChat (lol).
+        \n
+        \n
+        The app is also open source, and I\'d be happy if you visit my github page and support me there (I would love to hear about my code quality and/or receive advices, and stars would always be nice :P)
+        \n
+        \n
+        Thank you for using the app.
+    </string>
+    <string name="dialog_about_the_app_btn_positive">OK</string>
+
     <string name="dialog_confirmation_default_message">Are you sure?</string>
     <string name="dialog_confirmation_default_btn_positive">Yes</string>
     <string name="dialog_confirmation_default_btn_negative">Cancel</string>

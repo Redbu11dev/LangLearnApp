@@ -43,10 +43,7 @@ import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.db.Phrase
 import com.redbu11.langlearnapp.db.PhraseDatabase
 import com.redbu11.langlearnapp.db.PhraseRepository
-import com.redbu11.langlearnapp.ui.dialogs.ConfirmationDialogFragment
-import com.redbu11.langlearnapp.ui.dialogs.EraseDatabaseDialog
-import com.redbu11.langlearnapp.ui.dialogs.ExportPhrasesDialog
-import com.redbu11.langlearnapp.ui.dialogs.ImportPhrasesDialog
+import com.redbu11.langlearnapp.ui.dialogs.*
 import com.redbu11.langlearnapp.utils.MyFileUtils
 import java.io.File
 
@@ -92,6 +89,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
             }
             key.equals("export_phrases") -> showConfirmExportDatabaseDialog()
             key.equals("import_phrases") -> showConfirmImportDatabaseDialog()
+            key.equals("about") -> {
+                val dialogFragment: DialogFragment = AboutTheAppDialogFragment()
+                dialogFragment.show(childFragmentManager, "AboutTheAppDialogFragment")
+            }
             else -> {
                 //nothing
             }

@@ -219,7 +219,8 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed, Confi
 
     override fun onDialogNegativeClick(dialog: DialogFragment?) {
         when (dialog) {
-            is DialogFragment -> {
+            is UpdatePhraseConfirmationDialog,
+            is DeletePhraseConfirmationDialog -> {
                 dialog.dismiss()
             }
         }
