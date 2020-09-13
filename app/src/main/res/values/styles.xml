@@ -51,6 +51,8 @@
 <!--        <item name="commitIcon">...</item>-->
 <!--        &lt;!&ndash; Layout for query suggestion rows &ndash;&gt;-->
 <!--        <item name="suggestionRowLayout">...</item>-->
+        <item name="android:editTextColor">#ffffff</item>
+        <item name="android:textColorHint">#c8dfff</item>
     </style>
 
 <!--    TEXTS-->
