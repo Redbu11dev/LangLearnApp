@@ -21,12 +21,14 @@
 
 package com.redbu11.langlearnapp.ui.fragments.dashboard
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuItemCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -41,6 +43,7 @@ import com.redbu11.langlearnapp.db.Phrase
 import com.redbu11.langlearnapp.db.PhraseDatabase
 import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.utils.SoftUtils
+
 
 class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
 
@@ -66,6 +69,8 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_dashboard, container, false)
         binding.myViewModel = dashboardViewModel
         binding.lifecycleOwner = this
+
+        setHasOptionsMenu(true)
 
         return binding.root
     }
@@ -97,6 +102,42 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed {
 
     override fun onDestroyView() {
         super.onDestroyView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        // Inflate the options menu from XML
+        inflater.inflate(R.menu.options_menu, menu)
+
+        val mSearchItem = menu.findItem(R.id.m_search)
+        val mSearchView = mSearchItem.actionView as SearchView
+        mSearchView.isIconified = true
+
+        val searchManager =
+            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        mSearchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+        mSearchView.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                mSearchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                //adapter.getFilter().filter(query)
+                return true
+            }
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+
+//        // Get the SearchView and set the searchable configuration
+//        val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+//        (menu.findItem(R.id.m_search).actionView as SearchView).apply {
+//            // Assumes current activity is the searchable activity
+//            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+//            setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
+//        }
+
+//        return true
     }
 
     private fun initRecyclerView(){

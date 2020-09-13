@@ -21,9 +21,13 @@
 
 package com.redbu11.langlearnapp
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -54,6 +58,7 @@ class MainActivity : AppCompatActivity() {
 //        supportActionBar?.setDisplayShowHomeEnabled(true)
 
 //        supportActionBar?.hide()
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean { // handle arrow click here
