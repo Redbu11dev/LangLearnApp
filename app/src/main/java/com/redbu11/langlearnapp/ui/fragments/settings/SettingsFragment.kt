@@ -126,6 +126,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         val contentUri =
             FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
         val mimeType = context.contentResolver.getType(contentUri)
+        //intent.putExtra(Intent.EXTRA_TITLE, "Open your file with a .csv reader")
         intent.setDataAndType(contentUri, mimeType)
         intent.flags =
             Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION

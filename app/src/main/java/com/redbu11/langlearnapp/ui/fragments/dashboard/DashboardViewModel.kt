@@ -211,6 +211,13 @@ class DashboardViewModel(application: Application, private val repository: Phras
     }
 
     /**
+     * get current(open) phrase
+     */
+    fun getCurrentPhrase(): Phrase {
+        return phraseToUpdateOrDelete
+    }
+
+    /**
      * Insert phrase
      * @param phrase - Phrase object
      */

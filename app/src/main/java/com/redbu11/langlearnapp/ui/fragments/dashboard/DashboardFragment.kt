@@ -198,7 +198,14 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
     fun sharePhrase() {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "TEST")
+            val currentPhrase = dashboardViewModel.getCurrentPhrase()
+            //val notes = currentPhrase.notes
+            putExtra(Intent.EXTRA_TEXT, "(${currentPhrase.phraseLanguage}) ${currentPhrase.phraseText} -> (${currentPhrase.translationLanguage}) ${currentPhrase.translationText} (LangLearn (link))")
+            // (Optional) Here we're setting the title of the content
+            //putExtra(Intent.EXTRA_TITLE, "Share the phrase with other apps")
+            // (Optional) Here we're passing a content URI to an image to be displayed
+//            data = contentUri
+//            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
             type = "text/plain"
         }
 
