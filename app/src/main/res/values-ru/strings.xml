@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * Copyright (C) 2020 Viktor Bukovets
+  ~  *
+  ~  * This file is part of LangLearnApp.
+  ~  *
+  ~  * LangLearnApp is free software: you can redistribute it and/or modify
+  ~  * it under the terms of the GNU General Public License as published by
+  ~  * the Free Software Foundation, either version 3 of the License, or
+  ~  * (at your option) any later version.
+  ~  *
+  ~  * LangLearnApp is distributed in the hope that it will be useful,
+  ~  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~  * GNU General Public License for more details.
+  ~  *
+  ~  * You should have received a copy of the GNU General Public License
+  ~  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  ~  */
+  -->
+
+<resources>
+    <string name="error_occurred">Произошла ошибка</string>
+    <string name="title_features">#TODO</string>
+    <string name="title_dashboard">Фразы</string>
+    <string name="title_settings">Настройки</string>
+    <string name="dialog_about_the_app_title">О приложении</string>
+    <string name="dialog_about_the_app_message">
+        © 2020 Буковец Виктор
+        \n
+        \n
+        Приложение создано для помощи в изучении иностранных языков, путем предоставления специального отведеного способа записи фраз.
+        \n
+        Может быть полезным, если кто-то говорит вам фразу/слово, но у вас нет удобного способа записи этой информации.
+        \n
+        Приложение сделано в основном "для себя", так как мне нужен был удобный способ записи и хранения иностранных фраз.
+        \n
+        \n
+        Приложение имеет открытый код, я буду раз поддержке на GitHub (Был бы раз критике/советам по коду, ну и звездочкам тоже :P)
+        \n
+        \n
+        Спасибо за использование приложения.
+    </string>
+    <string name="dialog_about_the_app_btn_positive">ОК</string>
+    <string name="dialog_confirmation_default_message">Вы уверены?</string>
+    <string name="dialog_confirmation_default_btn_negative">Отмена</string>
+    <string name="dialog_erase_db_btn_positive">Удалить</string>
+    <string name="dialog_erase_db_btn_negative">Отмена</string>
+    <string name="dialog_export_phrases_btn_positive">Экспорт</string>
+    <string name="dialog_export_phrases_btn_negative">Отмена</string>
+    <string name="dialog_import_phrases_btn_positive">Импорт</string>
+    <string name="dialog_import_phrases_btn_negative">Отмена</string>
+    <string name="dialog_update_phrase_confirmation_message">Информация о фразе будет обновлена. Продолжить?</string>
+    <string name="dialog_update_phrase_confirmation_btn_positive">Обновить</string>
+    <string name="dialog_update_phrase_confirmation_btn_negative">Отмена</string>
+    <string name="dialog_delete_phrase_confirmation_message">Эта фраза будет удалена навегда. Вы уверены?</string>
+    <string name="dialog_delete_phrase_confirmation_btn_positive">Удалить</string>
+    <string name="dialog_delete_phrase_confirmation_btn_negative">Отмена</string>
+    <string name="dashboard_search_query_desc">Фильтр: %s</string>
+    <string name="dashboard_search_query_btn_clear">УБРАТЬ</string>
+    <string name="dashboard_phrase_manipulation_title_create">Создать фразу</string>
+    <string name="dashboard_phrase_manipulation_title_update">Обновть фразу</string>
+    <string name="dashboard_input_title_phrase_language">Из:</string>
+    <string name="dashboard_input_title_phrase_text">Фраза:</string>
+    <string name="dashboard_input_title_translation_language">В:</string>
+    <string name="dashboard_input_title_translation_text">Перевод:</string>
+    <string name="dashboard_input_title_notes">Заметки:</string>
+    <string name="dashboard_input_hint_phrase_language">Язык</string>
+    <string name="dashboard_input_hint_phrase_text">Текст фразы</string>
+    <string name="dashboard_input_hint_translation_language">Язык</string>
+    <string name="dashboard_input_hint_translation_text">Перевод</string>
+    <string name="dashboard_input_hint_notes">Заметки</string>
+    <string name="dashboard_btn_save">Сохранить</string>
+    <string name="dashboard_btn_clear_all">Удалить все</string>
+    <string name="dashboard_btn_update">Обновить</string>
+    <string name="dashboard_btn_delete">Удалить</string>
+    <string name="dashboard_error_enter_phrase_language">Пожалуйста, введите язык фразы</string>
+    <string name="dashboard_error_enter_phrase_text">Пожалуйста, введите текст фразы</string>
+    <string name="dashboard_error_enter_translation_language">Пожалуйста, введите язык перевода</string>
+    <string name="dashboard_error_enter_translation_text">Пожалуйста, введите текст перевода</string>
+    <string name="dashboard_phrase_insert_success">Фраза успешно вставлена</string>
+    <string name="dashboard_phrase_update_success">фраза(ы) успешно обновлено</string>
+    <string name="dashboard_phrase_delete_one_phrase_success">Фраза успешно удалена</string>
+    <string name="dashboard_phrase_delete_success">фраза(ы) успешно удалены</string>
+    <string name="dashboard_phrase_deleted_undo_message">Фраза удалена</string>
+    <string name="dashboard_phrase_deleted_undo_btn">ВЕРНУТЬ</string>
+    <string name="settings_category_phrases">Фразы</string>
+    <string name="settings_pref_delete_all_name">Удалить все</string>
+    <string name="settings_pref_delete_all_desc">Удалить все фразы</string>
+    <string name="settings_pref_export_name">Экспорт фраз</string>
+    <string name="settings_pref_export_desc">Экспорт всех фраз в хранилище</string>
+    <string name="settings_pref_import_name">Импорт фраз</string>
+    <string name="settings_pref_import_desc">Импорт всех фраз из хранилища</string>
+    <string name="settings_category_social">Социальные</string>
+    <string name="settings_category_other">Другое</string>
+    <string name="settings_pref_about_name">О приложении</string>
+    <string name="settings_pref_about_desc">Информация о приложении</string>
+    <string name="settings_pref_github_page_name">GitHub страница</string>
+    <string name="settings_pref_github_page_desc">Посетить GitHub страницу</string>
+    <string name="settings_pref_credits_name">Титры</string>
+    <string name="settings_pref_credits_desc">Информация о разработчиках</string>
+    <string name="settings_view_filename">Показать %s</string>
+    <string name="settings_pick_csv_intent">Выберите файл базы данных .csv</string>
+    <string name="settings_export_successful">Экспорт успешен</string>
+    <string name="settings_import_successful">Импорт успешен</string>
+    <string name="phrase_listItem_phraseLang_title">Фраза (%s):</string>
+    <string name="phrase_listItem_translationLang_title">Перевод (%s):</string>
+    <string name="phrase_listItem_notes_title">Заметки:</string>
+    <string name="dialog_confirmation_default_btn_positive">Да</string>
+    <string name="dialog_erase_db_message">Вы уверены, что хотите удалить все фразы навсегда?</string>
+    <string name="dialog_export_phrases_message">Ваши фразы будут экспортированы в .csv файл, находящийся по адресу %s</string>
+    <string name="dialog_import_phrases_message">Вам нужно выбрать .csv файл с фразами, на вашем хранилище, адрес по умолчанию: %s</string>
+</resources>

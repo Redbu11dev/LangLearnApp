@@ -100,7 +100,7 @@ class MyViewHolder(val binding: PhraseListItemBinding) : RecyclerView.ViewHolder
         binding.phraseTitleTextView.text =
             String.format(
                 binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_phraseLang_title),
-                "${phrase.phraseLanguage} | ${phrase.id}"
+                phrase.phraseLanguage //"${phrase.phraseLanguage} | ${phrase.id}"
             )
         binding.phraseTextView.text = phrase.phraseText
         binding.translationTitleTextView.text =

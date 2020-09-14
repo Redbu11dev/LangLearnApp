@@ -21,7 +21,7 @@
 
 <resources>
 <!--    Texts-->
-    <string name="credits_text">
+    <string name="credits_text" translatable="false">
         Copyright © 2020 Viktor Bukovets
         \n
         \n
