@@ -39,6 +39,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.google.android.material.snackbar.Snackbar
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.db.Phrase
 import com.redbu11.langlearnapp.db.PhraseDatabase
@@ -82,7 +83,6 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
         val key = preference?.key
-        //Toast.makeText(context, "$key", Toast.LENGTH_SHORT).show()
         when {
             key.equals("clear_all") -> {
                 showConfirmEraseDatabaseDialog()
@@ -105,7 +105,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        //Toast.makeText(context, "$key", Toast.LENGTH_SHORT).show()
+        //
     }
 
     override fun onResume() {
@@ -148,7 +148,11 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 fileName
             )
             settingsViewModel.exportFromRepositoryToCsv(file, phrases)
-            Toast.makeText(requireContext(), getString(R.string.settings_export_successful), Toast.LENGTH_SHORT).show()
+            Snackbar.make(
+                requireView(),
+                R.string.settings_export_successful,
+                Snackbar.LENGTH_SHORT
+            ).show()
             val intent = createOpenFileIntent(requireContext(), file)
             startActivity(
                 Intent.createChooser(
@@ -263,14 +267,26 @@ class SettingsFragment : PreferenceFragmentCompat(),
                             requireContext(),
                             fileUri
                         )
-                        Toast.makeText(requireContext(), getString(R.string.settings_import_successful), Toast.LENGTH_SHORT).show()
+                        Snackbar.make(
+                            requireView(),
+                            R.string.settings_import_successful,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                     } else {
                         //fileUri is null
-                        Toast.makeText(requireContext(), "${getString(R.string.error_occurred)} [fileUri is null]", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(
+                            requireView(),
+                            "${getString(R.string.error_occurred)} [fileUri is null]",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                     }
                 } else {
                     //NOT FOUND
-                    Toast.makeText(requireContext(), "${getString(R.string.error_occurred)} [DATA NOT FOUND]", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(
+                        requireView(),
+                        "${getString(R.string.error_occurred)} [DATA NOT FOUND]",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
         }

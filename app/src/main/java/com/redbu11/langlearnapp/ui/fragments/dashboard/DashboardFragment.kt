@@ -97,9 +97,13 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
 
         initRecyclerView()
 
-        dashboardViewModel.message.observe(viewLifecycleOwner, Observer {
+        dashboardViewModel.message.observe(viewLifecycleOwner, Observer { it ->
             it.getContentIfNotHandled().let {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+                Snackbar.make(
+                    requireView(),
+                    it.toString(),
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         })
 
@@ -191,12 +195,10 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
     }
 
     private fun listItemRemoved(phrase: Phrase) {
-        //Toast.makeText(requireContext(),"REMOVED",Toast.LENGTH_SHORT).show()
         dashboardViewModel.delete(phrase)
     }
 
     private fun listItemRestored(phrase: Phrase) {
-        //Toast.makeText(requireContext(),"RESTORED",Toast.LENGTH_SHORT).show()
         dashboardViewModel.insert(phrase)
     }
 
@@ -205,7 +207,6 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
     }
 
     override fun onBackPressed(): Boolean {
-        //Toast.makeText(requireContext(),"onBackPressed",Toast.LENGTH_SHORT).show()
         return if (binding.phraseCreatorContainer.visibility == View.VISIBLE) {
             dashboardViewModel.phraseCreatorContainerVisible.value = false
             true
