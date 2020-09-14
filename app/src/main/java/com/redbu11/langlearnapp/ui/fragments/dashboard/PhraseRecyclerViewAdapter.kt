@@ -40,7 +40,11 @@ import com.redbu11.langlearnapp.databinding.PhraseListItemBinding
 import com.redbu11.langlearnapp.db.Phrase
 
 
-class PhraseRecyclerViewAdapter(private val clicklistener: (Phrase) -> Unit) : RecyclerView.Adapter<MyViewHolder>() {
+class PhraseRecyclerViewAdapter(
+    private val clicklistener: (Phrase) -> Unit,
+    private val swipeRemoveListener: (Phrase) -> Unit,
+    private val restoreItemListener: (Phrase) -> Unit
+) : RecyclerView.Adapter<MyViewHolder>() {
 
     private val phrasesList = ArrayList<Phrase>()
 
@@ -72,12 +76,15 @@ class PhraseRecyclerViewAdapter(private val clicklistener: (Phrase) -> Unit) : R
         removedItem = phrasesList[position]
         removedPosition = position
 
-        phrasesList.removeAt(position)
-        notifyItemRemoved(position)
+//        phrasesList.removeAt(position)
+//        notifyItemRemoved(position)
+        swipeRemoveListener.invoke(removedItem)
 
         Snackbar.make(viewHolder.itemView, "$removedItem removed", Snackbar.LENGTH_LONG).setAction("UNDO") {
             phrasesList.add(removedPosition, removedItem)
             notifyItemInserted(removedPosition)
+
+            restoreItemListener.invoke(removedItem)
         }.show()
     }
 

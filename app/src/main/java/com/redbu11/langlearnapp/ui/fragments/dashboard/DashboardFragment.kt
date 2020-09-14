@@ -170,7 +170,11 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
 
         binding.phraseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter =
-            PhraseRecyclerViewAdapter { selectedItem: Phrase -> listItemClicked(selectedItem) }
+            PhraseRecyclerViewAdapter(
+                {selectedItem: Phrase -> listItemClicked(selectedItem)},
+                {removedItem: Phrase -> listItemRemoved(removedItem)},
+                {restoredItem: Phrase -> listItemRestored(restoredItem)}
+            )
         binding.phraseRecyclerView.adapter = adapter
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(requireContext(), (binding.phraseRecyclerView.adapter as PhraseRecyclerViewAdapter)))
         itemTouchHelper.attachToRecyclerView(binding.phraseRecyclerView)
@@ -183,6 +187,15 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
             adapter.setList(it)
             adapter.notifyDataSetChanged()
         })
+    }
+
+    private fun listItemRemoved(phrase: Phrase) {
+        //Toast.makeText(requireContext(),"REMOVED",Toast.LENGTH_SHORT).show()
+        dashboardViewModel.delete(phrase)
+    }
+
+    private fun listItemRestored(phrase: Phrase) {
+        Toast.makeText(requireContext(),"RESTORED",Toast.LENGTH_SHORT).show()
     }
 
     private fun listItemClicked(phrase: Phrase) {
