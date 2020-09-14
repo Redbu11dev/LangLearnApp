@@ -108,7 +108,11 @@
 
     <string name="dashboard_phrase_insert_success">Phrase inserted successfully</string>
     <string name="dashboard_phrase_update_success">phrase(s) updated successfully</string>
+    <string name="dashboard_phrase_delete_one_phrase_success">Phrase deleted successfully</string>
     <string name="dashboard_phrase_delete_success">phrase(s) deleted successfully</string>
+
+    <string name="dashboard_phrase_deleted_undo_message">Phrase removed</string>
+    <string name="dashboard_phrase_deleted_undo_btn">UNDO</string>
 
 <!--    Settings-->
     <string name="settings_category_phrases">Phrases</string>

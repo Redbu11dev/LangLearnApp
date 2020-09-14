@@ -45,6 +45,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.AutoTransition
 import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
+import com.google.android.material.snackbar.Snackbar
 import com.redbu11.langlearnapp.MainActivity
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.databinding.FragmentDashboardBinding
@@ -195,7 +196,8 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
     }
 
     private fun listItemRestored(phrase: Phrase) {
-        Toast.makeText(requireContext(),"RESTORED",Toast.LENGTH_SHORT).show()
+        //Toast.makeText(requireContext(),"RESTORED",Toast.LENGTH_SHORT).show()
+        dashboardViewModel.insert(phrase)
     }
 
     private fun listItemClicked(phrase: Phrase) {
@@ -236,6 +238,11 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
             }
             is DeletePhraseConfirmationDialog -> {
                 dashboardViewModel.delete()
+                Snackbar.make(
+                    requireView(),
+                    R.string.dashboard_phrase_delete_one_phrase_success,
+                    Snackbar.LENGTH_LONG
+                ).show()
                 dialog.dismiss()
             }
         }

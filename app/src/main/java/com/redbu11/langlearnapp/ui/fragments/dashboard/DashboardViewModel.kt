@@ -201,13 +201,6 @@ class DashboardViewModel(application: Application, private val repository: Phras
     }
 
     /**
-     * delete current phrase
-     */
-    fun delete() {
-        delete(phraseToUpdateOrDelete)
-    }
-
-    /**
      * Insert phrase
      * @param phrase - Phrase object
      */
@@ -248,13 +241,20 @@ class DashboardViewModel(application: Application, private val repository: Phras
         val noOfRowsDeleted = repository.delete(phrase)
         if (noOfRowsDeleted > 0) {
             setInputFormValuesAsCreate()
-            postStatusMessage(
-                "$noOfRowsDeleted ${getStringFromIdResource(R.string.dashboard_phrase_delete_success)}"
-            )
+//            postStatusMessage(
+//                "$noOfRowsDeleted ${getStringFromIdResource(R.string.dashboard_phrase_delete_success)}"
+//            )
             hidePhraseCreatorContainer()
         } else {
             postStatusMessage(R.string.error_occurred)
         }
+    }
+
+    /**
+     * delete current phrase
+     */
+    fun delete() {
+        delete(phraseToUpdateOrDelete)
     }
 
     fun clearQueryString() {

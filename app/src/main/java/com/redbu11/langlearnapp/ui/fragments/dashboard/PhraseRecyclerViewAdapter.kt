@@ -80,12 +80,17 @@ class PhraseRecyclerViewAdapter(
 //        notifyItemRemoved(position)
         swipeRemoveListener.invoke(removedItem)
 
-        Snackbar.make(viewHolder.itemView, "$removedItem removed", Snackbar.LENGTH_LONG).setAction("UNDO") {
-            phrasesList.add(removedPosition, removedItem)
-            notifyItemInserted(removedPosition)
+        Snackbar.make(
+            viewHolder.itemView,
+            viewHolder.itemView.context.getString(R.string.dashboard_phrase_deleted_undo_message),
+            Snackbar.LENGTH_LONG
+        )
+            .setAction(viewHolder.itemView.context.getString(R.string.dashboard_phrase_deleted_undo_btn)) {
+                //phrasesList.add(removedPosition, removedItem)
+                //notifyItemInserted(removedPosition)
 
-            restoreItemListener.invoke(removedItem)
-        }.show()
+                restoreItemListener.invoke(removedItem)
+            }.show()
     }
 
 }
@@ -93,12 +98,19 @@ class PhraseRecyclerViewAdapter(
 class MyViewHolder(val binding: PhraseListItemBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(phrase: Phrase, clicklistener: (Phrase) -> Unit) {
         binding.phraseTitleTextView.text =
-            String.format(binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_phraseLang_title), phrase.phraseLanguage)
+            String.format(
+                binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_phraseLang_title),
+                "${phrase.phraseLanguage} | ${phrase.id}"
+            )
         binding.phraseTextView.text = phrase.phraseText
         binding.translationTitleTextView.text =
-            String.format(binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_translationLang_title), phrase.translationLanguage)
+            String.format(
+                binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_translationLang_title),
+                phrase.translationLanguage
+            )
         binding.translationTextView.text = phrase.translationText
-        binding.notesTitleTextView.text = binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_notes_title)
+        binding.notesTitleTextView.text =
+            binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_notes_title)
         binding.notesTextView.text = phrase.notes
         if (TextUtils.isEmpty(binding.notesTextView.text)) {
             binding.notesTitleTextView.visibility = View.GONE
@@ -114,13 +126,22 @@ class MyViewHolder(val binding: PhraseListItemBinding) : RecyclerView.ViewHolder
     }
 }
 
-class SwipeToDeleteCallback(var context: Context, private var myAdapter: PhraseRecyclerViewAdapter) :
+class SwipeToDeleteCallback(
+    var context: Context,
+    private var myAdapter: PhraseRecyclerViewAdapter
+) :
     ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
-    private val background: ColorDrawable = ColorDrawable(ContextCompat.getColor(context, R.color.colorNeutralRed))
-    private var icon: Drawable = ContextCompat.getDrawable(context, R.drawable.ic_delete_light_24dp)!!
+    private val background: ColorDrawable =
+        ColorDrawable(ContextCompat.getColor(context, R.color.colorNeutralRed))
+    private var icon: Drawable =
+        ContextCompat.getDrawable(context, R.drawable.ic_delete_light_24dp)!!
 
-    override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, viewHolder2: RecyclerView.ViewHolder): Boolean {
+    override fun onMove(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        viewHolder2: RecyclerView.ViewHolder
+    ): Boolean {
         return false
     }
 
