@@ -354,6 +354,15 @@
 
                                     </LinearLayout>
 
+                                    <Button
+                                        android:id="@+id/share_button"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:onClick="@{()->myFragment.sharePhrase()}"
+                                        android:text="@string/dashboard_btn_share"
+                                        android:visibility="@{myViewModel.mutableDeleteButtonVisible ? View.VISIBLE : View.GONE}"
+                                        />
+
                                 </LinearLayout>
 
                             </LinearLayout>

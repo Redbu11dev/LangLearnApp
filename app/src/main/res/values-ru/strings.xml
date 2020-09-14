@@ -111,4 +111,5 @@
     <string name="dialog_erase_db_message">Вы уверены, что хотите удалить все фразы навсегда?</string>
     <string name="dialog_export_phrases_message">Ваши фразы будут экспортированы в .csv файл, находящийся по адресу %s</string>
     <string name="dialog_import_phrases_message">Вам нужно выбрать .csv файл с фразами, на вашем хранилище, адрес по умолчанию: %s</string>
+    <string name="dashboard_btn_share">Поделиться</string>
 </resources>

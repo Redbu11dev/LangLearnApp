@@ -23,6 +23,7 @@ package com.redbu11.langlearnapp.ui.fragments.dashboard
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -192,6 +193,17 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
             adapter.setList(it)
             adapter.notifyDataSetChanged()
         })
+    }
+
+    fun sharePhrase() {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "TEST")
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
     private fun listItemRemoved(phrase: Phrase) {

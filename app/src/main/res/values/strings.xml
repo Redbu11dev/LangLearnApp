@@ -100,6 +100,7 @@
     <string name="dashboard_btn_clear_all">Clear All</string>
     <string name="dashboard_btn_update">Update</string>
     <string name="dashboard_btn_delete">Delete</string>
+    <string name="dashboard_btn_share">Share</string>
 
     <string name="dashboard_error_enter_phrase_language">Please enter phrase language</string>
     <string name="dashboard_error_enter_phrase_text">Please enter phrase text</string>
