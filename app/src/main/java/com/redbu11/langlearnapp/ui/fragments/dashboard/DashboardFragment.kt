@@ -23,20 +23,25 @@ package com.redbu11.langlearnapp.ui.fragments.dashboard
 
 import android.app.SearchManager
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.MenuItemCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.AutoTransition
 import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
@@ -52,7 +57,8 @@ import com.redbu11.langlearnapp.ui.dialogs.UpdatePhraseConfirmationDialog
 import com.redbu11.langlearnapp.utils.SoftUtils
 
 
-class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed, ConfirmationDialogFragment.ConfirmationDialogListener {
+class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
+    ConfirmationDialogFragment.ConfirmationDialogListener {
 
     private lateinit var dashboardViewModel: DashboardViewModel
     private lateinit var binding: FragmentDashboardBinding
@@ -148,21 +154,26 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed, Confi
             if (TextUtils.isEmpty(it)) {
                 mSearchItem.collapseActionView()
                 binding.queryInfoDisplayScrollview.visibility = View.GONE
-            }
-            else {
+            } else {
                 binding.queryInfoDisplayScrollview.visibility = View.VISIBLE
             }
-            TransitionManager.beginDelayedTransition(binding.root as ViewGroup, AutoTransition().setDuration(100))
+            TransitionManager.beginDelayedTransition(
+                binding.root as ViewGroup,
+                AutoTransition().setDuration(100)
+            )
         })
 
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun initRecyclerView() {
+
         binding.phraseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter =
             PhraseRecyclerViewAdapter { selectedItem: Phrase -> listItemClicked(selectedItem) }
         binding.phraseRecyclerView.adapter = adapter
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(requireContext(), (binding.phraseRecyclerView.adapter as PhraseRecyclerViewAdapter)))
+        itemTouchHelper.attachToRecyclerView(binding.phraseRecyclerView)
         displayPhrasesList()
     }
 

@@ -21,26 +21,34 @@
 
 package com.redbu11.langlearnapp.ui.fragments.dashboard
 
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.databinding.PhraseListItemBinding
 import com.redbu11.langlearnapp.db.Phrase
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PhraseRecyclerViewAdapter (private val clicklistener:(Phrase)->Unit):RecyclerView.Adapter<MyViewHolder>() {
+class PhraseRecyclerViewAdapter(private val clicklistener: (Phrase) -> Unit) : RecyclerView.Adapter<MyViewHolder>() {
 
     private val phrasesList = ArrayList<Phrase>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding : PhraseListItemBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.phrase_list_item,parent,false)
+        val binding: PhraseListItemBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.phrase_list_item, parent, false)
         return MyViewHolder(binding)
     }
 
@@ -58,21 +66,39 @@ class PhraseRecyclerViewAdapter (private val clicklistener:(Phrase)->Unit):Recyc
         phrasesList.reverse()
     }
 
+    private var removedPosition: Int = 0
+    private lateinit var removedItem: Phrase
+
+    fun removeItem(position: Int, viewHolder: RecyclerView.ViewHolder) {
+        removedItem = phrasesList[position]
+        removedPosition = position
+
+        phrasesList.removeAt(position)
+        notifyItemRemoved(position)
+
+        Snackbar.make(viewHolder.itemView, "$removedItem removed", Snackbar.LENGTH_LONG).setAction("UNDO") {
+            phrasesList.add(removedPosition, removedItem)
+            notifyItemInserted(removedPosition)
+
+        }.show()
+    }
+
 }
 
-class MyViewHolder(val binding: PhraseListItemBinding):RecyclerView.ViewHolder(binding.root){
-    fun bind(phrase: Phrase, clicklistener:(Phrase)->Unit) {
-        binding.phraseTitleTextView.text = String.format(binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_phraseLang_title), phrase.phraseLanguage)
+class MyViewHolder(val binding: PhraseListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(phrase: Phrase, clicklistener: (Phrase) -> Unit) {
+        binding.phraseTitleTextView.text =
+            String.format(binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_phraseLang_title), phrase.phraseLanguage)
         binding.phraseTextView.text = phrase.phraseText
-        binding.translationTitleTextView.text = String.format(binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_translationLang_title), phrase.translationLanguage)
+        binding.translationTitleTextView.text =
+            String.format(binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_translationLang_title), phrase.translationLanguage)
         binding.translationTextView.text = phrase.translationText
         binding.notesTitleTextView.text = binding.phraseTitleTextView.context.getString(R.string.phrase_listItem_notes_title)
         binding.notesTextView.text = phrase.notes
         if (TextUtils.isEmpty(binding.notesTextView.text)) {
             binding.notesTitleTextView.visibility = View.GONE
             binding.notesTextView.visibility = View.GONE
-        }
-        else {
+        } else {
             binding.notesTitleTextView.visibility = View.VISIBLE
             binding.notesTextView.visibility = View.VISIBLE
         }
@@ -81,4 +107,68 @@ class MyViewHolder(val binding: PhraseListItemBinding):RecyclerView.ViewHolder(b
         }
         //binding.cardView.setCardBackgroundColor( Color.parseColor(ConvertUtils.stringToColor(phrase.phraseLanguage)) )
     }
+}
+
+class SwipeToDeleteCallback(private val context: Context, private var myAdapter: PhraseRecyclerViewAdapter) :
+    ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+
+    private var colorDrawableBackground: ColorDrawable = ColorDrawable(Color.parseColor("#ff0000"))
+    private var deleteIcon: Drawable = ContextCompat.getDrawable(context, R.drawable.ic_delete_forever_black_24dp)!!
+
+    override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, viewHolder2: RecyclerView.ViewHolder): Boolean {
+        return false
+    }
+
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDirection: Int) {
+        myAdapter.removeItem(viewHolder.adapterPosition, viewHolder)
+    }
+
+    override fun onChildDraw(
+        canvas: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
+    ) {
+//        val itemView = viewHolder.itemView
+//        val iconMarginVertical =
+//            (viewHolder.itemView.height - deleteIcon.intrinsicHeight) / 2
+//
+//        if (dX > 0) {
+//            colorDrawableBackground.setBounds(itemView.left, itemView.top, dX.toInt(), itemView.bottom)
+//            deleteIcon.setBounds(
+//                itemView.left + iconMarginVertical,
+//                itemView.top + iconMarginVertical,
+//                itemView.left + iconMarginVertical + deleteIcon.intrinsicWidth,
+//                itemView.bottom - iconMarginVertical
+//            )
+//        } else {
+//            colorDrawableBackground.setBounds(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
+//            deleteIcon.setBounds(
+//                itemView.right - iconMarginVertical - deleteIcon.intrinsicWidth,
+//                itemView.top + iconMarginVertical,
+//                itemView.right - iconMarginVertical,
+//                itemView.bottom - iconMarginVertical
+//            )
+//            deleteIcon.level = 0
+//        }
+//
+//        colorDrawableBackground.draw(canvas)
+//
+//        canvas.save()
+//
+//        if (dX > 0)
+//            canvas.clipRect(itemView.left, itemView.top, dX.toInt(), itemView.bottom)
+//        else
+//            canvas.clipRect(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
+//
+//        deleteIcon.draw(canvas)
+//
+//        canvas.restore()
+
+        super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+    }
+
 }
