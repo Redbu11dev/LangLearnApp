@@ -96,7 +96,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@{myViewModel.getQueryDescStringWith(myViewModel.queryString)}" />
+                                android:text="@{myViewModel.getQueryDescStringWith(myViewModel.mutableQueryString)}" />
 
                             <com.google.android.material.button.MaterialButton
                                 android:layout_width="wrap_content"
@@ -144,8 +144,8 @@
                         android:layout_marginEnd="18dp"
                         android:layout_marginBottom="10dp"
                         android:gravity="center"
-                        android:text="@{myViewModel.phraseManipulationTitle}"
-                        android:visibility="@{myViewModel.phraseCreatorContainerVisible ? View.VISIBLE : View.GONE}" />
+                        android:text="@{myViewModel.mutablePhraseManipulationTitle}"
+                        android:visibility="@{myViewModel.mutablePhraseCreatorContainerVisible ? View.VISIBLE : View.GONE}" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_view"
@@ -200,7 +200,7 @@
                                             android:inputType="text"
                                             android:maxLength="20"
                                             android:singleLine="true"
-                                            android:text="@={myViewModel.inputPhraseLang}" />
+                                            android:text="@={myViewModel.mutableInputPhraseLang}" />
                                     </com.google.android.material.textfield.TextInputLayout>
 
                                     <ImageView
@@ -233,7 +233,7 @@
                                             android:inputType="text"
                                             android:maxLength="20"
                                             android:singleLine="true"
-                                            android:text="@={myViewModel.inputTranslationLang}" />
+                                            android:text="@={myViewModel.mutableInputTranslationLang}" />
                                     </com.google.android.material.textfield.TextInputLayout>
 
                                 </LinearLayout>
@@ -256,7 +256,7 @@
                                         android:inputType="textMultiLine"
                                         android:maxLength="250"
                                         android:singleLine="false"
-                                        android:text="@={myViewModel.inputPhraseText}" />
+                                        android:text="@={myViewModel.mutableInputPhraseText}" />
                                 </com.google.android.material.textfield.TextInputLayout>
 
                                 <com.google.android.material.textfield.TextInputLayout
@@ -277,7 +277,7 @@
                                         android:inputType="textMultiLine"
                                         android:maxLength="250"
                                         android:singleLine="false"
-                                        android:text="@={myViewModel.inputTranslationText}" />
+                                        android:text="@={myViewModel.mutableInputTranslationText}" />
                                 </com.google.android.material.textfield.TextInputLayout>
 
                                 <com.google.android.material.textfield.TextInputLayout
@@ -299,7 +299,7 @@
                                         android:inputType="textMultiLine"
                                         android:maxLength="250"
                                         android:singleLine="false"
-                                        android:text="@={myViewModel.inputNotes}" />
+                                        android:text="@={myViewModel.mutableInputNotes}" />
                                 </com.google.android.material.textfield.TextInputLayout>
 
                                 <LinearLayout
@@ -317,7 +317,7 @@
                                         android:layout_height="wrap_content"
                                         android:onClick="@{()->myViewModel.saveCurrentPhrase()}"
                                         android:text="@string/dashboard_btn_save"
-                                        android:visibility="@{myViewModel.deleteButtonVisible ? View.GONE : View.VISIBLE}"
+                                        android:visibility="@{myViewModel.mutableDeleteButtonVisible ? View.GONE : View.VISIBLE}"
                                         />
 
                                     <LinearLayout
@@ -326,7 +326,7 @@
                                         android:clipChildren="false"
                                         android:clipToPadding="false"
                                         android:orientation="horizontal"
-                                        android:visibility="@{myViewModel.deleteButtonVisible ? View.VISIBLE : View.GONE}"
+                                        android:visibility="@{myViewModel.mutableDeleteButtonVisible ? View.VISIBLE : View.GONE}"
                                         >
 
                                     <Button

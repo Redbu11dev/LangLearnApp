@@ -39,35 +39,41 @@ class DashboardViewModel(application: Application, private val repository: Phras
     AndroidViewModel(application), Observable {
 
     @Bindable
-    val queryString = MutableLiveData<String>("")
-    val phrases =  Transformations.switchMap(queryString) {query ->
+    val mutableQueryString = MutableLiveData<String>("")
+    val queryString get() = mutableQueryString as LiveData<String> //does not generate additional properties in javacode
+
+    val phrases =  Transformations.switchMap(mutableQueryString) {query ->
         repository.phrasesThatContain("%${query}%")
     }
 
     private lateinit var phraseToUpdateOrDelete: Phrase
 
     @Bindable
-    val phraseCreatorContainerVisible = MutableLiveData<Boolean>()
+    val mutablePhraseCreatorContainerVisible = MutableLiveData<Boolean>()
+    val phraseCreatorContainerVisible get() = mutablePhraseCreatorContainerVisible as LiveData<Boolean>
 
     @Bindable
-    val inputPhraseLang = MutableLiveData<String>()
-    @Bindable
-    val inputPhraseText = MutableLiveData<String>()
-    @Bindable
-    val inputTranslationLang = MutableLiveData<String>()
-    @Bindable
-    val inputTranslationText = MutableLiveData<String>()
-    @Bindable
-    val inputNotes = MutableLiveData<String>()
+    val mutableInputPhraseLang = MutableLiveData<String>()
 
     @Bindable
-    val deleteButtonVisible = MutableLiveData<Boolean>()
+    val mutableInputPhraseText = MutableLiveData<String>()
 
     @Bindable
-    val phraseManipulationTitle = MutableLiveData<Int>()
+    val mutableInputTranslationLang = MutableLiveData<String>()
+
+    @Bindable
+    val mutableInputTranslationText = MutableLiveData<String>()
+
+    @Bindable
+    val mutableInputNotes = MutableLiveData<String>()
+
+    @Bindable
+    val mutableDeleteButtonVisible = MutableLiveData<Boolean>()
+
+    @Bindable
+    val mutablePhraseManipulationTitle = MutableLiveData<Int>()
 
     private val statusMessage = MutableLiveData<Event<String>>()
-
     val message: LiveData<Event<String>>
         get() = statusMessage
 
@@ -80,11 +86,11 @@ class DashboardViewModel(application: Application, private val repository: Phras
      * Clear input form values
      */
     fun clearInputValues() {
-        inputPhraseLang.value = ""
-        inputPhraseText.value = ""
-        inputTranslationLang.value = ""
-        inputTranslationText.value = ""
-        inputNotes.value = ""
+        mutableInputPhraseLang.value = ""
+        mutableInputPhraseText.value = ""
+        mutableInputTranslationLang.value = ""
+        mutableInputTranslationText.value = ""
+        mutableInputNotes.value = ""
     }
 
     /**
@@ -92,23 +98,23 @@ class DashboardViewModel(application: Application, private val repository: Phras
      */
     fun setInputFormValuesAsCreate() {
         clearInputValues()
-        deleteButtonVisible.value = false
-        phraseManipulationTitle.value = R.string.dashboard_phrase_manipulation_title_create
+        mutableDeleteButtonVisible.value = false
+        mutablePhraseManipulationTitle.value = R.string.dashboard_phrase_manipulation_title_create
     }
 
     /**
      * Set input form as "update"
      */
     fun setInputFormValuesAsUpdate(phrase: Phrase) {
-        inputPhraseLang.value = phrase.phraseLanguage
-        inputPhraseText.value = phrase.phraseText
-        inputTranslationLang.value = phrase.translationLanguage
-        inputTranslationText.value = phrase.translationText
-        inputNotes.value = phrase.notes
+        mutableInputPhraseLang.value = phrase.phraseLanguage
+        mutableInputPhraseText.value = phrase.phraseText
+        mutableInputTranslationLang.value = phrase.translationLanguage
+        mutableInputTranslationText.value = phrase.translationText
+        mutableInputNotes.value = phrase.notes
 
         phraseToUpdateOrDelete = phrase
-        deleteButtonVisible.value = true
-        phraseManipulationTitle.value = R.string.dashboard_phrase_manipulation_title_update
+        mutableDeleteButtonVisible.value = true
+        mutablePhraseManipulationTitle.value = R.string.dashboard_phrase_manipulation_title_update
     }
 
     /**
@@ -132,33 +138,37 @@ class DashboardViewModel(application: Application, private val repository: Phras
      * Show input form
      */
     fun showPhraseCreatorContainer() {
-        phraseCreatorContainerVisible.value = true
+        mutablePhraseCreatorContainerVisible.value = true
     }
 
     /**
      * Hide input form
      */
     fun hidePhraseCreatorContainer() {
-        phraseCreatorContainerVisible.value = false
+        mutablePhraseCreatorContainerVisible.value = false
+    }
+
+    fun setPhraseCreatorContainerVisibile(visible: Boolean) {
+        mutablePhraseCreatorContainerVisible.value = visible
     }
 
     /**
      * Check input fields for validity
      */
     fun inputFieldsValid(): Boolean {
-        if (TextUtils.isEmpty(inputPhraseLang.value)) {
+        if (TextUtils.isEmpty(mutableInputPhraseLang.value)) {
             postStatusMessage(R.string.dashboard_error_enter_phrase_language)
             return false
         }
-        else if (TextUtils.isEmpty(inputPhraseText.value)) {
+        else if (TextUtils.isEmpty(mutableInputPhraseText.value)) {
             postStatusMessage(R.string.dashboard_error_enter_phrase_text)
             return false
         }
-        else if (TextUtils.isEmpty(inputTranslationLang.value)) {
+        else if (TextUtils.isEmpty(mutableInputTranslationLang.value)) {
             postStatusMessage(R.string.dashboard_error_enter_translation_language)
             return false
         }
-        else if (TextUtils.isEmpty(inputTranslationText.value)) {
+        else if (TextUtils.isEmpty(mutableInputTranslationText.value)) {
             postStatusMessage(R.string.dashboard_error_enter_translation_text)
             return false
         }
@@ -172,11 +182,11 @@ class DashboardViewModel(application: Application, private val repository: Phras
      */
     fun updateCurrentPhrase() {
         if (inputFieldsValid()) {
-            phraseToUpdateOrDelete.phraseLanguage = inputPhraseLang.value ?: ""
-            phraseToUpdateOrDelete.phraseText = inputPhraseText.value ?: ""
-            phraseToUpdateOrDelete.translationLanguage = inputTranslationLang.value ?: ""
-            phraseToUpdateOrDelete.translationText = inputTranslationText.value ?: ""
-            phraseToUpdateOrDelete.notes = inputNotes.value ?: ""
+            phraseToUpdateOrDelete.phraseLanguage = mutableInputPhraseLang.value ?: ""
+            phraseToUpdateOrDelete.phraseText = mutableInputPhraseText.value ?: ""
+            phraseToUpdateOrDelete.translationLanguage = mutableInputTranslationLang.value ?: ""
+            phraseToUpdateOrDelete.translationText = mutableInputTranslationText.value ?: ""
+            phraseToUpdateOrDelete.notes = mutableInputNotes.value ?: ""
             update(phraseToUpdateOrDelete)
         }
     }
@@ -189,11 +199,11 @@ class DashboardViewModel(application: Application, private val repository: Phras
             insert(
                 Phrase(
                     0,
-                    inputPhraseLang.value ?: "",
-                    inputPhraseText.value ?: "",
-                    inputTranslationLang.value ?: "",
-                    inputTranslationText.value ?: "",
-                    inputNotes.value ?: ""
+                    mutableInputPhraseLang.value ?: "",
+                    mutableInputPhraseText.value ?: "",
+                    mutableInputTranslationLang.value ?: "",
+                    mutableInputTranslationText.value ?: "",
+                    mutableInputNotes.value ?: ""
                 )
             )
             clearInputValues()
@@ -258,7 +268,11 @@ class DashboardViewModel(application: Application, private val repository: Phras
     }
 
     fun clearQueryString() {
-        queryString.value = ""
+        mutableQueryString.value = ""
+    }
+
+    fun setQueryString(string: String) {
+        mutableQueryString.value = string
     }
 
     /**

@@ -148,7 +148,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
 
                 override fun onQueryTextChange(query: String): Boolean {
                     if (mSearchView.hasFocus()) {
-                        dashboardViewModel.queryString.value = query
+                        dashboardViewModel.setQueryString(query)
                     }
                     return true
                 }
@@ -208,7 +208,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
 
     override fun onBackPressed(): Boolean {
         return if (binding.phraseCreatorContainer.visibility == View.VISIBLE) {
-            dashboardViewModel.phraseCreatorContainerVisible.value = false
+            dashboardViewModel.setPhraseCreatorContainerVisibile(false)
             true
         } else {
             false

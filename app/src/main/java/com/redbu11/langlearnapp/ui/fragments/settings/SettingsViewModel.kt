@@ -31,6 +31,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 
 class SettingsViewModel(application: Application, private val repository: PhraseRepository) : AndroidViewModel(application) {
+
     val phrases = repository.phrases
 
     /**
