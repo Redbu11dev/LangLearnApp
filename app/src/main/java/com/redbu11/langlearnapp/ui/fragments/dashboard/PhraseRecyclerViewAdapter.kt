@@ -38,8 +38,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.databinding.PhraseListItemBinding
 import com.redbu11.langlearnapp.db.Phrase
-import java.util.*
-import kotlin.collections.ArrayList
+
 
 class PhraseRecyclerViewAdapter(private val clicklistener: (Phrase) -> Unit) : RecyclerView.Adapter<MyViewHolder>() {
 
@@ -79,7 +78,6 @@ class PhraseRecyclerViewAdapter(private val clicklistener: (Phrase) -> Unit) : R
         Snackbar.make(viewHolder.itemView, "$removedItem removed", Snackbar.LENGTH_LONG).setAction("UNDO") {
             phrasesList.add(removedPosition, removedItem)
             notifyItemInserted(removedPosition)
-
         }.show()
     }
 
@@ -109,11 +107,11 @@ class MyViewHolder(val binding: PhraseListItemBinding) : RecyclerView.ViewHolder
     }
 }
 
-class SwipeToDeleteCallback(private val context: Context, private var myAdapter: PhraseRecyclerViewAdapter) :
+class SwipeToDeleteCallback(var context: Context, private var myAdapter: PhraseRecyclerViewAdapter) :
     ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
-    private var colorDrawableBackground: ColorDrawable = ColorDrawable(Color.parseColor("#ff0000"))
-    private var deleteIcon: Drawable = ContextCompat.getDrawable(context, R.drawable.ic_delete_forever_black_24dp)!!
+    private val background: ColorDrawable = ColorDrawable(ContextCompat.getColor(context, R.color.colorNeutralRed))
+    private var icon: Drawable = ContextCompat.getDrawable(context, R.drawable.ic_delete_light_24dp)!!
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, viewHolder2: RecyclerView.ViewHolder): Boolean {
         return false
@@ -132,41 +130,50 @@ class SwipeToDeleteCallback(private val context: Context, private var myAdapter:
         actionState: Int,
         isCurrentlyActive: Boolean
     ) {
-//        val itemView = viewHolder.itemView
-//        val iconMarginVertical =
-//            (viewHolder.itemView.height - deleteIcon.intrinsicHeight) / 2
-//
-//        if (dX > 0) {
-//            colorDrawableBackground.setBounds(itemView.left, itemView.top, dX.toInt(), itemView.bottom)
-//            deleteIcon.setBounds(
-//                itemView.left + iconMarginVertical,
-//                itemView.top + iconMarginVertical,
-//                itemView.left + iconMarginVertical + deleteIcon.intrinsicWidth,
-//                itemView.bottom - iconMarginVertical
-//            )
-//        } else {
-//            colorDrawableBackground.setBounds(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
-//            deleteIcon.setBounds(
-//                itemView.right - iconMarginVertical - deleteIcon.intrinsicWidth,
-//                itemView.top + iconMarginVertical,
-//                itemView.right - iconMarginVertical,
-//                itemView.bottom - iconMarginVertical
-//            )
-//            deleteIcon.level = 0
-//        }
-//
-//        colorDrawableBackground.draw(canvas)
-//
-//        canvas.save()
-//
-//        if (dX > 0)
-//            canvas.clipRect(itemView.left, itemView.top, dX.toInt(), itemView.bottom)
-//        else
-//            canvas.clipRect(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
-//
-//        deleteIcon.draw(canvas)
-//
-//        canvas.restore()
+        val itemView = viewHolder.itemView
+        val backgroundCornerOffset = 20
+        val iconMarginVertical = (viewHolder.itemView.height - icon.intrinsicHeight) / 2
+        val iconMarginHorizontal = ((icon.intrinsicHeight) * 1.5f).toInt()
+
+        when {
+            dX > 0 -> { // Swiping to the right
+                icon.setBounds(
+                    itemView.left + iconMarginHorizontal,
+                    itemView.top + iconMarginVertical,
+                    itemView.left + iconMarginHorizontal + icon.intrinsicWidth,
+                    itemView.bottom - iconMarginVertical
+                )
+
+                background.setBounds(
+                    itemView.left,
+                    itemView.top,
+                    itemView.left + dX.toInt() + backgroundCornerOffset, //or itemView.w instead of dX
+                    itemView.bottom
+                )
+            }
+            dX < 0 -> { // Swiping to the left
+                icon.setBounds(
+                    itemView.right - iconMarginHorizontal - icon.intrinsicWidth,
+                    itemView.top + iconMarginVertical,
+                    itemView.right - iconMarginHorizontal,
+                    itemView.bottom - iconMarginVertical
+                )
+                icon.level = 0
+
+                background.setBounds(
+                    itemView.right + dX.toInt() - backgroundCornerOffset, //or itemView.w instead of dX
+                    itemView.top,
+                    itemView.right,
+                    itemView.bottom
+                )
+            }
+            else -> { // view is unSwiped
+                background.setBounds(0, 0, 0, 0)
+            }
+        }
+
+        background.draw(canvas)
+        icon.draw(canvas)
 
         super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
