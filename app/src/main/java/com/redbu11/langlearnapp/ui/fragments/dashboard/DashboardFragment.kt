@@ -84,7 +84,6 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_dashboard, container, false)
         binding.myViewModel = dashboardViewModel
-        binding.myFragment = this
         binding.lifecycleOwner = this
         binding.queryInfoDisplayScrollview.visibility = View.GONE
 
@@ -113,6 +112,13 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
         dashboardViewModel.textToShare.observe(viewLifecycleOwner, Observer { it ->
             it.getContentIfNotHandled()?.let {
                 sharePhraseAsText(it)
+            }
+        })
+
+        //observe dialog to show
+        dashboardViewModel.dialogToShow.observe(viewLifecycleOwner, Observer { it ->
+            it.getContentIfNotHandled()?.let {
+                showDialog(it)
             }
         })
 
@@ -244,17 +250,20 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
     /**
      * Show confirmation dialog to update phrase info
      */
-    fun showConfirmUpdatePhraseDialog() {
-        val dialogFragment: DialogFragment = UpdatePhraseConfirmationDialog()
-        dialogFragment.show(childFragmentManager, "UpdatePhraseConfirmationDialog")
-    }
-
-    /**
-     * Show confirmation dialog to delete phrase
-     */
-    fun showConfirmDeletePhraseDialog() {
-        val dialogFragment: DialogFragment = DeletePhraseConfirmationDialog()
-        dialogFragment.show(childFragmentManager, "DeletePhraseConfirmationDialog")
+    fun showDialog(dialogs: DashboardViewModel.Dialogs) {
+        when (dialogs) {
+            DashboardViewModel.Dialogs.UPDATE_CONFIRMATION -> {
+                val dialogFragment: DialogFragment = UpdatePhraseConfirmationDialog()
+                dialogFragment.show(childFragmentManager, "UpdatePhraseConfirmationDialog")
+            }
+            DashboardViewModel.Dialogs.DELETE_CONFIRMATION -> {
+                val dialogFragment: DialogFragment = DeletePhraseConfirmationDialog()
+                dialogFragment.show(childFragmentManager, "DeletePhraseConfirmationDialog")
+            }
+            else -> {
+                //do nothing
+            }
+        }
     }
 
     override fun onDialogPositiveClick(dialog: DialogFragment?) {

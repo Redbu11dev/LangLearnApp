@@ -26,12 +26,14 @@ import android.app.Application
 import android.text.TextUtils
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.*
 import com.redbu11.langlearnapp.db.Phrase
 import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.utils.Event
 import kotlinx.coroutines.launch
 import com.redbu11.langlearnapp.R
+import com.redbu11.langlearnapp.ui.dialogs.DeletePhraseConfirmationDialog
 import com.redbu11.langlearnapp.utils.SoftUtils
 
 
@@ -80,6 +82,10 @@ class DashboardViewModel(application: Application, private val repository: Phras
     private val _textToShare = MutableLiveData<Event<Phrase>>()
     val textToShare: LiveData<Event<Phrase>>
         get() = _textToShare
+
+    private val _dialogToShow = MutableLiveData<Event<Dialogs>>()
+    val dialogToShow: LiveData<Event<Dialogs>>
+        get() = _dialogToShow
 
     init {
         hidePhraseCreatorContainer()
@@ -308,6 +314,19 @@ class DashboardViewModel(application: Application, private val repository: Phras
 
     fun shareCurrentPhraseAsText() {
         _textToShare.value = Event(getCurrentPhrase())
+    }
+
+    enum class Dialogs {
+        UPDATE_CONFIRMATION,
+        DELETE_CONFIRMATION
+    }
+
+    fun showConfirmUpdatePhraseDialog() {
+        _dialogToShow.value = Event(Dialogs.UPDATE_CONFIRMATION)
+    }
+
+    fun showConfirmDeletePhraseDialog() {
+        _dialogToShow.value = Event(Dialogs.DELETE_CONFIRMATION)
     }
 
     /**

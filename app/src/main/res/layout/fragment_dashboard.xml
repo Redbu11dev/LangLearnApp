@@ -28,15 +28,10 @@
         <import type="android.view.View" />
 
         <import type="android.text.TextUtils" />
-        <import type="com.redbu11.langlearnapp.R" />
 
         <variable
             name="myViewModel"
             type="com.redbu11.langlearnapp.ui.fragments.dashboard.DashboardViewModel" />
-
-        <variable
-            name="myFragment"
-            type="com.redbu11.langlearnapp.ui.fragments.dashboard.DashboardFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -334,7 +329,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:onClick="@{()->myFragment.showConfirmUpdatePhraseDialog()}"
+                                        android:onClick="@{()->myViewModel.showConfirmUpdatePhraseDialog()}"
                                         android:text="@string/dashboard_btn_update"
                                         />
 
@@ -349,7 +344,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:onClick="@{()->myFragment.showConfirmDeletePhraseDialog()}"
+                                        android:onClick="@{()->myViewModel.showConfirmDeletePhraseDialog()}"
                                         android:text="@string/dashboard_btn_delete" />
 
                                     </LinearLayout>
