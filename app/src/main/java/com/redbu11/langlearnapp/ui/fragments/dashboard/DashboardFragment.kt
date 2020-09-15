@@ -98,6 +98,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
 
         initRecyclerView()
 
+        //observe status message
         dashboardViewModel.message.observe(viewLifecycleOwner, Observer { it ->
             it.getContentIfNotHandled().let {
                 Snackbar.make(
@@ -105,6 +106,13 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
                     it.toString(),
                     Snackbar.LENGTH_SHORT
                 ).show()
+            }
+        })
+
+        //observe text to share
+        dashboardViewModel.textToShare.observe(viewLifecycleOwner, Observer { it ->
+            it.getContentIfNotHandled()?.let {
+                sharePhraseAsText(it)
             }
         })
 
@@ -195,12 +203,11 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
         })
     }
 
-    fun sharePhrase() {
+    fun sharePhraseAsText(phrase: Phrase) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            val currentPhrase = dashboardViewModel.getCurrentPhrase()
             //val notes = currentPhrase.notes
-            putExtra(Intent.EXTRA_TEXT, "(${currentPhrase.phraseLanguage}) ${currentPhrase.phraseText} -> (${currentPhrase.translationLanguage}) ${currentPhrase.translationText} (LangLearn (link))")
+            putExtra(Intent.EXTRA_TEXT, "(${phrase.phraseLanguage}) ${phrase.phraseText} -> (${phrase.translationLanguage}) ${phrase.translationText} \n\n (LangLearn (https://play.google.com/store/apps/details?id=com.redbu11.langlearnapp))")
             // (Optional) Here we're setting the title of the content
             //putExtra(Intent.EXTRA_TITLE, "Share the phrase with other apps")
             // (Optional) Here we're passing a content URI to an image to be displayed

@@ -77,6 +77,10 @@ class DashboardViewModel(application: Application, private val repository: Phras
     val message: LiveData<Event<String>>
         get() = statusMessage
 
+    private val _textToShare = MutableLiveData<Event<Phrase>>()
+    val textToShare: LiveData<Event<Phrase>>
+        get() = _textToShare
+
     init {
         hidePhraseCreatorContainer()
         setInputFormValuesAsCreate()
@@ -300,6 +304,10 @@ class DashboardViewModel(application: Application, private val repository: Phras
 
     fun getQueryDescStringWith(string: String): String {
         return String.format(getStringFromIdResource(R.string.dashboard_search_query_desc), string)
+    }
+
+    fun shareCurrentPhraseAsText() {
+        _textToShare.value = Event(getCurrentPhrase())
     }
 
     /**
