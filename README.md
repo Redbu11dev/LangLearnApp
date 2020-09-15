@@ -5,5 +5,9 @@ LangLearnApp
 
 # Description
 Simple app for storing phrases
-# TODO
 
+<img src="screenshots/screenshot1.png" height="400" alt="Screenshot"/>
+<img src="screenshots/screenshot3.png" height="400" alt="Screenshot"/>
+
+# TODO
+Secret
