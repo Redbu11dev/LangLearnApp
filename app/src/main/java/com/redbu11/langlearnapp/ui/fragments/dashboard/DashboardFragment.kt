@@ -209,7 +209,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
         })
     }
 
-    fun sharePhraseAsText(phrase: Phrase) {
+    private fun sharePhraseAsText(phrase: Phrase) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             //val notes = currentPhrase.notes
@@ -250,7 +250,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
     /**
      * Show confirmation dialog to update phrase info
      */
-    fun showDialog(dialogs: DashboardViewModel.Dialogs) {
+    private fun showDialog(dialogs: DashboardViewModel.Dialogs) {
         when (dialogs) {
             DashboardViewModel.Dialogs.UPDATE_CONFIRMATION -> {
                 val dialogFragment: DialogFragment = UpdatePhraseConfirmationDialog()

@@ -22,12 +22,10 @@
 package com.redbu11.langlearnapp
 
 import android.app.Application
-import com.twitter.sdk.android.core.Twitter
 
 class LangLearnApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        //Twitter.initialize(this)
     }
 }
