@@ -1,5 +1,5 @@
-<img align="left" src="screenshots/screenshot1.png" height="400" alt="Screenshot"/>
-<img align="right" src="screenshots/screenshot3.png" height="400" alt="Screenshot"/>
+<img align="left" src="https://user-images.githubusercontent.com/34152018/93181525-c019e680-f762-11ea-9d56-10b6464db31d.png" height="400" alt="Screenshot"/>
+<img align="right" src="https://user-images.githubusercontent.com/34152018/93181617-da53c480-f762-11ea-82fd-ff787399a527.png" height="400" alt="Screenshot"/>
 
 LangLearnApp
 ===============
