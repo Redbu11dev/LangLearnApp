@@ -83,6 +83,11 @@ class DashboardViewModel(application: Application, private val repository: Phras
     val textToShare: LiveData<Event<Phrase>>
         get() = _textToShare
 
+    enum class Dialogs {
+        UPDATE_CONFIRMATION,
+        DELETE_CONFIRMATION
+    }
+
     private val _dialogToShow = MutableLiveData<Event<Dialogs>>()
     val dialogToShow: LiveData<Event<Dialogs>>
         get() = _dialogToShow
@@ -314,11 +319,6 @@ class DashboardViewModel(application: Application, private val repository: Phras
 
     fun shareCurrentPhraseAsText() {
         _textToShare.value = Event(getCurrentPhrase())
-    }
-
-    enum class Dialogs {
-        UPDATE_CONFIRMATION,
-        DELETE_CONFIRMATION
     }
 
     fun showConfirmUpdatePhraseDialog() {

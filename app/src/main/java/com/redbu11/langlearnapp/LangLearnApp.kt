@@ -28,6 +28,6 @@ class LangLearnApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Twitter.initialize(this)
+        //Twitter.initialize(this)
     }
 }
