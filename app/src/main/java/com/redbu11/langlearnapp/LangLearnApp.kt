@@ -25,7 +25,7 @@ import android.app.Application
 import com.redbu11.langlearnapp.di.AppComponent
 import com.redbu11.langlearnapp.di.AppModule
 import com.redbu11.langlearnapp.di.DaggerAppComponent
-import com.redbu11.langlearnapp.di.RepositoryModule
+import com.redbu11.langlearnapp.di.RoomModule
 
 class LangLearnApp: Application() {
 
@@ -41,7 +41,7 @@ class LangLearnApp: Application() {
     private fun initDagger(): AppComponent {
         return DaggerAppComponent.builder()
             .appModule(AppModule(this))
-            .repositoryModule(RepositoryModule(this))
+            .roomModule(RoomModule())
             .build()
     }
 }

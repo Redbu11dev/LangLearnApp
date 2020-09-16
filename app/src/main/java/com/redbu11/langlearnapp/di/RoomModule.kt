@@ -23,6 +23,7 @@ package com.redbu11.langlearnapp.di
 
 import android.app.Application
 import android.content.Context
+import androidx.room.Room
 import com.redbu11.langlearnapp.db.PhraseDAO
 import com.redbu11.langlearnapp.db.PhraseDAO_Impl
 import com.redbu11.langlearnapp.db.PhraseDatabase
@@ -32,13 +33,21 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class RepositoryModule(private val app: Application) {
+class RoomModule {
 
     @Provides
     @Singleton
-    fun providePhraseDao() = PhraseDatabase.getInstance(app).phraseDAO
+    fun providePhraseDatabase(app: Application): PhraseDatabase {
+        //need application context
+        return Room.databaseBuilder(app, PhraseDatabase::class.java, "phrase_data_database").build()
+    }
 
     @Provides
+    @Singleton
+    fun providePhraseDao(phraseDatabase: PhraseDatabase) = phraseDatabase.phraseDAO
+
+    @Provides
+    @Singleton
     fun providePhraseRepository(dao: PhraseDAO) : PhraseRepository {
         return PhraseRepository(dao)
     }

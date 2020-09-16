@@ -28,7 +28,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, RepositoryModule::class])
+@Component(modules = [AppModule::class, RoomModule::class])
 interface AppComponent {
 
     //Activities
