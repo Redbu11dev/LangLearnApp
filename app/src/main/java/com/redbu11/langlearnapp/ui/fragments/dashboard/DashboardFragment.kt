@@ -47,16 +47,19 @@ import androidx.transition.AutoTransition
 import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
 import com.google.android.material.snackbar.Snackbar
+import com.redbu11.langlearnapp.LangLearnApp
 import com.redbu11.langlearnapp.MainActivity
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.databinding.FragmentDashboardBinding
 import com.redbu11.langlearnapp.db.Phrase
+import com.redbu11.langlearnapp.db.PhraseDAO
 import com.redbu11.langlearnapp.db.PhraseDatabase
 import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.ui.dialogs.ConfirmationDialogFragment
 import com.redbu11.langlearnapp.ui.dialogs.DeletePhraseConfirmationDialog
 import com.redbu11.langlearnapp.ui.dialogs.UpdatePhraseConfirmationDialog
 import com.redbu11.langlearnapp.utils.SoftUtils
+import javax.inject.Inject
 
 
 class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
@@ -66,6 +69,11 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var adapter: PhraseRecyclerViewAdapter
 
+    @Inject
+    lateinit var dao: PhraseDAO
+    @Inject
+    lateinit var repository: PhraseRepository
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -74,8 +82,7 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
 //        dashboardViewModel =
 //                ViewModelProvider(this).get(DashboardViewModel::class.java)
 
-        val dao = PhraseDatabase.getInstance(requireContext().applicationContext).phraseDAO
-        val repository = PhraseRepository(dao)
+        LangLearnApp.appComponent.inject(this)
         val factory = DashboardViewModelFactory(requireActivity().application, repository)
 
         dashboardViewModel =
@@ -191,12 +198,17 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
         binding.phraseRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter =
             PhraseRecyclerViewAdapter(
-                {selectedItem: Phrase -> listItemClicked(selectedItem)},
-                {removedItem: Phrase -> listItemRemoved(removedItem)},
-                {restoredItem: Phrase -> listItemRestored(restoredItem)}
+                { selectedItem: Phrase -> listItemClicked(selectedItem) },
+                { removedItem: Phrase -> listItemRemoved(removedItem) },
+                { restoredItem: Phrase -> listItemRestored(restoredItem) }
             )
         binding.phraseRecyclerView.adapter = adapter
-        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(requireContext(), (binding.phraseRecyclerView.adapter as PhraseRecyclerViewAdapter)))
+        val itemTouchHelper = ItemTouchHelper(
+            SwipeToDeleteCallback(
+                requireContext(),
+                (binding.phraseRecyclerView.adapter as PhraseRecyclerViewAdapter)
+            )
+        )
         itemTouchHelper.attachToRecyclerView(binding.phraseRecyclerView)
         displayPhrasesList()
     }
@@ -213,7 +225,10 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             //val notes = currentPhrase.notes
-            putExtra(Intent.EXTRA_TEXT, "(${phrase.phraseLanguage}) ${phrase.phraseText} -> (${phrase.translationLanguage}) ${phrase.translationText} \n\n (LangLearn (https://play.google.com/store/apps/details?id=com.redbu11.langlearnapp))")
+            putExtra(
+                Intent.EXTRA_TEXT,
+                "(${phrase.phraseLanguage}) ${phrase.phraseText} -> (${phrase.translationLanguage}) ${phrase.translationText} \n\n (LangLearn (https://play.google.com/store/apps/details?id=com.redbu11.langlearnapp))"
+            )
             // (Optional) Here we're setting the title of the content
             //putExtra(Intent.EXTRA_TITLE, "Share the phrase with other apps")
             // (Optional) Here we're passing a content URI to an image to be displayed

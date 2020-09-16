@@ -19,29 +19,27 @@
  *
  */
 
-package com.redbu11.langlearnapp
+package com.redbu11.langlearnapp.di
 
 import android.app.Application
-import com.redbu11.langlearnapp.di.AppComponent
-import com.redbu11.langlearnapp.di.AppModule
-import com.redbu11.langlearnapp.di.DaggerAppComponent
-import com.redbu11.langlearnapp.di.RepositoryModule
+import android.content.Context
+import com.redbu11.langlearnapp.db.PhraseDAO
+import com.redbu11.langlearnapp.db.PhraseDAO_Impl
+import com.redbu11.langlearnapp.db.PhraseDatabase
+import com.redbu11.langlearnapp.db.PhraseRepository
+import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
 
-class LangLearnApp: Application() {
+@Module
+class RepositoryModule(private val app: Application) {
 
-    companion object {
-        lateinit var appComponent: AppComponent
-    }
+    @Provides
+    @Singleton
+    fun providePhraseDao() = PhraseDatabase.getInstance(app).phraseDAO
 
-    override fun onCreate() {
-        super.onCreate()
-        appComponent = initDagger()
-    }
-
-    private fun initDagger(): AppComponent {
-        return DaggerAppComponent.builder()
-            .appModule(AppModule(this))
-            .repositoryModule(RepositoryModule(this))
-            .build()
+    @Provides
+    fun providePhraseRepository(dao: PhraseDAO) : PhraseRepository {
+        return PhraseRepository(dao)
     }
 }

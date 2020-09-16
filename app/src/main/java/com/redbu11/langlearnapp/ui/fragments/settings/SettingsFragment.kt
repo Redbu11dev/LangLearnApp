@@ -40,18 +40,26 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.snackbar.Snackbar
+import com.redbu11.langlearnapp.LangLearnApp
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.db.Phrase
+import com.redbu11.langlearnapp.db.PhraseDAO
 import com.redbu11.langlearnapp.db.PhraseDatabase
 import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.ui.dialogs.*
 import com.redbu11.langlearnapp.utils.MyFileUtils
 import java.io.File
+import javax.inject.Inject
 
 
 class SettingsFragment : PreferenceFragmentCompat(),
     SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener,
     ConfirmationDialogFragment.ConfirmationDialogListener {
+
+    @Inject
+    lateinit var dao: PhraseDAO
+    @Inject
+    lateinit var repository: PhraseRepository
 
     private lateinit var settingsViewModel: SettingsViewModel
     private val phrases: MutableSet<Phrase> = mutableSetOf()
@@ -65,8 +73,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val dao = PhraseDatabase.getInstance(requireContext().applicationContext).phraseDAO
-        val repository = PhraseRepository(dao)
+        LangLearnApp.appComponent.inject(this)
         val factory = SettingsViewModelFactory(requireActivity().application, repository)
         settingsViewModel =
             ViewModelProvider(this, factory).get(SettingsViewModel::class.java)

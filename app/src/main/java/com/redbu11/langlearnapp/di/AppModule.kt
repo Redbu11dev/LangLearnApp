@@ -19,29 +19,17 @@
  *
  */
 
-package com.redbu11.langlearnapp
+package com.redbu11.langlearnapp.di
 
 import android.app.Application
-import com.redbu11.langlearnapp.di.AppComponent
-import com.redbu11.langlearnapp.di.AppModule
-import com.redbu11.langlearnapp.di.DaggerAppComponent
-import com.redbu11.langlearnapp.di.RepositoryModule
+import android.content.Context
+import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
 
-class LangLearnApp: Application() {
-
-    companion object {
-        lateinit var appComponent: AppComponent
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        appComponent = initDagger()
-    }
-
-    private fun initDagger(): AppComponent {
-        return DaggerAppComponent.builder()
-            .appModule(AppModule(this))
-            .repositoryModule(RepositoryModule(this))
-            .build()
-    }
+@Module
+class AppModule(private val app: Application) {
+    @Provides
+    @Singleton
+    fun provideContext(): Context = app
 }
