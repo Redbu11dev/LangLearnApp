@@ -47,6 +47,7 @@ import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.ui.dialogs.*
 import com.redbu11.langlearnapp.ui.dialogs.abstactions.ConfirmationDialogFragment
 import com.redbu11.langlearnapp.ui.dialogs.abstactions.ImportantNoticeDialog
+import com.redbu11.langlearnapp.utils.MyGeneralUtils
 import com.redbu11.langlearnapp.utils.SoftUtils
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -262,16 +263,20 @@ class DashboardFragment : DaggerFragment(), MainActivity.IActivityOnBackPressed,
         when (dialogs) {
             DashboardViewModel.Dialogs.UPDATE_CONFIRMATION -> {
                 val dialogFragment: DialogFragment = UpdatePhraseConfirmationDialog()
-                dialogFragment.show(childFragmentManager, "UpdatePhraseConfirmationDialog")
+                dialogFragment.show(childFragmentManager, dialogFragment::class.simpleName)
             }
             DashboardViewModel.Dialogs.DELETE_CONFIRMATION -> {
                 val dialogFragment: DialogFragment = DeletePhraseConfirmationDialog()
-                dialogFragment.show(childFragmentManager, "DeletePhraseConfirmationDialog")
+                dialogFragment.show(childFragmentManager, dialogFragment::class.simpleName)
             }
             DashboardViewModel.Dialogs.IMPORTANT_NOTICE_PHRASE_PERSISTENCE -> {
-                //TODO check if will be shown
-                val dialogFragment: DialogFragment = PhrasePersistenceDialog()
-                dialogFragment.show(childFragmentManager, "PhrasePersistenceImportantNoticeDialog")
+                if (!MyGeneralUtils.getBooleanPreferenceValue(requireActivity(), R.string.preference_never_show_phrase_persistence_dialog, false)) {
+                    val dialogFragment: DialogFragment = PhrasePersistenceDialog()
+                    dialogFragment.show(
+                        childFragmentManager,
+                        dialogFragment::class.simpleName
+                    )
+                }
             }
             else -> {
                 //do nothing
@@ -311,9 +316,11 @@ class DashboardFragment : DaggerFragment(), MainActivity.IActivityOnBackPressed,
             is PhrasePersistenceDialog -> {
                 if (boolean) {
                     //save the value, and not show again
+                    MyGeneralUtils.setBooleanPreferenceValue(requireActivity(), R.string.preference_never_show_phrase_persistence_dialog, true)
                 }
                 else {
-
+                    //save the value
+                    MyGeneralUtils.setBooleanPreferenceValue(requireActivity(), R.string.preference_never_show_phrase_persistence_dialog, false)
                 }
             }
         }

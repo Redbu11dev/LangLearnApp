@@ -35,7 +35,7 @@
 <!--    Dialogs-->
     <string name="dialog_title_important_notice">Important notice</string>
 
-    <string name="dialog_phrase_persistence_message">Because the application stores your data only locally, your phrases will be permanently deleted after uninstalling the application or clearing it\'s data.
+    <string name="dialog_phrase_persistence_message">Because the application stores your data only locally, your phrases will be permanently deleted after uninstalling the application or clearing its data.
         \n
         \n
         To avoid losing your phrases, you may export them to a .csv file from the \"%s\" menu, which can be used to restore your phrases.

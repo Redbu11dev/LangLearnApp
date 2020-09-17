@@ -31,11 +31,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -45,12 +45,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.db.Phrase
 import com.redbu11.langlearnapp.db.PhraseRepository
-import com.redbu11.langlearnapp.ui.dialogs.*
+import com.redbu11.langlearnapp.ui.dialogs.AboutTheAppDialogFragment
+import com.redbu11.langlearnapp.ui.dialogs.EraseDatabaseDialog
+import com.redbu11.langlearnapp.ui.dialogs.ExportPhrasesDialog
+import com.redbu11.langlearnapp.ui.dialogs.ImportPhrasesDialog
 import com.redbu11.langlearnapp.ui.dialogs.abstactions.ConfirmationDialogFragment
 import dagger.android.AndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
-import java.io.File
 import javax.inject.Inject
 
 
@@ -67,7 +69,6 @@ class SettingsFragment : PreferenceFragmentCompat(),
     private val phrases: MutableSet<Phrase> = mutableSetOf()
 
     override fun androidInjector(): AndroidInjector<Any> {
-        //TODO("Not yet implemented")
         return androidInjector()
     }
 
@@ -138,16 +139,16 @@ class SettingsFragment : PreferenceFragmentCompat(),
     /**
      * Create an intent
      */
-    private fun createOpenFileIntent(context: Context, file: File): Intent {
+    private fun createOpenFileIntent(context: Context, uri: Uri): Intent {
         val intent = Intent(Intent.ACTION_VIEW)
-        val contentUri =
-            FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
-        val mimeType = context.contentResolver.getType(contentUri)
+        //val contentUri =
+        //    FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
+        val mimeType = context.contentResolver.getType(uri)
         //intent.putExtra(Intent.EXTRA_TITLE, "Open your file with a .csv reader")
-        intent.setDataAndType(contentUri, mimeType)
+        intent.setDataAndType(uri, mimeType)
         intent.flags =
             Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         return intent
     }
 
@@ -171,7 +172,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
                     putExtra(DocumentsContract.EXTRA_INITIAL_URI, Uri.EMPTY)
                 }
             }
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivityForResult(intent, CREATE_CSV_FILE)
 
         } else {
@@ -190,7 +191,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         var chooseFile = Intent(Intent.ACTION_GET_CONTENT)
         chooseFile.type = "text/*"
         chooseFile = Intent.createChooser(chooseFile, getString(R.string.settings_pick_csv_intent))
-        chooseFile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        //chooseFile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivityForResult(chooseFile, REQUEST_CODE_GET_CSV_FILE)
     }
 
@@ -280,7 +281,9 @@ class SettingsFragment : PreferenceFragmentCompat(),
             CREATE_CSV_FILE -> {
                 // The result data contains a URI for the document or directory that
                 // the user selected.
+                Log.i("createOpenFileIntent", "createOpenFileIntent1 ${data.toString()}")
                 data?.data?.also { uri ->
+                    Log.i("createOpenFileIntent", "createOpenFileIntent2")
                     val oStream = requireActivity().contentResolver.openOutputStream(uri)
                     settingsViewModel.exportFromRepositoryToCsv(oStream!!, phrases)
                     Snackbar.make(
@@ -288,13 +291,14 @@ class SettingsFragment : PreferenceFragmentCompat(),
                         R.string.settings_export_successful,
                         Snackbar.LENGTH_SHORT
                     ).show()
-//                    val intent = createOpenFileIntent(requireContext(), oStream!!)
-//                    startActivity(
-//                        Intent.createChooser(
-//                            intent,
-//                            String.format(getString(R.string.settings_view_filename, fileName))
-//                        )
-//                    )
+                    val intent = createOpenFileIntent(requireContext(), uri)
+                    startActivity(
+                        Intent.createChooser(
+                            intent,
+                            String.format(getString(R.string.settings_view_filename, "phrases.csv"))
+                        )
+                    )
+                    Log.i("createOpenFileIntent", "createOpenFileIntent3")
                 }
             }
             REQUEST_CODE_GET_CSV_FILE -> {
