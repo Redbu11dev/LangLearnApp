@@ -21,27 +21,32 @@
 
 package com.redbu11.langlearnapp
 
-import android.app.Application
 import com.redbu11.langlearnapp.di.AppComponent
 import com.redbu11.langlearnapp.di.AppModule
 import com.redbu11.langlearnapp.di.DaggerAppComponent
-import com.redbu11.langlearnapp.di.RoomModule
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerApplication
 
-class LangLearnApp: Application() {
 
-    companion object {
-        lateinit var appComponent: AppComponent
-    }
+class LangLearnApp: DaggerApplication() {
+
+//    companion object {
+//        lateinit var appComponent: AppComponent
+//    }
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = initDagger()
+//        appComponent = initDagger()
     }
 
-    private fun initDagger(): AppComponent {
-        return DaggerAppComponent.builder()
-            .appModule(AppModule(this))
-            .roomModule(RoomModule())
-            .build()
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder().appModule(AppModule(this)).build()
     }
+
+//    private fun initDagger(): AppComponent {
+//        return DaggerAppComponent.builder()
+//            .appModule(AppModule(this))
+//            //.roomModule(RoomModule())
+//            .build()
+//    }
 }

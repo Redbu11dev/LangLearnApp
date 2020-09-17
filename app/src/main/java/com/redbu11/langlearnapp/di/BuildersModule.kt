@@ -21,33 +21,17 @@
 
 package com.redbu11.langlearnapp.di
 
-import com.redbu11.langlearnapp.LangLearnApp
-import com.redbu11.langlearnapp.MainActivity
 import com.redbu11.langlearnapp.ui.fragments.dashboard.DashboardFragment
-import dagger.Binds
-import dagger.Component
+import com.redbu11.langlearnapp.ui.fragments.settings.SettingsFragment
 import dagger.Module
-import dagger.Subcomponent
-import dagger.android.AndroidInjector
 import dagger.android.ContributesAndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
-import dagger.android.support.DaggerApplication
-import dagger.multibindings.ClassKey
-import dagger.multibindings.IntoMap
-import javax.inject.Singleton
 
+@Module
+abstract class BuildersModule {
 
-@Singleton
-@Component(modules = [AndroidSupportInjectionModule::class, BuildersModule::class, AppModule::class, RoomModule::class])
-interface AppComponent: AndroidInjector<DaggerApplication> {
+    @ContributesAndroidInjector
+    abstract fun contributeDashboardFragment(): DashboardFragment
 
-//    //Activities
-//    fun inject(activity: MainActivity)
-//
-//    //Fragments
-//    fun inject(fragment: DashboardFragment)
-//    fun inject(fragment: SettingsFragment)
-
-    fun inject(application: LangLearnApp)
-
+    @ContributesAndroidInjector
+    abstract fun contributeSettingsFragment(): SettingsFragment
 }

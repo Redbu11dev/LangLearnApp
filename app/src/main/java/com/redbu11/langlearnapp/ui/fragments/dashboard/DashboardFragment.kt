@@ -59,18 +59,19 @@ import com.redbu11.langlearnapp.ui.dialogs.ConfirmationDialogFragment
 import com.redbu11.langlearnapp.ui.dialogs.DeletePhraseConfirmationDialog
 import com.redbu11.langlearnapp.ui.dialogs.UpdatePhraseConfirmationDialog
 import com.redbu11.langlearnapp.utils.SoftUtils
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 
-class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
+class DashboardFragment : DaggerFragment(), MainActivity.IActivityOnBackPressed,
     ConfirmationDialogFragment.ConfirmationDialogListener {
 
     private lateinit var dashboardViewModel: DashboardViewModel
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var adapter: PhraseRecyclerViewAdapter
 
-    @Inject
-    lateinit var dao: PhraseDAO
+    //@Inject
+    //lateinit var dao: PhraseDAO
     @Inject
     lateinit var repository: PhraseRepository
 
@@ -82,7 +83,10 @@ class DashboardFragment : Fragment(), MainActivity.IActivityOnBackPressed,
 //        dashboardViewModel =
 //                ViewModelProvider(this).get(DashboardViewModel::class.java)
 
-        LangLearnApp.appComponent.inject(this)
+
+        //PhraseDatabase.getInstance(requireActivity().applicationContext).phraseDAO
+        //LangLearnApp.appComponent.inject(this)
+        //repository = PhraseRepository(dao)
         val factory = DashboardViewModelFactory(requireActivity().application, repository)
 
         dashboardViewModel =

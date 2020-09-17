@@ -31,7 +31,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
@@ -40,29 +39,35 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.snackbar.Snackbar
-import com.redbu11.langlearnapp.LangLearnApp
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.db.Phrase
 import com.redbu11.langlearnapp.db.PhraseDAO
-import com.redbu11.langlearnapp.db.PhraseDatabase
 import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.ui.dialogs.*
 import com.redbu11.langlearnapp.utils.MyFileUtils
+import dagger.android.AndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.android.support.AndroidSupportInjection
 import java.io.File
 import javax.inject.Inject
 
 
 class SettingsFragment : PreferenceFragmentCompat(),
     SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener,
-    ConfirmationDialogFragment.ConfirmationDialogListener {
+    ConfirmationDialogFragment.ConfirmationDialogListener, HasAndroidInjector {
 
-    @Inject
-    lateinit var dao: PhraseDAO
+    //@Inject
+    //lateinit var dao: PhraseDAO
     @Inject
     lateinit var repository: PhraseRepository
 
     private lateinit var settingsViewModel: SettingsViewModel
     private val phrases: MutableSet<Phrase> = mutableSetOf()
+
+    override fun androidInjector(): AndroidInjector<Any> {
+        //TODO("Not yet implemented")
+        return androidInjector()
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.settings_pref)
@@ -73,7 +78,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        LangLearnApp.appComponent.inject(this)
+        AndroidSupportInjection.inject(this)
+        //LangLearnApp.appComponent.inject(this)
+        //PhraseDatabase.getInstance(requireActivity().applicationContext).phraseDAO
+        //repository = PhraseRepository(dao)
         val factory = SettingsViewModelFactory(requireActivity().application, repository)
         settingsViewModel =
             ViewModelProvider(this, factory).get(SettingsViewModel::class.java)
