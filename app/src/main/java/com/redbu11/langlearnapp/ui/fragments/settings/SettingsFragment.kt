@@ -27,17 +27,26 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.FileUtils
+import android.provider.DocumentsContract
+import android.provider.DocumentsProvider
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentResolverCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.net.toFile
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.room.util.FileUtil
+import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import com.google.android.material.snackbar.Snackbar
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.db.Phrase
@@ -158,24 +167,20 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            val fileName = "export_phrases_${System.currentTimeMillis() / 1000}.csv"
-            val file = MyFileUtils.generateExternalFile(
-                requireContext(),
-                fileName
-            )
-            settingsViewModel.exportFromRepositoryToCsv(file, phrases)
-            Snackbar.make(
-                requireView(),
-                R.string.settings_export_successful,
-                Snackbar.LENGTH_SHORT
-            ).show()
-            val intent = createOpenFileIntent(requireContext(), file)
-            startActivity(
-                Intent.createChooser(
-                    intent,
-                    String.format(getString(R.string.settings_view_filename, fileName))
-                )
-            )
+            val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "application/csv"
+                putExtra(Intent.EXTRA_TITLE, "export_phrases_${System.currentTimeMillis() / 1000}.csv")
+
+                // Optionally, specify a URI for the directory that should be opened in
+                // the system file picker before your app creates the document.
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    putExtra(DocumentsContract.EXTRA_INITIAL_URI, Uri.EMPTY)
+                }
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivityForResult(intent, CREATE_FILE)
+
         } else {
             requestPermissions(
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -253,6 +258,9 @@ class SettingsFragment : PreferenceFragmentCompat(),
     companion object {
         const val REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 0
         const val REQUEST_CODE_GET_CSV_FILE = 1
+
+        // Request code for creating a PDF document.
+        const val CREATE_FILE = 10
     }
 
     override fun onRequestPermissionsResult(
@@ -275,6 +283,26 @@ class SettingsFragment : PreferenceFragmentCompat(),
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
+            CREATE_FILE -> {
+                // The result data contains a URI for the document or directory that
+                // the user selected.
+                data?.data?.also { uri ->
+                    val oStream = requireActivity().contentResolver.openOutputStream(uri)
+                    settingsViewModel.exportFromRepositoryToCsv(oStream!!, phrases)
+                    Snackbar.make(
+                        requireView(),
+                        R.string.settings_export_successful,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+//                    val intent = createOpenFileIntent(requireContext(), oStream!!)
+//                    startActivity(
+//                        Intent.createChooser(
+//                            intent,
+//                            String.format(getString(R.string.settings_view_filename, fileName))
+//                        )
+//                    )
+                }
+            }
             REQUEST_CODE_GET_CSV_FILE -> {
                 if (resultCode == RESULT_OK && data != null) {
                     val fileUri = data.data

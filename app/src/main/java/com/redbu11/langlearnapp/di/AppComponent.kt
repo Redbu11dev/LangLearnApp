@@ -40,14 +40,5 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AndroidSupportInjectionModule::class, BuildersModule::class, AppModule::class, RoomModule::class])
 interface AppComponent: AndroidInjector<DaggerApplication> {
-
-//    //Activities
-//    fun inject(activity: MainActivity)
-//
-//    //Fragments
-//    fun inject(fragment: DashboardFragment)
-//    fun inject(fragment: SettingsFragment)
-
     fun inject(application: LangLearnApp)
-
 }

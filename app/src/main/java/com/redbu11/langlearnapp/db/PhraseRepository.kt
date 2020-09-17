@@ -28,6 +28,7 @@ import androidx.lifecycle.LiveData
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import java.io.File
+import java.io.OutputStream
 
 /**
  * Phrase repository
@@ -60,8 +61,10 @@ class PhraseRepository(private val dao : PhraseDAO) {
     /**
      * Export phrases to CSV
      */
-    fun exportToCSVFile(csvFile: File, phrases: Collection<Phrase>) {
-        csvWriter().open(csvFile, append = false) {
+    fun exportToCSVFile(csvFile: OutputStream, phrases: Collection<Phrase>) {
+    //fun exportToCSVFile(csvFile: File, phrases: Collection<Phrase>) {
+        //csvWriter().open(csvFile, append = false) {
+        csvWriter().open(csvFile) {
             // Header
             writeRow(
                 listOf(

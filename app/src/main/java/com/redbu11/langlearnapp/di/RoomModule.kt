@@ -34,7 +34,6 @@ import javax.inject.Singleton
 
 @Module
 class RoomModule {
-
     @Provides
     @Singleton
     fun providePhraseDatabase(app: Application): PhraseDatabase {

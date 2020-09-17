@@ -29,6 +29,7 @@ import com.redbu11.langlearnapp.db.Phrase
 import com.redbu11.langlearnapp.db.PhraseRepository
 import kotlinx.coroutines.launch
 import java.io.File
+import java.io.OutputStream
 
 class SettingsViewModel(application: Application, private val repository: PhraseRepository) : AndroidViewModel(application) {
 
@@ -50,7 +51,8 @@ class SettingsViewModel(application: Application, private val repository: Phrase
         repository.importFromCsvFile(context, fileUri)
     }
 
-    fun exportFromRepositoryToCsv(csvFile: File, phrases: Collection<Phrase>) {
+    //fun exportFromRepositoryToCsv(csvFile: File, phrases: Collection<Phrase>) {
+    fun exportFromRepositoryToCsv(csvFile: OutputStream, phrases: Collection<Phrase>) {
         repository.exportToCSVFile(csvFile, phrases)
     }
 }
