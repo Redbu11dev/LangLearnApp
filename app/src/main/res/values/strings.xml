@@ -33,6 +33,16 @@
     <string name="title_settings">Settings</string>
 
 <!--    Dialogs-->
+    <string name="dialog_title_important_notice">Important notice</string>
+
+    <string name="dialog_phrase_persistence_message">Because the application stores your data only locally, your phrases will be permanently deleted after uninstalling the application or clearing it\'s data.
+        \n
+        \n
+        To avoid losing your phrases, you may export them to a .csv file from the \"%s\" menu, which can be used to restore your phrases.
+    </string>
+    <string name="dialog_phrase_persistence_confirmation_message">I understand, don\'t show again</string>
+    <string name="dialog_phrase_persistence_btn_positive">OK</string>
+
     <string name="dialog_about_the_app_title">About the app</string>
     <string name="dialog_about_the_app_message">
         Copyright © 2020 Viktor Bukovets
@@ -50,6 +60,7 @@
         \n
         Thank you for using the app.
     </string>
+
     <string name="dialog_about_the_app_btn_positive">OK</string>
 
     <string name="dialog_confirmation_default_message">Are you sure?</string>
@@ -60,11 +71,15 @@
     <string name="dialog_erase_db_btn_positive">Delete</string>
     <string name="dialog_erase_db_btn_negative">Cancel</string>
 
-    <string name="dialog_export_phrases_message">Your phrases will be exported to a .csv file, located at %s</string>
+    <string name="dialog_export_phrases_message">Please select a location for the .csv file.
+        \n
+        \n
+        Note: Please make sure to save the file outside of \"Android/data\" to avoid losing the file after uninstalling the application.
+    </string>
     <string name="dialog_export_phrases_btn_positive">Export</string>
     <string name="dialog_export_phrases_btn_negative">Cancel</string>
 
-    <string name="dialog_import_phrases_message">You need to locate a .csv file with phrases on your storage, by default the location is %s</string>
+    <string name="dialog_import_phrases_message">You need to locate a .csv file with phrases on your storage</string>
     <string name="dialog_import_phrases_btn_positive">Import</string>
     <string name="dialog_import_phrases_btn_negative">Cancel</string>
 

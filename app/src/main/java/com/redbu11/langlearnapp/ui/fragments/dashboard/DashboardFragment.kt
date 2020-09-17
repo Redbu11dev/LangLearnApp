@@ -24,47 +24,36 @@ package com.redbu11.langlearnapp.ui.fragments.dashboard
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.AutoTransition
 import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
 import com.google.android.material.snackbar.Snackbar
-import com.redbu11.langlearnapp.LangLearnApp
 import com.redbu11.langlearnapp.MainActivity
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.databinding.FragmentDashboardBinding
 import com.redbu11.langlearnapp.db.Phrase
-import com.redbu11.langlearnapp.db.PhraseDAO
-import com.redbu11.langlearnapp.db.PhraseDatabase
 import com.redbu11.langlearnapp.db.PhraseRepository
-import com.redbu11.langlearnapp.ui.dialogs.ConfirmationDialogFragment
-import com.redbu11.langlearnapp.ui.dialogs.DeletePhraseConfirmationDialog
-import com.redbu11.langlearnapp.ui.dialogs.UpdatePhraseConfirmationDialog
+import com.redbu11.langlearnapp.ui.dialogs.*
+import com.redbu11.langlearnapp.ui.dialogs.abstactions.ConfirmationDialogFragment
+import com.redbu11.langlearnapp.ui.dialogs.abstactions.ImportantNoticeDialog
 import com.redbu11.langlearnapp.utils.SoftUtils
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 
 class DashboardFragment : DaggerFragment(), MainActivity.IActivityOnBackPressed,
-    ConfirmationDialogFragment.ConfirmationDialogListener {
+    ConfirmationDialogFragment.ConfirmationDialogListener, ImportantNoticeDialog.ImportantNoticeDialogListener {
 
     private lateinit var dashboardViewModel: DashboardViewModel
     private lateinit var binding: FragmentDashboardBinding
@@ -279,6 +268,10 @@ class DashboardFragment : DaggerFragment(), MainActivity.IActivityOnBackPressed,
                 val dialogFragment: DialogFragment = DeletePhraseConfirmationDialog()
                 dialogFragment.show(childFragmentManager, "DeletePhraseConfirmationDialog")
             }
+            DashboardViewModel.Dialogs.IMPORTANT_NOTICE_PHRASE_PERSISTENCE -> {
+                val dialogFragment: DialogFragment = PhrasePersistenceDialog()
+                dialogFragment.show(childFragmentManager, "PhrasePersistenceImportantNoticeDialog")
+            }
             else -> {
                 //do nothing
             }
@@ -308,6 +301,19 @@ class DashboardFragment : DaggerFragment(), MainActivity.IActivityOnBackPressed,
             is UpdatePhraseConfirmationDialog,
             is DeletePhraseConfirmationDialog -> {
                 dialog.dismiss()
+            }
+        }
+    }
+
+    override fun onImportantNoticeDialogCheckBoxClick(dialog: DialogFragment, boolean: Boolean) {
+        when (dialog) {
+            is PhrasePersistenceDialog -> {
+                if (boolean) {
+                    //save the value, and not show again
+                }
+                else {
+
+                }
             }
         }
     }

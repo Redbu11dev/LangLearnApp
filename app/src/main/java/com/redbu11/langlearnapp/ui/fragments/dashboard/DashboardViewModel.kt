@@ -84,6 +84,7 @@ class DashboardViewModel(application: Application, private val repository: Phras
         get() = _textToShare
 
     enum class Dialogs {
+        IMPORTANT_NOTICE_PHRASE_PERSISTENCE,
         UPDATE_CONFIRMATION,
         DELETE_CONFIRMATION
     }
@@ -95,6 +96,7 @@ class DashboardViewModel(application: Application, private val repository: Phras
     init {
         hidePhraseCreatorContainer()
         setInputFormValuesAsCreate()
+        showImportantNoticePhrasePersistenceDialog()
     }
 
     /**
@@ -319,6 +321,10 @@ class DashboardViewModel(application: Application, private val repository: Phras
 
     fun shareCurrentPhraseAsText() {
         _textToShare.value = Event(getCurrentPhrase())
+    }
+
+    fun showImportantNoticePhrasePersistenceDialog() {
+        _dialogToShow.value = Event(Dialogs.IMPORTANT_NOTICE_PHRASE_PERSISTENCE)
     }
 
     fun showConfirmUpdatePhraseDialog() {

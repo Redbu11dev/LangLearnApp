@@ -25,21 +25,19 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.redbu11.langlearnapp.R
-import com.redbu11.langlearnapp.ui.dialogs.abstactions.ConfirmationDialogFragment
+import com.redbu11.langlearnapp.ui.dialogs.abstactions.ImportantNoticeDialog
 
 
-class UpdatePhraseConfirmationDialog : ConfirmationDialogFragment() {
-
+class PhrasePersistenceDialog : ImportantNoticeDialog() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext())
-            .setMessage(getString(R.string.dialog_update_phrase_confirmation_message))
-            .setPositiveButton(getString(R.string.dialog_update_phrase_confirmation_btn_positive)) { _, _ ->
+            .setIcon(R.drawable.ic_info_outline_black_24dp)
+            .setTitle(R.string.dialog_title_important_notice)
+            .setMessage(String.format(getString(R.string.dialog_phrase_persistence_message), getString(R.string.title_settings)))
+            .setView(checkBoxView)
+            .setPositiveButton(getString(R.string.dialog_phrase_persistence_btn_positive)) { _, _ ->
                 listener.onDialogPositiveClick(this)
-            }
-            .setNegativeButton(getString(R.string.dialog_update_phrase_confirmation_btn_negative)) { _, _ ->
-                listener.onDialogNegativeClick(this)
             }
             .create()
     }
-
 }

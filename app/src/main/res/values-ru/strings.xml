@@ -109,7 +109,12 @@
     <string name="phrase_listItem_notes_title">Заметки:</string>
     <string name="dialog_confirmation_default_btn_positive">Да</string>
     <string name="dialog_erase_db_message">Вы уверены, что хотите удалить все фразы навсегда?</string>
-    <string name="dialog_export_phrases_message">Ваши фразы будут экспортированы в .csv файл, находящийся по адресу %s</string>
+    <string name="dialog_export_phrases_message">Пожалуйста, выберите расположение для .csv файла.
+        \n
+        \n
+        Важно: Пожалуйста, убедитесь, что не сохраняете файл в директории \"Android/data\", чтобы не потерять файл после удаления приложения.
+    </string>
     <string name="dialog_import_phrases_message">Вам нужно выбрать .csv файл с фразами, на вашем хранилище, адрес по умолчанию: %s</string>
     <string name="dashboard_btn_share">Поделиться</string>
+    <string name="dialog_title_important_notice">Важное уведомление</string>
 </resources>

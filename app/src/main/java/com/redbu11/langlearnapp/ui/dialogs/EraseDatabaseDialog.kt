@@ -22,11 +22,10 @@
 package com.redbu11.langlearnapp.ui.dialogs
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
 import com.redbu11.langlearnapp.R
+import com.redbu11.langlearnapp.ui.dialogs.abstactions.ConfirmationDialogFragment
 
 
 class EraseDatabaseDialog : ConfirmationDialogFragment() {

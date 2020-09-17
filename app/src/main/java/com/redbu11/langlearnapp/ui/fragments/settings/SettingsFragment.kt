@@ -30,30 +30,23 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.FileUtils
 import android.provider.DocumentsContract
-import android.provider.DocumentsProvider
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentResolverCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.net.toFile
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.room.util.FileUtil
-import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import com.google.android.material.snackbar.Snackbar
 import com.redbu11.langlearnapp.R
 import com.redbu11.langlearnapp.db.Phrase
-import com.redbu11.langlearnapp.db.PhraseDAO
 import com.redbu11.langlearnapp.db.PhraseRepository
 import com.redbu11.langlearnapp.ui.dialogs.*
-import com.redbu11.langlearnapp.utils.MyFileUtils
+import com.redbu11.langlearnapp.ui.dialogs.abstactions.ConfirmationDialogFragment
 import dagger.android.AndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
@@ -179,7 +172,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 }
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivityForResult(intent, CREATE_FILE)
+            startActivityForResult(intent, CREATE_CSV_FILE)
 
         } else {
             requestPermissions(
@@ -197,6 +190,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         var chooseFile = Intent(Intent.ACTION_GET_CONTENT)
         chooseFile.type = "text/*"
         chooseFile = Intent.createChooser(chooseFile, getString(R.string.settings_pick_csv_intent))
+        chooseFile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivityForResult(chooseFile, REQUEST_CODE_GET_CSV_FILE)
     }
 
@@ -260,7 +254,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         const val REQUEST_CODE_GET_CSV_FILE = 1
 
         // Request code for creating a PDF document.
-        const val CREATE_FILE = 10
+        const val CREATE_CSV_FILE = 10
     }
 
     override fun onRequestPermissionsResult(
@@ -283,7 +277,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            CREATE_FILE -> {
+            CREATE_CSV_FILE -> {
                 // The result data contains a URI for the document or directory that
                 // the user selected.
                 data?.data?.also { uri ->
