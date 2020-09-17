@@ -117,4 +117,11 @@
     <string name="dialog_import_phrases_message">Вам нужно выбрать .csv файл с фразами, на вашем хранилище, адрес по умолчанию: %s</string>
     <string name="dashboard_btn_share">Поделиться</string>
     <string name="dialog_title_important_notice">Важное уведомление</string>
+    <string name="dialog_phrase_persistence_btn_positive">ОК</string>
+    <string name="dialog_phrase_persistence_confirmation_message">Понятно, боьше не показывать</string>
+    <string name="dialog_phrase_persistence_message">Так как приложение сохраняет данные только локально, ваши фразы будут навсегда удалены при удалении приложения или очистке данных приложения.
+        \n
+        \n
+        Для избежания потери ваших фраз, вы можете экспортировать их в .csv файл из меню \"%s\", который потом можно использовать для восстановления(импорта).
+    </string>
 </resources>

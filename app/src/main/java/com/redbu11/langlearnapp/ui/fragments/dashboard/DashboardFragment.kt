@@ -269,6 +269,7 @@ class DashboardFragment : DaggerFragment(), MainActivity.IActivityOnBackPressed,
                 dialogFragment.show(childFragmentManager, "DeletePhraseConfirmationDialog")
             }
             DashboardViewModel.Dialogs.IMPORTANT_NOTICE_PHRASE_PERSISTENCE -> {
+                //TODO check if will be shown
                 val dialogFragment: DialogFragment = PhrasePersistenceDialog()
                 dialogFragment.show(childFragmentManager, "PhrasePersistenceImportantNoticeDialog")
             }
